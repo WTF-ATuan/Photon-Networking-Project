@@ -15,8 +15,8 @@ namespace Script.Main{
 			var localUserId = PhotonNetwork.LocalPlayer.UserId;
 			var localUserIndex = PhotonNetwork.LocalPlayer.ActorNumber;
 			var currentRoomName = PhotonNetwork.CurrentRoom.Name;
-			var currentLobby = PhotonNetwork.CurrentLobby.Name;
-			var guiText = "Lobby" + currentLobby + "\r\n" +
+			var currentLobbyName = PhotonNetwork.CurrentLobby.Name;
+			var guiText = "Lobby" + currentLobbyName + "\r\n" +
 						  "Room : " + currentRoomName + "\r\n" +
 						  "User ID : " + localUserId + "\r\n" +
 						  "User Index : " + localUserIndex + "\r\n";

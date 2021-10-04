@@ -18,7 +18,5 @@ namespace Script.Main{
 		public override void OnJoinedRoom(){
 			PhotonNetwork.LoadLevel("MainScene");
 		}
-
-
 	}
 }
