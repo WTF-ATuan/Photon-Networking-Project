@@ -1,5 +1,4 @@
 ﻿using Photon.Pun;
-using UnityEngine;
 
 namespace Script.Main{
 	public class SeverRequest{

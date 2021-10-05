@@ -1,19 +1,14 @@
-using Photon.Pun;
 using UnityEngine;
 
 namespace Script.Main{
-	public class ConnectToSever : MonoBehaviourPunCallbacks{
+	public class ConnectToSever : MonoBehaviour{
 
 		public GameObject uiView;
 		private void Start(){
-			PhotonNetwork.ConnectUsingSettings();
+			EventBus.Subscribe<LobbyJoined>(OnJoinedLobby);
 		}
 
-		public override void OnConnectedToMaster(){
-			PhotonNetwork.JoinLobby();
-		}
-
-		public override void OnJoinedLobby(){
+		private void OnJoinedLobby(LobbyJoined obj){
 			uiView.SetActive(true);
 		}
 	}
