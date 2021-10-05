@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 472200567}
   - component: {fileID: 472200568}
   m_Layer: 0
-  m_Name: ConnectSever
+  m_Name: Show Room UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1758,3 +1758,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   field1: {fileID: 471418595}
   field2: {fileID: 1621593577}
+  sever: {fileID: 226365461}

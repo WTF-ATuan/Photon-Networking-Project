@@ -1,14 +1,12 @@
-﻿using Photon.Pun;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Script.Main{
 	public class CreateJoinRoom : MonoBehaviour{
 		[SerializeField] private InputField field1;
 		[SerializeField] private InputField field2;
-
 		[SerializeField] private Sever sever;
-		
+
 		private void Start(){
 			EventBus.Subscribe<RoomJoined>(OnJoinedRoom);
 		}
@@ -22,7 +20,7 @@ namespace Script.Main{
 		}
 
 		private void OnJoinedRoom(RoomJoined obj){
-			PhotonNetwork.LoadLevel("MainScene");
+			sever.LoadScene("MainScene");
 		}
 	}
 }
