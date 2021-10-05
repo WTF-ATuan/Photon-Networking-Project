@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace Script.Main{
-	public class ConnectToSever : MonoBehaviour{
+	public class ShowRoomSelectionUI : MonoBehaviour{
 
 		public GameObject uiView;
 		private void Start(){
