@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Script.Main{
-	public class StateGUI : MonoBehaviour{
+	public class GUIMessage : MonoBehaviour{
 		private void OnGUI(){
 			int width = Screen.width, height = Screen.height;
 			var style = new GUIStyle();
@@ -21,6 +21,13 @@ namespace Script.Main{
 						  "User ID : " + localUserId + "\r\n" +
 						  "User Index : " + localUserIndex + "\r\n";
 			GUI.Label(rect, guiText, style);
+		}
+	}
+	public class ShowGUIMessage{
+		public string Message{ get; }
+
+		public ShowGUIMessage(string message){
+			Message = message;
 		}
 	}
 }
