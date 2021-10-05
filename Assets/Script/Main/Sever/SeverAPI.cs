@@ -11,7 +11,7 @@ namespace Script.Main{
 			PhotonNetwork.LoadLevel(sceneName);
 		}
 
-		public void Instantiate(string dataName , Vector3 position , Quaternion rotation , string ownerId){
+		public void GenerateItem(string dataName , Vector3 position , Quaternion rotation , string ownerId){
 			var generateItem = PhotonNetwork.Instantiate(dataName, position, rotation);
 			EventBus.Post(new ItemGenerated(ownerId , generateItem));
 		}

@@ -29,7 +29,7 @@ namespace Script.Main{
 			}
 			else{
 				var fullName = type.Name;
-				Debug.Log($" ##{fullName}##  is not Contain in EventBus");
+				Debug.Log($" Type {fullName}  is not Contain in EventBus");
 			}
 		}
 

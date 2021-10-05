@@ -23,8 +23,13 @@ namespace Script.Main{
 		public void JoinRoom(string roomName){
 			_severRequest.CreateRoom(roomName);
 		}
+
 		public void LoadScene(string sceneName){
 			_severAPI.LoadScene(sceneName);
+		}
+
+		public void GenerateItem(string dataName, Vector3 position, Quaternion rotation, string ownerId){
+			_severAPI.GenerateItem(dataName, position, rotation, ownerId);
 		}
 	}
 }
