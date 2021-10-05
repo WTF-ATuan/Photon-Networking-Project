@@ -1,5 +1,4 @@
-﻿using System;
-using Photon.Pun;
+﻿using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,16 +7,18 @@ namespace Script.Main{
 		[SerializeField] private InputField field1;
 		[SerializeField] private InputField field2;
 
+		[SerializeField] private Sever sever;
+		
 		private void Start(){
 			EventBus.Subscribe<RoomJoined>(OnJoinedRoom);
 		}
 
 		public void CreateRoom(){
-			PhotonNetwork.CreateRoom(field1.text);
+			sever.CreateRoom(field1.text);
 		}
 
 		public void JoinedRoom(){
-			PhotonNetwork.JoinRoom(field2.text);
+			sever.JoinRoom(field2.text);
 		}
 
 		private void OnJoinedRoom(RoomJoined obj){
