@@ -5,5 +5,11 @@ namespace Script.Main{
 			var userId = PhotonNetwork.LocalPlayer.UserId;
 			EventBus.Post(new SeverConnected(userId));
 		}
+
+		public override void OnJoinedRoom(){
+			var userId = PhotonNetwork.LocalPlayer.UserId;
+			var roomName = PhotonNetwork.CurrentRoom.Name;
+			EventBus.Post(new JoinedRoom(userId , roomName));
+		}
 	}
 }
