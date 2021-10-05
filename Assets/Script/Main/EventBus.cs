@@ -28,7 +28,8 @@ namespace Script.Main{
 				actions.ForEach(o => o.Invoke(obj));
 			}
 			else{
-				Debug.Log($"{type} {obj} is not Contain in EventBus");
+				var fullName = type.Name;
+				Debug.Log($" ##{fullName}##  is not Contain in EventBus");
 			}
 		}
 

@@ -1,11 +1,16 @@
-﻿using Photon.Pun;
+﻿using System;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Script.Main{
-	public class CreateJoinRoom : MonoBehaviourPunCallbacks{
+	public class CreateJoinRoom : MonoBehaviour{
 		[SerializeField] private InputField field1;
 		[SerializeField] private InputField field2;
+
+		private void Start(){
+			EventBus.Subscribe<JoinedRoom>(OnJoinedRoom);
+		}
 
 		public void CreateRoom(){
 			PhotonNetwork.CreateRoom(field1.text);
@@ -15,7 +20,7 @@ namespace Script.Main{
 			PhotonNetwork.JoinRoom(field2.text);
 		}
 
-		public override void OnJoinedRoom(){
+		private void OnJoinedRoom(JoinedRoom obj){
 			PhotonNetwork.LoadLevel("MainScene");
 		}
 	}
