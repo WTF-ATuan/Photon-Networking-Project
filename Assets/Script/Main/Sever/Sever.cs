@@ -1,11 +1,12 @@
-﻿using System;
-using Photon.Pun;
+﻿using Photon.Pun;
+using UnityEngine;
 
 namespace Script.Main{
-	public class Sever : MonoBehaviourPunCallbacks{
+	public class Sever : MonoBehaviour{
 		private void Start(){
 			ConnectSever();
 		}
+
 		public void ConnectSever(){
 			PhotonNetwork.ConnectUsingSettings();
 		}
@@ -16,23 +17,10 @@ namespace Script.Main{
 
 		public void CreateRoom(string roomName){
 			PhotonNetwork.CreateRoom(roomName);
-
 		}
 
 		public void JoinRoom(string roomName){
 			PhotonNetwork.JoinRoom(roomName);
-		}
-
-		public override void OnConnectedToMaster(){
-			var userId = PhotonNetwork.LocalPlayer.UserId;
-			EventBus.Post(new SeverConnected(userId));
-		}
-	}
-	public class SeverConnected{
-		public string UserId{ get; }
-
-		public SeverConnected(string userId){
-			UserId = userId;
 		}
 	}
 }
