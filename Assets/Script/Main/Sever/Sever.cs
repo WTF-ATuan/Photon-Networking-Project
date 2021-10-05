@@ -21,7 +21,7 @@ namespace Script.Main{
 		}
 
 		public void JoinRoom(string roomName){
-			_severRequest.CreateRoom(roomName);
+			_severRequest.JoinRoom(roomName);
 		}
 
 		public void LoadScene(string sceneName){
