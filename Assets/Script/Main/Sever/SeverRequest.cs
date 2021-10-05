@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Script.Main{
-	public class Sever : MonoBehaviour{
+	public class SeverRequest : MonoBehaviour{
 		private void Start(){
 			ConnectSever();
 		}
