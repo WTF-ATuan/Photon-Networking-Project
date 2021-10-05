@@ -9,7 +9,7 @@ namespace Script.Main{
 		[SerializeField] private InputField field2;
 
 		private void Start(){
-			EventBus.Subscribe<JoinedRoom>(OnJoinedRoom);
+			EventBus.Subscribe<RoomJoined>(OnJoinedRoom);
 		}
 
 		public void CreateRoom(){
@@ -20,7 +20,7 @@ namespace Script.Main{
 			PhotonNetwork.JoinRoom(field2.text);
 		}
 
-		private void OnJoinedRoom(JoinedRoom obj){
+		private void OnJoinedRoom(RoomJoined obj){
 			PhotonNetwork.LoadLevel("MainScene");
 		}
 	}

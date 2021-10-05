@@ -2,11 +2,7 @@
 using UnityEngine;
 
 namespace Script.Main{
-	public class SeverRequest : MonoBehaviour{
-		private void Start(){
-			ConnectSever();
-		}
-
+	public class SeverRequest{
 		public void ConnectSever(){
 			PhotonNetwork.ConnectUsingSettings();
 		}
