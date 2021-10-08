@@ -11,7 +11,6 @@ namespace Script.Main.InputData{
 			var horizontalValue = Input.GetAxisRaw($"Horizontal");
 			var verticalValue = Input.GetAxisRaw($"Vertical");
 			EventBus.Post(new MoveInputDetected("123" , horizontalValue , verticalValue));
-			
 		}
 		
 	}
