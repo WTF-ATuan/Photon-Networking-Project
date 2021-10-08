@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Script.Main.InputData{
-	public class InputAdapter : MonoBehaviour{
+	public class InputEventDetector : MonoBehaviour{
 		private void Update(){
 			DetectMoveInput();
 		}
@@ -10,10 +10,8 @@ namespace Script.Main.InputData{
 		private void DetectMoveInput(){
 			var horizontalValue = Input.GetAxisRaw($"Horizontal");
 			var verticalValue = Input.GetAxisRaw($"Vertical");
-			if(horizontalValue != 0 || verticalValue != 0){
-				EventBus.Post(new MoveInputDetected("123" , horizontalValue , verticalValue));
-			}
-
+			EventBus.Post(new MoveInputDetected("123" , horizontalValue , verticalValue));
+			
 		}
 		
 	}
