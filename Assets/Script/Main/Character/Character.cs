@@ -5,7 +5,6 @@ namespace Script.Main.Character{
 	public class Character : MonoBehaviour{
 		private CharacterMovement _movement;
 		private CharacterSkill _skill;
-
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
 			_skill = GetComponent<CharacterSkill>();
@@ -23,7 +22,7 @@ namespace Script.Main.Character{
 
 		private void OnBaseSkillDetected(BaseSkillDetected obj){
 			var userId = obj.UserId;
-			_skill.CreateSkill();
+			_skill.CreateBaseSkill(userId);
 		}
 
 		private void OnStrongSkillDetected(StrongSkillDetected obj){ }
