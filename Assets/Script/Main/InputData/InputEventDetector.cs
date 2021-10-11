@@ -5,6 +5,8 @@ namespace Script.Main.InputData{
 	public class InputEventDetector : MonoBehaviour{
 		private void Update(){
 			DetectMoveInput();
+			DetectBaseSkillInput();
+			DetectStrongSkillInput();
 		}
 
 		private void DetectMoveInput(){
@@ -14,10 +16,14 @@ namespace Script.Main.InputData{
 		}
 
 		private void DetectBaseSkillInput(){
-			
+			if(Input.GetKeyDown(KeyCode.Q)){
+				EventBus.Post(new BaseSkillDetected("123"));
+			}
 		}
 		private void DetectStrongSkillInput(){
-			
+			if(Input.GetKeyDown(KeyCode.E)){
+				EventBus.Post(new StrongSkillDetected("123"));
+			}
 		}
 
 
