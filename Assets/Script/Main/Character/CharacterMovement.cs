@@ -1,4 +1,4 @@
-﻿using Script.Main.InputData.Event;
+﻿
 using UnityEngine;
 
 namespace Script.Main.Character{
