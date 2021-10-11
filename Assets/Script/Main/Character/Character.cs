@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using Script.Main.InputData.Event;
 using UnityEngine;
 
@@ -9,6 +9,8 @@ namespace Script.Main.Character{
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
 			EventBus.Subscribe<MoveInputDetected>(OnMoveInputDetected);
+			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
+			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
 		}
 
 		private void OnMoveInputDetected(MoveInputDetected obj){
@@ -16,6 +18,15 @@ namespace Script.Main.Character{
 			var vertical = obj.Vertical;
 			_movement.Move(horizontal, vertical);
 			_movement.SetFaceDirection(horizontal);
+		}
+
+		private void OnBaseSkillDetected(BaseSkillDetected obj){
+			var userId = obj.UserId;
+			
+		}
+
+		private void OnStrongSkillDetected(StrongSkillDetected obj){
+			
 		}
 	}
 }
