@@ -13,5 +13,6 @@ namespace Script.Main.InputData{
 			EventBus.Post(new MoveInputDetected("123" , horizontalValue , verticalValue));
 		}
 		
+		
 	}
 }
