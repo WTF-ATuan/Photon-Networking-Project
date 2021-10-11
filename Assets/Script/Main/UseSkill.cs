@@ -1,28 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class UseSkill : MonoBehaviour
-{
-    public GameObject FireBall;
+namespace Script.Main{
+	public class UseSkill : MonoBehaviour{
+		public GameObject fireBall;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-    
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            CreateSkill();
-        }
-    }
 
-    public void CreateSkill()
-    {
-        Instantiate(FireBall, gameObject.transform.position, Quaternion.identity);
-    }
+		private void Update(){
+			if(Input.GetKeyDown(KeyCode.Q)){
+				CreateSkill();
+			}
+		}
 
+		public void CreateSkill(){
+			Instantiate(fireBall, gameObject.transform.position, Quaternion.identity);
+		}
+	}
 }
