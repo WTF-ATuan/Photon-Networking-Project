@@ -11,5 +11,13 @@ namespace Script.Main{
 		public void CreateStrongSkill(string characterID){
 			
 		}
+
+		public float GetBaseSkillColdDown(){
+			return 0;
+		}
+
+		public float GetStrongSkillColdDown(){
+			return 0;
+		}
 	}
 }
