@@ -1,10 +1,15 @@
-﻿using Script.Main.InputData.Event;
+﻿using Script.Main.Character.Skill;
+using Script.Main.InputData.Event;
 using UnityEngine;
 
 namespace Script.Main.Character{
 	public class Character : MonoBehaviour{
 		private CharacterMovement _movement;
 		private CharacterSkill _skill;
+
+		private string _baseSkillName;
+		private string _strongSkillName;
+
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
 			_skill = GetComponent<CharacterSkill>();
@@ -21,10 +26,13 @@ namespace Script.Main.Character{
 		}
 
 		private void OnBaseSkillDetected(BaseSkillDetected obj){
-			var userId = obj.UserId;
-			_skill.CreateBaseSkill(userId);
+			
+			_skill.CreateSkill(_baseSkillName, new Skill.Skill("123", transform.position, transform.right));
 		}
 
-		private void OnStrongSkillDetected(StrongSkillDetected obj){ }
+		private void OnStrongSkillDetected(StrongSkillDetected obj){
+			_skill.CreateSkill(_strongSkillName, new Skill.Skill("123", transform.position, transform.right));
+
+		}
 	}
 }
