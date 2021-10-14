@@ -34,7 +34,7 @@ namespace Script.Main.Character{
 			var currentEnergyValue = _energy.GetCurrentEnergyValue();
 			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_baseSkillName);
 			if(currentEnergyValue > skillEnergyUsage){
-				_skill.CreateSkill(_baseSkillName, new Skill.Skill("123", transform.position, transform.right));
+				_skill.CreateSkill(_baseSkillName, new Skill.SkillSpawnInfo("123", transform.position, transform.right));
 			}
 		}
 
@@ -42,7 +42,7 @@ namespace Script.Main.Character{
 			var currentEnergyValue = _energy.GetCurrentEnergyValue();
 			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_strongSkillName);
 			if(currentEnergyValue > skillEnergyUsage){
-				_skill.CreateSkill(_strongSkillName, new Skill.Skill("123", transform.position, transform.right));
+				_skill.CreateSkill(_strongSkillName, new Skill.SkillSpawnInfo("123", transform.position, transform.right));
 			}
 		}
 	}

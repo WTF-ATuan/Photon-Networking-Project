@@ -5,7 +5,7 @@ namespace Script.Main.Character.Skill{
 	public class CharacterSkill : MonoBehaviour{
 		
 
-		public void CreateSkill(string skillName, Skill data){
+		public void CreateSkill(string skillName, SkillSpawnInfo data){
 		}
 
 		public float GetSkillEnergyUsage(string skillName){
