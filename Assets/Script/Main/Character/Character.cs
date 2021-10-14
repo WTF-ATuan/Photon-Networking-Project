@@ -5,8 +5,8 @@ using UnityEngine;
 namespace Script.Main.Character{
 	public class Character : MonoBehaviour{
 		[SerializeField] private float startEnergyValue;
-		
-		
+
+
 		private CharacterMovement _movement;
 		private CharacterSkill _skill;
 		private Energy _energy;
@@ -31,13 +31,19 @@ namespace Script.Main.Character{
 		}
 
 		private void OnBaseSkillDetected(BaseSkillDetected obj){
-			
-			_skill.CreateSkill(_baseSkillName, new Skill.Skill("123", transform.position, transform.right));
+			var currentEnergyValue = _energy.GetCurrentEnergyValue();
+			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_baseSkillName);
+			if(currentEnergyValue > skillEnergyUsage){
+				_skill.CreateSkill(_baseSkillName, new Skill.Skill("123", transform.position, transform.right));
+			}
 		}
 
 		private void OnStrongSkillDetected(StrongSkillDetected obj){
-			_skill.CreateSkill(_strongSkillName, new Skill.Skill("123", transform.position, transform.right));
-
+			var currentEnergyValue = _energy.GetCurrentEnergyValue();
+			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_strongSkillName);
+			if(currentEnergyValue > skillEnergyUsage){
+				_skill.CreateSkill(_strongSkillName, new Skill.Skill("123", transform.position, transform.right));
+			}
 		}
 	}
 }
