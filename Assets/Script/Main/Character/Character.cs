@@ -4,8 +4,12 @@ using UnityEngine;
 
 namespace Script.Main.Character{
 	public class Character : MonoBehaviour{
+		[SerializeField] private float startEnergyValue;
+		
+		
 		private CharacterMovement _movement;
 		private CharacterSkill _skill;
+		private Energy _energy;
 
 		private string _baseSkillName;
 		private string _strongSkillName;
@@ -13,6 +17,7 @@ namespace Script.Main.Character{
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
 			_skill = GetComponent<CharacterSkill>();
+			_energy = new Energy("123", startEnergyValue);
 			EventBus.Subscribe<MoveInputDetected>(OnMoveInputDetected);
 			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
 			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
