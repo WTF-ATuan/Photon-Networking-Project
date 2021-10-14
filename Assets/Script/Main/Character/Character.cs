@@ -27,7 +27,9 @@ namespace Script.Main.Character{
 			var horizontal = obj.Horizontal;
 			var vertical = obj.Vertical;
 			_movement.Move(horizontal, vertical);
-			_movement.SetFaceDirection(horizontal);
+			if(horizontal != 0){
+				_movement.SetFaceDirection(horizontal);
+			}
 		}
 
 		private void OnBaseSkillDetected(BaseSkillDetected obj){
