@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Script.Main.Character.Skill{
 	public class CharacterSkill : MonoBehaviour{
-		public List<AbstractSkill> skillList;
+		public List<SkillBase> skillList;
 
 		public void CastSkill(string skillName, SkillSpawnInfo data){
 			if(skillName == null){
-				throw new Exception("Skill Name is Null");
+				throw new Exception("SkillName is Null");
 			}
 
-			var skill = skillList.Find(_ => _.SkillName() == skillName);
+			var skill = skillList.Find(_ => _.skillName == skillName);
 			if(skill == null){
 				throw new Exception($"{skill} is not in List");
 			}
@@ -20,15 +20,15 @@ namespace Script.Main.Character.Skill{
 
 		public float GetSkillEnergyUsage(string skillName){
 			if(skillName == null){
-				throw new Exception("Skill Name is Null");
+				throw new Exception("SkillName is Null");
 			}
 
-			var skill = skillList.Find(_ => _.SkillName() == skillName);
+			var skill = skillList.Find(_ => _.skillName == skillName);
 			if(skill == null){
 				throw new Exception($"{skill} is not in List");
 			}
 
-			return skill.EnergyUsage();
+			return skill.energyUsage;
 		}
 	}
 }

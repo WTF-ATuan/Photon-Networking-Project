@@ -11,7 +11,7 @@ namespace Script.Main.Character{
 		private CharacterSkill _skill;
 		private Energy _energy;
 
-		private string _baseSkillName;
+		private string _baseSkillName = "FireBall";
 		private string _strongSkillName;
 
 		private void Start(){
