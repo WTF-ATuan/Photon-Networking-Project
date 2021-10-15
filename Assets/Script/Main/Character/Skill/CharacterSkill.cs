@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Script.Main.Character.Skill{
 	public class CharacterSkill : MonoBehaviour{
-		public List<SkillBase> skillList;
+		public List<SkillCreatedTag> skillList;
 
 		public void CastSkill(string skillName, SkillSpawnInfo data){
 			if(skillName == null){
