@@ -3,9 +3,10 @@ using UnityEngine;
 
 namespace Script.Main.Character.Skill{
 	public class CharacterSkill : MonoBehaviour{
-		
 
-		public void CreateSkill(string skillName, SkillSpawnInfo data){
+		public List<AbstractSkill> skillList;
+		public void CastSkill(string skillName, SkillSpawnInfo data){
+			
 		}
 
 		public float GetSkillEnergyUsage(string skillName){
