@@ -1,15 +1,34 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Script.Main.Character.Skill{
 	public class CharacterSkill : MonoBehaviour{
-		
+		public List<SkillCreatedTag> skillList;
 
-		public void CreateSkill(string skillName, SkillSpawnInfo data){
+		public void CastSkill(string skillName, SkillSpawnInfo data){
+			if(skillName == null){
+				throw new Exception("SkillName is Null");
+			}
+
+			var skill = skillList.Find(_ => _.skillName == skillName);
+			if(skill == null){
+				throw new Exception($"{skill} is not in List");
+			}
+			skill.InitSkill(data);
 		}
 
 		public float GetSkillEnergyUsage(string skillName){
-			return 0;
+			if(skillName == null){
+				throw new Exception("SkillName is Null");
+			}
+
+			var skill = skillList.Find(_ => _.skillName == skillName);
+			if(skill == null){
+				throw new Exception($"{skill} is not in List");
+			}
+
+			return skill.energyUsage;
 		}
 	}
 }

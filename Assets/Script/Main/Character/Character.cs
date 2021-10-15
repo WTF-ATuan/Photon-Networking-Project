@@ -11,7 +11,7 @@ namespace Script.Main.Character{
 		private CharacterSkill _skill;
 		private Energy _energy;
 
-		private string _baseSkillName;
+		private string _baseSkillName = "FireBall";
 		private string _strongSkillName;
 
 		private void Start(){
@@ -36,7 +36,7 @@ namespace Script.Main.Character{
 			var currentEnergyValue = _energy.GetCurrentEnergyValue();
 			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_baseSkillName);
 			if(currentEnergyValue > skillEnergyUsage){
-				_skill.CreateSkill(_baseSkillName, new SkillSpawnInfo("123", transform.position, transform.right));
+				_skill.CastSkill(_baseSkillName, new SkillSpawnInfo("123", transform.position, transform.right));
 			}
 		}
 
@@ -44,7 +44,7 @@ namespace Script.Main.Character{
 			var currentEnergyValue = _energy.GetCurrentEnergyValue();
 			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_strongSkillName);
 			if(currentEnergyValue > skillEnergyUsage){
-				_skill.CreateSkill(_strongSkillName, new SkillSpawnInfo("123", transform.position, transform.right));
+				_skill.CastSkill(_strongSkillName, new SkillSpawnInfo("123", transform.position, transform.right));
 			}
 		}
 	}
