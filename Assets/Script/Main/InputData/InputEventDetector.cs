@@ -23,13 +23,13 @@ namespace Script.Main.InputData{
 
 		private void DetectBaseSkillInput(){
 			if(Input.GetKeyDown(KeyCode.Q)){
-				EventBus.Post(new BaseSkillDetected(OwnerID));
+				EventBus.Post(new BaseSkillDetected(OwnerID , MouseWorldPosition()));
 			}
 		}
 
 		private void DetectStrongSkillInput(){
 			if(Input.GetKeyDown(KeyCode.E)){
-				EventBus.Post(new StrongSkillDetected(OwnerID));
+				EventBus.Post(new StrongSkillDetected(OwnerID , MouseWorldPosition()));
 			}
 		}
 
