@@ -39,7 +39,6 @@ namespace Script.Main.InputData{
 			mousePos.z = Camera.main.nearClipPlane;
 			var worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
 			worldPosition.z = 0;
-			Debug.Log($"worldPosition = {worldPosition}");
 			return worldPosition;
 		}
 	}
