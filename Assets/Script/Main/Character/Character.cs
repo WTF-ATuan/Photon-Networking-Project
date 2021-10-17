@@ -35,8 +35,7 @@ namespace Script.Main.Character{
 		private void OnBaseSkillDetected(BaseSkillDetected obj){
 			var currentEnergyValue = _energy.GetCurrentEnergyValue();
 			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_baseSkillName);
-			var direction = obj.MouseWorldPosition;
-			Debug.Log($"direction = {direction}");
+			var direction = obj.MouseWorldPosition * 10;
 			if(currentEnergyValue > skillEnergyUsage){
 				_skill.CastSkill(_baseSkillName, new SkillSpawnInfo("123", transform.position , direction));
 			}
