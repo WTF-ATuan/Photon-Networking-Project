@@ -33,9 +33,12 @@ namespace Script.Main.InputData{
 			}
 		}
 
-		private Vector2 MouseWorldPosition(){
-			var worldPosition = Camera.main?.ScreenToWorldPoint(Input.mousePosition);
-			return worldPosition ?? Vector2.zero;
+		private Vector3 MouseWorldPosition(){
+			if(Camera.main == null) return Vector3.zero;
+			var mousePos = Input.mousePosition;
+			mousePos.z = Camera.main.nearClipPlane;
+			var worldPosition = Camera.main?.ScreenToWorldPoint(mousePos);
+			return (Vector3)worldPosition;
 		}
 	}
 }
