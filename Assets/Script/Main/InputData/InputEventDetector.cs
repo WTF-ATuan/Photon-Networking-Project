@@ -3,11 +3,8 @@ using UnityEngine;
 
 namespace Script.Main.InputData{
 	public class InputEventDetector : MonoBehaviour{
+		public string OwnerID{ get; private set; }
 
-		public string OwnerID{
-			get;
-			private set;
-		}
 		public void Init(string ownerId){
 			OwnerID = ownerId;
 		}
@@ -21,7 +18,7 @@ namespace Script.Main.InputData{
 		private void DetectMoveInput(){
 			var horizontalValue = Input.GetAxisRaw($"Horizontal");
 			var verticalValue = Input.GetAxisRaw($"Vertical");
-			EventBus.Post(new MoveInputDetected(OwnerID , horizontalValue , verticalValue));
+			EventBus.Post(new MoveInputDetected(OwnerID, horizontalValue, verticalValue));
 		}
 
 		private void DetectBaseSkillInput(){
@@ -29,12 +26,16 @@ namespace Script.Main.InputData{
 				EventBus.Post(new BaseSkillDetected(OwnerID));
 			}
 		}
+
 		private void DetectStrongSkillInput(){
 			if(Input.GetKeyDown(KeyCode.E)){
 				EventBus.Post(new StrongSkillDetected(OwnerID));
 			}
 		}
 
-
+		private Vector2 MouseWorldPosition(){
+			var worldPosition = Camera.main?.ScreenToWorldPoint(Input.mousePosition);
+			return worldPosition ?? Vector2.zero;
+		}
 	}
 }
