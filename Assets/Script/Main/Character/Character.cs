@@ -35,8 +35,9 @@ namespace Script.Main.Character{
 		private void OnBaseSkillDetected(BaseSkillDetected obj){
 			var currentEnergyValue = _energy.GetCurrentEnergyValue();
 			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_baseSkillName);
+			var direction = obj.MouseWorldPosition.normalized;
 			if(currentEnergyValue > skillEnergyUsage){
-				_skill.CastSkill(_baseSkillName, new SkillSpawnInfo("123", transform.position, transform.right));
+				_skill.CastSkill(_baseSkillName, new SkillSpawnInfo("123", transform.position , direction));
 			}
 			else{
 				Debug.Log($"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
@@ -46,8 +47,9 @@ namespace Script.Main.Character{
 		private void OnStrongSkillDetected(StrongSkillDetected obj){
 			var currentEnergyValue = _energy.GetCurrentEnergyValue();
 			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_strongSkillName);
+			var direction = obj.MouseWorldPosition.normalized;
 			if(currentEnergyValue > skillEnergyUsage){
-				_skill.CastSkill(_strongSkillName, new SkillSpawnInfo("123", transform.position, transform.right));
+				_skill.CastSkill(_strongSkillName, new SkillSpawnInfo("123", transform.position, direction));
 			}
 			else{
 				Debug.Log($"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");

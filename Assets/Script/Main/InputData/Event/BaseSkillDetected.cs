@@ -3,11 +3,11 @@
 namespace Script.Main.InputData.Event{
 	public class BaseSkillDetected{
 		public string UserId{ get; }
-		public Vector2 MousePosition{ get; }
+		public Vector2 MouseWorldPosition{ get; }
 
-		public BaseSkillDetected(string userId , Vector2 mousePosition){
+		public BaseSkillDetected(string userId , Vector2 mouseWorldPosition){
 			UserId = userId;
-			MousePosition = mousePosition;
+			MouseWorldPosition = mouseWorldPosition;
 		}
 	}
 }
