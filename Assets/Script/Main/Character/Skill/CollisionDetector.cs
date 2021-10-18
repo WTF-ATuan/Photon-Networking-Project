@@ -1,4 +1,5 @@
-﻿using Script.Main.Character.Skill.SkillEvent;
+﻿using System;
+using Script.Main.Character.Skill.SkillEvent;
 using UnityEngine;
 
 namespace Script.Main.Character.Skill{
@@ -10,10 +11,18 @@ namespace Script.Main.Character.Skill{
 		}
 
 		private void OnCollisionEnter2D(Collision2D other){
+			if(string.IsNullOrEmpty(OwnerID)){
+				throw new NullReferenceException("OwnerID is Null or Empty Init First");
+			}
+
 			EventBus.Post(new SkillCollide(OwnerID, true, other));
 		}
 
 		private void OnCollisionExit2D(Collision2D other){
+			if(string.IsNullOrEmpty(OwnerID)){
+				throw new NullReferenceException("OwnerID is Null or Empty Init First");
+			}
+
 			EventBus.Post(new SkillCollide(OwnerID, false, other));
 		}
 	}

@@ -1,4 +1,5 @@
 ﻿using Script.Main.Character.Skill;
+using Script.Main.Character.Skill.SkillEvent;
 using Script.Main.InputData.Event;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Script.Main.Character{
 		private Energy _energy;
 
 		private string _baseSkillName = "FireBall";
-		private string _strongSkillName;
+		private string _strongSkillName = "FireBall2D";
 
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
@@ -21,6 +22,7 @@ namespace Script.Main.Character{
 			EventBus.Subscribe<MoveInputDetected>(OnMoveInputDetected);
 			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
 			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
+			EventBus.Subscribe<SkillCollide>(OnSkillCollide);
 		}
 
 		private void OnMoveInputDetected(MoveInputDetected obj){
@@ -54,6 +56,9 @@ namespace Script.Main.Character{
 			else{
 				Debug.Log($"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
 			}
+		}
+
+		private void OnSkillCollide(SkillCollide obj){
 		}
 	}
 }
