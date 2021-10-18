@@ -39,10 +39,11 @@ namespace Script.Main.Character{
 			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_baseSkillName);
 			var direction = obj.MouseWorldPosition * 10;
 			if(currentEnergyValue > skillEnergyUsage){
-				_skill.CastSkill(_baseSkillName, new SkillSpawnInfo("123", transform.position , direction));
+				_skill.CastSkill(_baseSkillName, new SkillSpawnInfo("123", transform.position, direction));
 			}
 			else{
-				Debug.Log($"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
+				Debug.Log(
+					$"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
 			}
 		}
 
@@ -54,11 +55,15 @@ namespace Script.Main.Character{
 				_skill.CastSkill(_strongSkillName, new SkillSpawnInfo("123", transform.position, direction));
 			}
 			else{
-				Debug.Log($"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
+				Debug.Log(
+					$"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
 			}
 		}
 
 		private void OnSkillCollide(SkillCollide obj){
+			var collisionGameObject = obj.Collision.gameObject;
+			var enemy = collisionGameObject.GetComponent<Enemy>();
+			enemy?.ModifyHp(-10);
 		}
 	}
 }
