@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Script.Main.Character.Skill.SkillEvent;
+using UnityEngine;
 
 namespace Script.Main.Character.Skill{
 	public class CollisionDetector : MonoBehaviour{
@@ -8,12 +9,12 @@ namespace Script.Main.Character.Skill{
 			OwnerID = ownerID;
 		}
 
-		private void OnCollisionEnter(Collision other){ }
+		private void OnCollisionEnter2D(Collision2D other){
+			EventBus.Post(new SkillCollide(OwnerID, true, other));
+		}
 
-		private void OnCollisionExit(Collision other){ }
-
-		private void OnCollisionEnter2D(Collision2D other){ }
-
-		private void OnCollisionExit2D(Collision2D other){ }
+		private void OnCollisionExit2D(Collision2D other){
+			EventBus.Post(new SkillCollide(OwnerID, false, other));
+		}
 	}
 }
