@@ -8,7 +8,7 @@ namespace Script.Main.Character.Skill.SkillData.FireBall2D{
 			var rigidbody2D = GetComponent<Rigidbody2D>();
 			var collisionDetector = GetComponent<SkillCollisionDetector>();
 			collisionDetector.InitDetector(ownerID , GetType().Name);
-			rigidbody2D.AddForce(direction * 50 , ForceMode2D.Impulse);
+			rigidbody2D.AddForce(direction * 500 , ForceMode2D.Impulse);
 		}
 	}
 }
