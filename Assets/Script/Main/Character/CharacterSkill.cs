@@ -4,29 +4,8 @@ using UnityEngine;
 
 namespace Script.Main.Skill{
 	public class CharacterSkill : MonoBehaviour{
-		public List<SkillCreatedTag> skillList;
-
-		public void CastSkill(string skillName, SkillSpawnInfo data){
-			var skill = FindSkillCreatedTag(skillName);
-			skill.InitSkill(data);
-		}
-
 		public float GetSkillEnergyUsage(string skillName){
-			var skill = FindSkillCreatedTag(skillName);
-			return skill.energyUsage;
-		}
-
-		private SkillCreatedTag FindSkillCreatedTag(string skillName){
-			if(skillName == null){
-				throw new Exception("SkillName is Null");
-			}
-
-			var skill = skillList.Find(_ => _.name == skillName);
-			if(skill == null){
-				throw new Exception($"{skill} is not in List");
-			}
-
-			return skill;
+			return 0;
 		}
 	}
 }

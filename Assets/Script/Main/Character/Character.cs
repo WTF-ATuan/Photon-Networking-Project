@@ -1,4 +1,5 @@
-﻿using Script.Main.Character.Skill;
+﻿using Script.Main.Character.Event;
+using Script.Main.Character.Skill;
 using Script.Main.InputData.Event;
 using Script.Main.Skill;
 using Script.Main.Skill.SkillEvent;
@@ -10,7 +11,6 @@ namespace Script.Main.Character{
 
 
 		private CharacterMovement _movement;
-		private CharacterSkill _skill;
 		private Energy _energy;
 
 		private string _baseSkillName = "FireBall";
@@ -18,7 +18,6 @@ namespace Script.Main.Character{
 
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
-			_skill = GetComponent<CharacterSkill>();
 			_energy = new Energy("123", startEnergyValue);
 			EventBus.Subscribe<MoveInputDetected>(OnMoveInputDetected);
 			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
@@ -36,28 +35,30 @@ namespace Script.Main.Character{
 
 		private void OnBaseSkillDetected(BaseSkillDetected obj){
 			var currentEnergyValue = _energy.GetCurrentEnergyValue();
-			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_baseSkillName);
 			var direction = obj.MouseWorldPosition * 10;
-			if(currentEnergyValue > skillEnergyUsage){
-				_skill.CastSkill(_baseSkillName, new SkillSpawnInfo("123", transform.position, direction));
-			}
-			else{
-				Debug.Log(
-					$"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
-			}
+			EventBus.Post(new SkillCasted(_baseSkillName,
+				new SkillSpawnInfo("123", transform.position, direction)));
+
+			// if(currentEnergyValue > skillEnergyUsage){
+			// }
+			// else{
+			// 	Debug.Log(
+			// 		$"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
+			// }
 		}
 
 		private void OnStrongSkillDetected(StrongSkillDetected obj){
 			var currentEnergyValue = _energy.GetCurrentEnergyValue();
-			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_strongSkillName);
 			var direction = obj.MouseWorldPosition;
-			if(currentEnergyValue > skillEnergyUsage){
-				_skill.CastSkill(_strongSkillName, new SkillSpawnInfo("123", transform.position, direction));
-			}
-			else{
-				Debug.Log(
-					$"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
-			}
+			EventBus.Post(new SkillCasted(_strongSkillName, new SkillSpawnInfo("123", transform.position, direction)));
+
+			// if(currentEnergyValue > skillEnergyUsage){
+			// 	
+			// }
+			// else{
+			// 	Debug.Log(
+			// 		$"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
+			// }
 		}
 	}
 }
