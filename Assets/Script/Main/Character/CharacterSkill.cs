@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Script.Main.Character;
-using Script.Main.Character.Skill;
 using UnityEngine;
 
 namespace Script.Main.Skill{
@@ -23,7 +21,7 @@ namespace Script.Main.Skill{
 				throw new Exception("SkillName is Null");
 			}
 
-			var skill = skillList.Find(_ => _.skillName == skillName);
+			var skill = skillList.Find(_ => _.name == skillName);
 			if(skill == null){
 				throw new Exception($"{skill} is not in List");
 			}
