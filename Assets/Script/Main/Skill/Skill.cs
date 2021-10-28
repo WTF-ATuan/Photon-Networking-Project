@@ -4,6 +4,7 @@ using Script.Main.Character;
 using Script.Main.Character.Event;
 using Script.Main.Skill.SkillEvent;
 using UnityEngine;
+using WebSocketSharp;
 
 namespace Script.Main.Skill{
 	public class Skill : MonoBehaviour{
@@ -26,7 +27,7 @@ namespace Script.Main.Skill{
 			enemy?.ModifyHp(-10);
 		}
 		private SkillCreatedTag FindSkillCreatedTag(string skillName){
-			if(skillName == null){
+			if(skillName.IsNullOrEmpty()){
 				throw new Exception("SkillName is Null");
 			}
 

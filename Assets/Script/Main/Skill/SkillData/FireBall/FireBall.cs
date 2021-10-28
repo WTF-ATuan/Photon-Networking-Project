@@ -6,7 +6,7 @@ namespace Script.Main.Character.Skill{
 		public override void InitSkill(SkillSpawnInfo spawnInfo){
 			var direction = spawnInfo.Direction;
 			var rigidbody = GetComponent<Rigidbody>();
-			rigidbody.AddForce(direction * 500);
+			rigidbody.AddForce(direction * 10);
 		}
 	}
 }
