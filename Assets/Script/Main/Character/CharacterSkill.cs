@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Script.Main.Character;
+using Script.Main.Character.Skill;
 using UnityEngine;
 
-namespace Script.Main.Character.Skill{
+namespace Script.Main.Skill{
 	public class CharacterSkill : MonoBehaviour{
 		public List<SkillCreatedTag> skillList;
 

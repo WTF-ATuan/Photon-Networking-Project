@@ -1,6 +1,7 @@
 ﻿using Script.Main.Character.Skill;
 using Script.Main.Character.Skill.SkillEvent;
 using Script.Main.InputData.Event;
+using Script.Main.Skill;
 using UnityEngine;
 
 namespace Script.Main.Character{
