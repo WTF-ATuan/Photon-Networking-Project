@@ -36,27 +36,12 @@ namespace Script.Main.Character{
 			var direction = obj.MouseWorldPosition * 10;
 			EventBus.Post(new SkillCasted(_baseSkillName,
 				new SkillSpawnInfo("123", transform.position, direction)));
-
-			// if(currentEnergyValue > skillEnergyUsage){
-			// }
-			// else{
-			// 	Debug.Log(
-			// 		$"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
-			// }
 		}
 
 		private void OnStrongSkillDetected(StrongSkillDetected obj){
 			var currentEnergyValue = _energy.GetCurrentEnergyValue();
 			var direction = obj.MouseWorldPosition;
 			EventBus.Post(new SkillCasted(_strongSkillName, new SkillSpawnInfo("123", transform.position, direction)));
-
-			// if(currentEnergyValue > skillEnergyUsage){
-			// 	
-			// }
-			// else{
-			// 	Debug.Log(
-			// 		$"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
-			// }
 		}
 	}
 }
