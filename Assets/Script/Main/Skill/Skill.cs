@@ -1,5 +1,4 @@
-﻿
-using Script.Main.Character;
+﻿using Script.Main.Character;
 using Script.Main.Skill.SkillEvent;
 using UnityEngine;
 
