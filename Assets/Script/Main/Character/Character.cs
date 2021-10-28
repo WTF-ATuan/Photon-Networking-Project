@@ -1,7 +1,7 @@
 ﻿using Script.Main.Character.Skill;
-using Script.Main.Character.Skill.SkillEvent;
 using Script.Main.InputData.Event;
 using Script.Main.Skill;
+using Script.Main.Skill.SkillEvent;
 using UnityEngine;
 
 namespace Script.Main.Character{
@@ -23,7 +23,6 @@ namespace Script.Main.Character{
 			EventBus.Subscribe<MoveInputDetected>(OnMoveInputDetected);
 			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
 			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
-			EventBus.Subscribe<SkillCollide>(OnSkillCollide);
 		}
 
 		private void OnMoveInputDetected(MoveInputDetected obj){
@@ -59,12 +58,6 @@ namespace Script.Main.Character{
 				Debug.Log(
 					$"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
 			}
-		}
-
-		private void OnSkillCollide(SkillCollide obj){
-			var collisionGameObject = obj.Collision.gameObject;
-			var enemy = collisionGameObject.GetComponent<IModifyHp>();
-			enemy?.ModifyHp(-10);
 		}
 	}
 }
