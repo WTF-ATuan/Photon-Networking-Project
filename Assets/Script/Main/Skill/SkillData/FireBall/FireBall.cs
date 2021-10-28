@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Script.Main.Skill;
+using UnityEngine;
 
 namespace Script.Main.Character.Skill{
 	public class FireBall : AbstractSkill{
