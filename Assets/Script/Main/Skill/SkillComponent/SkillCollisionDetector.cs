@@ -1,5 +1,5 @@
 ﻿using System;
-using Script.Main.Character.Skill.SkillEvent;
+using Script.Main.Skill.SkillEvent;
 using UnityEngine;
 
 namespace Script.Main.Skill{
