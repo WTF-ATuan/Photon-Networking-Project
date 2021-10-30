@@ -15,6 +15,8 @@ namespace Script.Main.Character{
 		}
 
 		public Character Query(string characterID){
+			var containsKey = _characters.ContainsKey(characterID);
+
 			var character = _characters[characterID];
 			return character ? character : default;
 		}

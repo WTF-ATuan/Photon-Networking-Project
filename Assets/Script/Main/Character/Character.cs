@@ -1,14 +1,17 @@
 ﻿using Script.Main.Character.Event;
 using Script.Main.InputData.Event;
 using Script.Main.Skill;
+using Script.Main.Utility;
 using UnityEngine;
 
 namespace Script.Main.Character{
 	public class Character : MonoBehaviour{
+		public string characterID = "123";
 		[SerializeField] private float startEnergyValue;
 
-
 		private CharacterMovement _movement;
+		private CharacterRepository _repository;
+		private CharacterEventHandler _eventHandler;
 		private Energy _energy;
 
 		private string _baseSkillName = "FireBall";
@@ -16,10 +19,13 @@ namespace Script.Main.Character{
 
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
+			_repository = SingleRepository.QueryObject<CharacterRepository>();
+			_eventHandler = SingleRepository.QueryObject<CharacterEventHandler>();
 			_energy = new Energy("123", startEnergyValue);
-			EventBus.Subscribe<MoveInputDetected>(OnMoveInputDetected);
-			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
-			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
+			_repository.Save(characterID, this);
+			// EventBus.Subscribe<MoveInputDetected>(OnMoveInputDetected);
+			// EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
+			// EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
 		}
 
 		private void OnMoveInputDetected(MoveInputDetected obj){
