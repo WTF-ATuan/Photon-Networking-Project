@@ -31,11 +31,30 @@ namespace Script.Main.Character{
 			}
 		}
 
+		public void Move(float horizontal, float vertical){
+			_movement.Move(horizontal, vertical);
+		}
+
+		public void SetFaceDirection(float direction){
+			_movement.SetFaceDirection(direction);
+		}
+
 		private void OnBaseSkillDetected(BaseSkillDetected obj){
 			var currentEnergyValue = _energy.GetCurrentEnergyValue();
 			var direction = obj.MouseWorldPosition * 10;
 			EventBus.Post(new SkillCasted(_baseSkillName,
 				new SkillSpawnInfo("123", transform.position, direction)));
+		}
+
+		public void CastSkill(Vector2 direction, bool isBase){
+			if(isBase){
+				EventBus.Post(new SkillCasted(_baseSkillName,
+					new SkillSpawnInfo("123", transform.position, direction)));
+			}
+			else{
+				EventBus.Post(new SkillCasted(_strongSkillName,
+					new SkillSpawnInfo("123", transform.position, direction)));
+			}
 		}
 
 		private void OnStrongSkillDetected(StrongSkillDetected obj){
