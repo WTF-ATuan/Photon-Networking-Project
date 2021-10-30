@@ -69,6 +69,7 @@ namespace Script.Main{
 
 		private void OnDisable(){
 			NonCallbackActions.Clear();
+			CallbackActions.Clear();
 		}
 	}
 }
