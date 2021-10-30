@@ -38,11 +38,11 @@ namespace Script.Main.Character{
 		public void CastSkill(Vector2 direction, bool isBase){
 			if(isBase){
 				EventBus.Post(new SkillCasted(_baseSkillName,
-					new SkillSpawnInfo("123", transform.position, direction)));
+					new SkillSpawnInfo(characterID, transform.position, direction)));
 			}
 			else{
 				EventBus.Post(new SkillCasted(_strongSkillName,
-					new SkillSpawnInfo("123", transform.position, direction)));
+					new SkillSpawnInfo(characterID, transform.position, direction)));
 			}
 		}
 	}
