@@ -14,11 +14,16 @@ namespace Script.Main.Utility{
 				return (TReturn)singletonObject;
 			}
 			else{
-				var singletonObject = new TReturn();
-				SingletonObjects.Add(type, singletonObject);
-				return singletonObject;
+				CreateSingleObject<TReturn>();
+				var singletonObject = SingletonObjects[type];
+				return (TReturn)singletonObject;
 			}
 		}
 
+		private static void CreateSingleObject<T>() where T : new(){
+			var type = typeof(T);
+			var singletonObject = new T();
+			SingletonObjects.Add(type, singletonObject);
+		}
 	}
 }
