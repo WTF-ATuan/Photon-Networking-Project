@@ -25,5 +25,9 @@ namespace Script.Main.Utility{
 			var singletonObject = new T();
 			SingletonObjects.Add(type, singletonObject);
 		}
+
+		private void OnDisable(){
+			SingletonObjects.Clear();
+		}
 	}
 }
