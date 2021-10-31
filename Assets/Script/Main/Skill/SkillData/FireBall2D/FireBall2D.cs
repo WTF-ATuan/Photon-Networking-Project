@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Script.Main.Character.Skill.SkillData.FireBall2D{
+namespace Script.Main.Skill.SkillData.FireBall2D{
 	public class FireBall2D : AbstractSkill{
 		public override void InitSkill(SkillSpawnInfo spawnInfo){
 			var direction = spawnInfo.Direction;
@@ -8,7 +8,7 @@ namespace Script.Main.Character.Skill.SkillData.FireBall2D{
 			var rigidbody2D = GetComponent<Rigidbody2D>();
 			var collisionDetector = GetComponent<SkillCollisionDetector>();
 			collisionDetector.InitDetector(ownerID , GetType().Name);
-			rigidbody2D.AddForce(direction * 500 , ForceMode2D.Impulse);
+			rigidbody2D.AddForce(direction * 10 , ForceMode2D.Impulse);
 		}
 	}
 }

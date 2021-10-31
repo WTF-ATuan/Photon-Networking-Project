@@ -1,69 +1,49 @@
-﻿using Script.Main.Character.Skill;
-using Script.Main.Character.Skill.SkillEvent;
-using Script.Main.InputData.Event;
+﻿using Script.Main.Character.Event;
+using Script.Main.InputData;
+using Script.Main.Skill;
+using Script.Main.Utility;
 using UnityEngine;
 
 namespace Script.Main.Character{
 	public class Character : MonoBehaviour{
-		[SerializeField] private float startEnergyValue;
-
+		public string characterID = "123";
 
 		private CharacterMovement _movement;
-		private CharacterSkill _skill;
-		private Energy _energy;
+		private CharacterRepository _repository;
+		private CharacterEventHandler _eventHandler;
+		private InputEventDetector _inputEventDetector;
 
 		private string _baseSkillName = "FireBall";
 		private string _strongSkillName = "FireBall2D";
 
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
-			_skill = GetComponent<CharacterSkill>();
-			_energy = new Energy("123", startEnergyValue);
-			EventBus.Subscribe<MoveInputDetected>(OnMoveInputDetected);
-			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
-			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
-			EventBus.Subscribe<SkillCollide>(OnSkillCollide);
+			_inputEventDetector = GetComponent<InputEventDetector>();
+			_repository = SingleRepository.QueryObject<CharacterRepository>();
+			_eventHandler = SingleRepository.QueryObject<CharacterEventHandler>();
+			_repository.Save(characterID, this);
+			_inputEventDetector.Init(characterID);
 		}
 
-		private void OnMoveInputDetected(MoveInputDetected obj){
-			var horizontal = obj.Horizontal;
-			var vertical = obj.Vertical;
+		public void Move(float horizontal, float vertical){
 			_movement.Move(horizontal, vertical);
-			if(horizontal != 0){
-				_movement.SetFaceDirection(horizontal);
+		}
+
+		public void SetFaceDirection(float direction){
+			if(direction != 0){
+				_movement.SetFaceDirection(direction);
 			}
 		}
 
-		private void OnBaseSkillDetected(BaseSkillDetected obj){
-			var currentEnergyValue = _energy.GetCurrentEnergyValue();
-			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_baseSkillName);
-			var direction = obj.MouseWorldPosition * 10;
-			if(currentEnergyValue > skillEnergyUsage){
-				_skill.CastSkill(_baseSkillName, new SkillSpawnInfo("123", transform.position, direction));
+		public void CastSkill(Vector2 direction, bool isBase){
+			if(isBase){
+				EventBus.Post(new SkillCasted(_baseSkillName,
+					new SkillSpawnInfo(characterID, transform.position, direction)));
 			}
 			else{
-				Debug.Log(
-					$"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
+				EventBus.Post(new SkillCasted(_strongSkillName,
+					new SkillSpawnInfo(characterID, transform.position, direction)));
 			}
-		}
-
-		private void OnStrongSkillDetected(StrongSkillDetected obj){
-			var currentEnergyValue = _energy.GetCurrentEnergyValue();
-			var skillEnergyUsage = _skill.GetSkillEnergyUsage(_strongSkillName);
-			var direction = obj.MouseWorldPosition;
-			if(currentEnergyValue > skillEnergyUsage){
-				_skill.CastSkill(_strongSkillName, new SkillSpawnInfo("123", transform.position, direction));
-			}
-			else{
-				Debug.Log(
-					$"currentEnergyValue : {currentEnergyValue} is less than SkillEnergyUsage : {skillEnergyUsage}");
-			}
-		}
-
-		private void OnSkillCollide(SkillCollide obj){
-			var collisionGameObject = obj.Collision.gameObject;
-			var enemy = collisionGameObject.GetComponent<IModifyHp>();
-			enemy?.ModifyHp(-10);
 		}
 	}
 }

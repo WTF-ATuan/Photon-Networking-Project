@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Script.Main.Character.Skill.SkillEvent{
+namespace Script.Main.Skill.SkillEvent{
 	public class SkillCollide{
 		public string OwnerID{ get; }
 		public bool IsEnter{ get; }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Script.Main.Character.Skill{
+namespace Script.Main.Skill{
 	public class SkillSpawnInfo{
 		public string OwnerID{ get; }
 		public Vector3 OriginPosition{ get; }

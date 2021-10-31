@@ -37,9 +37,9 @@ namespace Script.Main.InputData{
 			if(Camera.main == null) return Vector3.zero;
 			var mousePos = Input.mousePosition;
 			mousePos.z = Camera.main.nearClipPlane;
-			var worldPosition = Camera.main.ScreenToWorldPoint(mousePos).normalized;
+			var worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
 			worldPosition.z = 0;
-			return worldPosition;
+			return worldPosition.normalized;
 		}
 	}
 }

@@ -1,8 +1,8 @@
 ﻿using System;
-using Script.Main.Character.Skill.SkillEvent;
+using Script.Main.Skill.SkillEvent;
 using UnityEngine;
 
-namespace Script.Main.Character.Skill{
+namespace Script.Main.Skill{
 	public class SkillCollisionDetector : MonoBehaviour{
 		public string OwnerID{ get; private set; }
 		public string SkillName{ get; private set; }
