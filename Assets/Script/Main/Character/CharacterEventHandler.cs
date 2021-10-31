@@ -6,7 +6,7 @@ namespace Script.Main.Character{
 		private CharacterRepository CharacterRepository{ get; }
 
 		public CharacterEventHandler(){
-			CharacterRepository = SingleRepository.QueryObject<CharacterRepository>();
+			CharacterRepository = SingleRepository.Query<CharacterRepository>();
 			EventBus.Subscribe<MoveInputDetected>(OnMoveInputDetected);
 			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
 			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);

@@ -10,7 +10,6 @@ namespace Script.Main.Character{
 
 		private CharacterMovement _movement;
 		private CharacterRepository _repository;
-		private CharacterEventHandler _eventHandler;
 		private InputEventDetector _inputEventDetector;
 
 		private string _baseSkillName = "FireBall";
@@ -19,8 +18,8 @@ namespace Script.Main.Character{
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
 			_inputEventDetector = GetComponent<InputEventDetector>();
-			_repository = SingleRepository.QueryObject<CharacterRepository>();
-			_eventHandler = SingleRepository.QueryObject<CharacterEventHandler>();
+			_repository = SingleRepository.Query<CharacterRepository>();
+			SingleRepository.Create<CharacterEventHandler>();
 			_repository.Save(characterID, this);
 			_inputEventDetector.Init(characterID);
 		}
