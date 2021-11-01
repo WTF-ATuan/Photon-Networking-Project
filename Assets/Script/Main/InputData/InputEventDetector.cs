@@ -10,6 +10,9 @@ namespace Script.Main.InputData{
 		}
 
 		private void Update(){
+			if(string.IsNullOrEmpty(OwnerID)){
+				return;
+			}
 			DetectMoveInput();
 			DetectBaseSkillInput();
 			DetectStrongSkillInput();
