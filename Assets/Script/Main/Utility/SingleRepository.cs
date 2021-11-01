@@ -9,15 +9,9 @@ namespace Script.Main.Utility{
 		public static TReturn Query<TReturn>() where TReturn : new(){
 			var type = typeof(TReturn);
 			var containsKey = SingletonObjects.ContainsKey(type);
-			if(containsKey){
-				var singletonObject = SingletonObjects[type];
-				return (TReturn)singletonObject;
-			}
-			else{
-				Create<TReturn>();
-				var singletonObject = SingletonObjects[type];
-				return (TReturn)singletonObject;
-			}
+			if(!containsKey) throw new Exception($"{type.Name} is not in SingletonLists must create first");
+			var singletonObject = SingletonObjects[type];
+			return (TReturn)singletonObject;
 		}
 
 		public static void Create<T>() where T : new(){

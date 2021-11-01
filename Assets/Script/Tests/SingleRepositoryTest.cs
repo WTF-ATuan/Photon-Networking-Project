@@ -7,6 +7,7 @@ namespace Script.Tests{
 
 		[Test]
 		public void Query_Should_Create_New_Instance(){
+			SingleRepository.Create<SingleRepositoryTest>();
 			var current = SingleRepository.Query<SingleRepositoryTest>();
 			Assert.NotNull(current);
 		}
@@ -20,6 +21,7 @@ namespace Script.Tests{
 
 		[Test]
 		public void Repeatedly_Query_ShouldBe_Same_instance(){
+			SingleRepository.Create<SingleRepositoryTest>();
 			var firstQuery = SingleRepository.Query<SingleRepositoryTest>();
 			firstQuery.TestValue = 5;
 			var secondQuery = SingleRepository.Query<SingleRepositoryTest>();

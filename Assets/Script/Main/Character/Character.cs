@@ -19,7 +19,6 @@ namespace Script.Main.Character{
 			_movement = GetComponent<CharacterMovement>();
 			_inputEventDetector = GetComponent<InputEventDetector>();
 			_repository = SingleRepository.Query<CharacterRepository>();
-			SingleRepository.Create<CharacterEventHandler>();
 			_repository.Save(characterID, this);
 			_inputEventDetector.Init(characterID);
 		}
