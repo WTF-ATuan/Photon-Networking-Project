@@ -9,7 +9,7 @@ namespace Script.Main{
 		private void Start(){
 			var randomPosition = Random.insideUnitCircle * 3;
 			var id = gameObject.GetInstanceID().ToString();
-			sever.GenerateItem(cubePrefab.name, randomPosition, Quaternion.identity, id);
+			sever.GenerateItem(cubePrefab.name, randomPosition, Quaternion.identity);
 		}
 	}
 }
