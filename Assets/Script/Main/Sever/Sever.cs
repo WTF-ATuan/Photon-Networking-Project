@@ -28,8 +28,8 @@ namespace Script.Main{
 			_severAPI.LoadScene(sceneName);
 		}
 
-		public void GenerateItem(string dataName, Vector3 position, Quaternion rotation, string ownerId){
-			_severAPI.GenerateItem(dataName, position, rotation, ownerId);
+		public GameObject GenerateItem(string dataName, Vector3 position, Quaternion rotation){
+			return _severAPI.GenerateItem(dataName, position, rotation);
 		}
 	}
 }
