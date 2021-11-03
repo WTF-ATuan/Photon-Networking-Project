@@ -1,4 +1,5 @@
-﻿using Script.Main.InputData.Event;
+﻿using Script.Main.Character.Event;
+using Script.Main.InputData.Event;
 using Script.Main.Utility;
 
 namespace Script.Main.Character{
@@ -10,6 +11,14 @@ namespace Script.Main.Character{
 			EventBus.Subscribe<MoveInputDetected>(OnMoveInputDetected);
 			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
 			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
+			EventBus.Subscribe<CharacterCreated>(OnCharacterCreated);
+		}
+
+		private void OnCharacterCreated(CharacterCreated obj){
+			var characterID = obj.CharacterID;
+			var character = obj.Character;
+			character.characterID = characterID;
+			CharacterRepository.Save(characterID , character);
 		}
 
 		private void OnMoveInputDetected(MoveInputDetected obj){

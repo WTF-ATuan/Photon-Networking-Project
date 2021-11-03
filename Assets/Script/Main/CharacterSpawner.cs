@@ -13,7 +13,8 @@ namespace Script.Main{
 			var randomPosition = Random.insideUnitCircle * 3;
 			var id = gameObject.GetInstanceID().ToString();
 			var generateItem = sever.GenerateItem(characterPre.name, randomPosition, Quaternion.identity);
-			EventBus.Post(new CharacterCreated(id));
+			var character = generateItem.GetComponent<Character.Character>();
+			EventBus.Post(new CharacterCreated(id , character));
 			inputEventDetector.Init(id);
 		}
 
