@@ -23,11 +23,4 @@ namespace Script.Main{
 			GUI.Label(rect, guiText, style);
 		}
 	}
-	public class ShowGUIMessage{
-		public string Message{ get; }
-
-		public ShowGUIMessage(string message){
-			Message = message;
-		}
-	}
 }

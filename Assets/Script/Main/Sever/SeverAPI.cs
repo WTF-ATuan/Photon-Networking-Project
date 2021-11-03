@@ -1,5 +1,4 @@
 ﻿using Photon.Pun;
-using Script.Main.Event;
 using UnityEngine;
 
 namespace Script.Main{
