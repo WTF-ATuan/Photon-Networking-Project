@@ -17,7 +17,7 @@ namespace Script.Main.Character{
 		}
 
 		public void Move(float horizontal, float vertical){
-			_movement.Move(horizontal, vertical);
+			_movement?.Move(horizontal, vertical);
 		}
 
 		public void SetFaceDirection(float direction){
