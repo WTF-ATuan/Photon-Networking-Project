@@ -9,18 +9,11 @@ namespace Script.Main.Character{
 		public string characterID = "123";
 
 		private CharacterMovement _movement;
-		private CharacterRepository _repository;
-		private InputEventDetector _inputEventDetector;
-
 		private string _baseSkillName = "FireBall";
 		private string _strongSkillName = "FireBall2D";
 
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
-			_inputEventDetector = GetComponent<InputEventDetector>();
-			_repository = SingleRepository.Query<CharacterRepository>();
-			_repository.Save(characterID, this);
-			_inputEventDetector.Init(characterID);
 		}
 
 		public void Move(float horizontal, float vertical){
