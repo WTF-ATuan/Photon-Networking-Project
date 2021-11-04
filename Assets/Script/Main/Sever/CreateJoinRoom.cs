@@ -20,7 +20,7 @@ namespace Script.Main{
 		}
 
 		private void OnJoinedRoom(RoomJoined obj){
-			sever.LoadScene("MainScene");
+			sever.LoadScene("Battle Scene");
 		}
 	}
 }
