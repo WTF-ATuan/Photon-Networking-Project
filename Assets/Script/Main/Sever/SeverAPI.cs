@@ -1,5 +1,4 @@
 ﻿using Photon.Pun;
-using Script.Main.Event;
 using UnityEngine;
 
 namespace Script.Main{
@@ -11,9 +10,9 @@ namespace Script.Main{
 			PhotonNetwork.LoadLevel(sceneName);
 		}
 
-		public void GenerateItem(string dataName , Vector3 position , Quaternion rotation , string ownerId){
+		public GameObject GenerateItem(string dataName , Vector3 position , Quaternion rotation){
 			var generateItem = PhotonNetwork.Instantiate(dataName, position, rotation);
-			EventBus.Post(new ItemGenerated(ownerId , generateItem));
+			return generateItem;
 		}
 	}
 }

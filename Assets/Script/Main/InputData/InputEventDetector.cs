@@ -10,6 +10,9 @@ namespace Script.Main.InputData{
 		}
 
 		private void Update(){
+			if(string.IsNullOrEmpty(OwnerID)){
+				return;
+			}
 			DetectMoveInput();
 			DetectBaseSkillInput();
 			DetectStrongSkillInput();
@@ -23,23 +26,23 @@ namespace Script.Main.InputData{
 
 		private void DetectBaseSkillInput(){
 			if(Input.GetKeyDown(KeyCode.Q)){
-				EventBus.Post(new BaseSkillDetected(OwnerID, MouseWorldPosition()));
+				EventBus.Post(new BaseSkillDetected(OwnerID, MouseWorldDirection()));
 			}
 		}
 
 		private void DetectStrongSkillInput(){
 			if(Input.GetKeyDown(KeyCode.E)){
-				EventBus.Post(new StrongSkillDetected(OwnerID, MouseWorldPosition()));
+				EventBus.Post(new StrongSkillDetected(OwnerID, MouseWorldDirection()));
 			}
 		}
 
-		private Vector3 MouseWorldPosition(){
+		private Vector3 MouseWorldDirection(){
 			if(Camera.main == null) return Vector3.zero;
 			var mousePos = Input.mousePosition;
 			mousePos.z = Camera.main.nearClipPlane;
 			var worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
 			worldPosition.z = 0;
-			return worldPosition;
+			return worldPosition.normalized;
 		}
 	}
 }
