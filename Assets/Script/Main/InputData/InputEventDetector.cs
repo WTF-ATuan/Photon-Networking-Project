@@ -13,6 +13,7 @@ namespace Script.Main.InputData{
 			if(string.IsNullOrEmpty(OwnerID)){
 				return;
 			}
+
 			DetectMoveInput();
 			DetectBaseSkillInput();
 			DetectStrongSkillInput();
@@ -21,7 +22,8 @@ namespace Script.Main.InputData{
 		private void DetectMoveInput(){
 			var horizontalValue = Input.GetAxisRaw($"Horizontal");
 			var verticalValue = Input.GetAxisRaw($"Vertical");
-			EventBus.Post(new MoveInputDetected(OwnerID, horizontalValue, verticalValue));
+			var isTumbleRoll = Input.GetKeyDown(KeyCode.LeftShift);
+			EventBus.Post(new MoveInputDetected(OwnerID, horizontalValue, verticalValue, isTumbleRoll));
 		}
 
 		private void DetectBaseSkillInput(){

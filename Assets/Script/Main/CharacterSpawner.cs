@@ -7,16 +7,23 @@ namespace Script.Main{
 		[SerializeField] private GameObject characterPre;
 		[SerializeField] private Sever sever;
 		[SerializeField] private InputEventDetector inputEventDetector;
-		
+
 
 		private void Start(){
 			var randomPosition = Random.insideUnitCircle * 3;
 			var id = gameObject.GetInstanceID().ToString();
-			var generateItem = sever.GenerateItem(characterPre.name, randomPosition, Quaternion.identity);
-			var character = generateItem.GetComponent<Character.Character>();
-			EventBus.Post(new CharacterCreated(id , character));
-			inputEventDetector.Init(id);
+			if(sever){
+				var generateItem = sever.GenerateItem(characterPre.name, randomPosition, Quaternion.identity);
+				var character = generateItem.GetComponent<Character.Character>();
+				EventBus.Post(new CharacterCreated(id, character));
+				inputEventDetector.Init(id);
+			}
+			else{
+				var generateItem = Instantiate(characterPre, randomPosition, Quaternion.identity);
+				var character = generateItem.GetComponent<Character.Character>();
+				EventBus.Post(new CharacterCreated(id, character));
+				inputEventDetector.Init(id);
+			}
 		}
-
 	}
 }

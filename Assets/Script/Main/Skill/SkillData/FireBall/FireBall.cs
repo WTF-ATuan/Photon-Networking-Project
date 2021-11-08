@@ -3,10 +3,12 @@ using UnityEngine;
 
 namespace Script.Main.Character.Skill{
 	public class FireBall : AbstractSkill{
-		public override void InitSkill(SkillSpawnInfo spawnInfo){
+		public override void OnSkillCasted(SkillSpawnInfo spawnInfo){
+			var originPosition = spawnInfo.OriginPosition;
 			var direction = spawnInfo.Direction;
-			var rigidbody = GetComponent<Rigidbody>();
-			rigidbody.AddForce(direction * 10);
+			var skillObject = Instantiate(this, originPosition, Quaternion.identity);
+			var rigidBody = skillObject.GetComponent<Rigidbody>();
+			rigidBody.AddForce(direction * 10);
 		}
 	}
 }

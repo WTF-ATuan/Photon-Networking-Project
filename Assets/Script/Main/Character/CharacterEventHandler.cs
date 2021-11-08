@@ -18,7 +18,7 @@ namespace Script.Main.Character{
 			var characterID = obj.CharacterID;
 			var character = obj.Character;
 			character.characterID = characterID;
-			CharacterRepository.Save(characterID , character);
+			CharacterRepository.Save(characterID, character);
 		}
 
 		private void OnMoveInputDetected(MoveInputDetected obj){
@@ -26,8 +26,12 @@ namespace Script.Main.Character{
 			var character = CharacterRepository.Query(userId);
 			var horizontal = obj.Horizontal;
 			var vertical = obj.Vertical;
+			var isTumbleRoll = obj.IsTumbleRoll;
 			character.Move(horizontal, vertical);
 			character.SetFaceDirection(horizontal);
+			if(isTumbleRoll){
+				character.TumbleRoll(horizontal, vertical);
+			}
 		}
 
 		private void OnStrongSkillDetected(StrongSkillDetected obj){

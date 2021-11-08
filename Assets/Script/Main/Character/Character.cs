@@ -1,7 +1,5 @@
 ﻿using Script.Main.Character.Event;
-using Script.Main.InputData;
 using Script.Main.Skill;
-using Script.Main.Utility;
 using UnityEngine;
 
 namespace Script.Main.Character{
@@ -17,7 +15,11 @@ namespace Script.Main.Character{
 		}
 
 		public void Move(float horizontal, float vertical){
-			_movement?.Move(horizontal, vertical);
+			_movement.Move(horizontal, vertical);
+		}
+
+		public void TumbleRoll(float horizontal, float vertical){
+			_movement.TumbleRoll(new Vector2(horizontal, vertical), 2);
 		}
 
 		public void SetFaceDirection(float direction){
