@@ -28,7 +28,8 @@ namespace Script.Main.Character{
 			}
 		}
 
-		public void CastSkill(Vector2 direction, bool isBase){
+		public void CastSkill(Vector2 targetPosition, bool isBase){
+			var direction = (targetPosition - (Vector2)transform.position).normalized;
 			if(isBase){
 				EventBus.Post(new SkillCasted(_baseSkillName,
 					new SkillSpawnInfo(characterID, transform.position, direction)));
