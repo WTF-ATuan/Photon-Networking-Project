@@ -7,7 +7,7 @@ namespace Script.Main.Character{
 		public string characterID = "123";
 
 		private CharacterMovement _movement;
-		private string _baseSkillName = "FireBall";
+		private string _baseSkillName = "Damage-Roll";
 		private string _strongSkillName = "FireBall2D";
 
 		private void Start(){
