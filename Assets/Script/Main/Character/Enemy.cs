@@ -8,8 +8,10 @@ namespace Script.Main.Character{
 
 		public void ModifyHp(float amount){
 			hp += amount;
-
-            HPbar.GetComponent<RectTransform>().sizeDelta= new Vector2(hp -amount, 10);
+			HPbar.GetComponent<RectTransform>().sizeDelta= new Vector2(hp -amount, 10);
+			if(hp <= 0){
+				gameObject.SetActive(false);
+			}
 		}
 	}
 

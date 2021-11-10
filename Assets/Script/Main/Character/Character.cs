@@ -7,7 +7,7 @@ namespace Script.Main.Character{
 		public string characterID = "123";
 
 		private CharacterMovement _movement;
-		private string _baseSkillName = "FireBall";
+		private string _baseSkillName = "Damage-Roll";
 		private string _strongSkillName = "FireBall2D";
 
 		private void Start(){
@@ -28,7 +28,8 @@ namespace Script.Main.Character{
 			}
 		}
 
-		public void CastSkill(Vector2 direction, bool isBase){
+		public void CastSkill(Vector2 targetPosition, bool isBase){
+			var direction = (targetPosition - (Vector2)transform.position).normalized;
 			if(isBase){
 				EventBus.Post(new SkillCasted(_baseSkillName,
 					new SkillSpawnInfo(characterID, transform.position, direction)));
