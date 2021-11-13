@@ -1,7 +1,5 @@
 ﻿using Script.Main.Character.Event;
-using Script.Main.InputData;
 using Script.Main.Skill;
-using Script.Main.Utility;
 using UnityEngine;
 
 namespace Script.Main.Character{
@@ -9,7 +7,7 @@ namespace Script.Main.Character{
 		public string characterID = "123";
 
 		private CharacterMovement _movement;
-		private string _baseSkillName = "FireBall";
+		private string _baseSkillName = "Damage-Roll";
 		private string _strongSkillName = "FireBall2D";
 
 		private void Start(){
@@ -17,7 +15,11 @@ namespace Script.Main.Character{
 		}
 
 		public void Move(float horizontal, float vertical){
-			_movement?.Move(horizontal, vertical);
+			_movement.Move(horizontal, vertical);
+		}
+
+		public void TumbleRoll(float horizontal, float vertical){
+			_movement.TumbleRoll(new Vector2(horizontal, vertical), 2);
 		}
 
 		public void SetFaceDirection(float direction){
@@ -26,7 +28,8 @@ namespace Script.Main.Character{
 			}
 		}
 
-		public void CastSkill(Vector2 direction, bool isBase){
+		public void CastSkill(Vector2 targetPosition, bool isBase){
+			var direction = (targetPosition - (Vector2)transform.position).normalized;
 			if(isBase){
 				EventBus.Post(new SkillCasted(_baseSkillName,
 					new SkillSpawnInfo(characterID, transform.position, direction)));

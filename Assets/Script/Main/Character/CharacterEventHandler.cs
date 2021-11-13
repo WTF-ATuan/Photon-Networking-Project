@@ -12,13 +12,21 @@ namespace Script.Main.Character{
 			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
 			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
 			EventBus.Subscribe<CharacterCreated>(OnCharacterCreated);
+			EventBus.Subscribe<CharacterRolled>(OnCharacterRolled);
+		}
+
+		private void OnCharacterRolled(CharacterRolled obj){
+			var characterID = obj.CharacterID;
+			var direction = obj.Direction;
+			var character = CharacterRepository.Query(characterID);
+			character.TumbleRoll(direction.x, direction.y);
 		}
 
 		private void OnCharacterCreated(CharacterCreated obj){
 			var characterID = obj.CharacterID;
 			var character = obj.Character;
 			character.characterID = characterID;
-			CharacterRepository.Save(characterID , character);
+			CharacterRepository.Save(characterID, character);
 		}
 
 		private void OnMoveInputDetected(MoveInputDetected obj){
@@ -26,8 +34,12 @@ namespace Script.Main.Character{
 			var character = CharacterRepository.Query(userId);
 			var horizontal = obj.Horizontal;
 			var vertical = obj.Vertical;
+			var isTumbleRoll = obj.IsTumbleRoll;
 			character.Move(horizontal, vertical);
 			character.SetFaceDirection(horizontal);
+			if(isTumbleRoll){
+				character.TumbleRoll(horizontal, vertical);
+			}
 		}
 
 		private void OnStrongSkillDetected(StrongSkillDetected obj){
