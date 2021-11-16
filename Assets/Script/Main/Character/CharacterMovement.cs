@@ -13,6 +13,15 @@ namespace Script.Main.Character{
 			_spriteRenderer = GetComponent<SpriteRenderer>();
 		}
 
+		public Vector2 GetMoveVelocity(float horizontal, float vertical){
+			var velocity = new Vector2(horizontal, vertical) * movementSpeed;
+			return velocity;
+		}
+
+		public void MoveWithVelocity(){
+			
+		}
+
 		public void Move(float horizontal, float vertical){
 			var velocity = new Vector2(horizontal, vertical) * movementSpeed;
 			_rigidbody2D.velocity = velocity;
