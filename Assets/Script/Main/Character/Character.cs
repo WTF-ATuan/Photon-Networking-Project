@@ -15,11 +15,14 @@ namespace Script.Main.Character{
 		}
 
 		public void Move(float horizontal, float vertical){
-			_movement.Move(horizontal, vertical);
+			var velocity = _movement.GetMoveVelocity(horizontal, vertical, 3);
+			_movement.VelocityMove(velocity);
 		}
 
 		public void TumbleRoll(float horizontal, float vertical){
-			_movement.TumbleRoll(new Vector2(horizontal, vertical), 2);
+			var direction = new Vector2(horizontal, vertical);
+			var targetPosition = _movement.GetRollTargetPosition(transform.position, direction, 2);
+			_movement.RollMove(targetPosition);
 		}
 
 		public void SetFaceDirection(float direction){
