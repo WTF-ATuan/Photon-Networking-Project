@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
-using UnityEngine.UI ;
+using UnityEngine.UI;
 
-namespace Script.Main.Character{
-	public class Enemy : MonoBehaviour , IModifyHp{
+namespace Script.Main.Enemy{
+	public class Enemy : MonoBehaviour, IModifyHp{
 		public float hp = 100;
-        public Image HPbar;
+		public Image hpBar;
 
 		public void ModifyHp(float amount){
 			hp += amount;
-			HPbar.GetComponent<RectTransform>().sizeDelta= new Vector2(hp -amount, 10);
+			hpBar.GetComponent<RectTransform>().sizeDelta = new Vector2(hp - amount, 10);
 			if(hp <= 0){
 				gameObject.SetActive(false);
 			}
@@ -17,9 +17,5 @@ namespace Script.Main.Character{
 
 	public interface IModifyHp{
 		void ModifyHp(float amount);
-
-
 	}
-
-    
 }
