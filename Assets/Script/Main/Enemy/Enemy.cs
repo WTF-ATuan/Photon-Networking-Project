@@ -1,10 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using Script.Main.Utility;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Script.Main.Enemy{
 	public class Enemy : MonoBehaviour, IModifyHp{
 		public float hp = 100;
 		public Image hpBar;
+
+		private void Start(){
+			var enemyRepository = SingleRepository.Query<EnemyRepository>();
+			var id = Guid.NewGuid().ToString();
+			enemyRepository.Save(id, this);
+		}
 
 		public void ModifyHp(float amount){
 			hp += amount;
