@@ -31,10 +31,10 @@ namespace Script.Main.Enemy{
 			}
 		}
 
-		public void Attack(Vector3 targetPosition){
-		}
+		public void Attack(Vector3 targetPosition){ }
 
 		public void Move(Vector2 targetPosition){
+			transform.position = targetPosition;
 		}
 	}
 }
