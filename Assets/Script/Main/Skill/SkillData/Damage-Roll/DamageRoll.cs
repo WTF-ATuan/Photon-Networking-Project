@@ -1,6 +1,7 @@
 ﻿using Script.Main.Character;
 using Script.Main.Character.Event;
 using Script.Main.Enemy;
+using Script.Main.Enemy.Interface;
 using UnityEngine;
 
 namespace Script.Main.Skill.Damage_Roll{

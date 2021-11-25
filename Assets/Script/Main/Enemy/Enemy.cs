@@ -1,4 +1,5 @@
 ﻿using System;
+using Script.Main.Enemy.Interface;
 using Script.Main.Utility;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,9 +30,5 @@ namespace Script.Main.Enemy{
 				gameObject.SetActive(false);
 			}
 		}
-	}
-
-	public interface IModifyHp{
-		void ModifyHp(float amount);
 	}
 }
