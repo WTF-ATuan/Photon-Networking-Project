@@ -1,4 +1,5 @@
 ﻿using Script.Main.Character;
+using Script.Main.Enemy;
 using Script.Main.Utility;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace Script.Main.Installer{
 		private void Awake(){
 			SingleRepository.Create<CharacterRepository>();
 			SingleRepository.Create<CharacterEventHandler>();
+			SingleRepository.Create<EnemyRepository>();
+			SingleRepository.Create<EnemyStateCalculated>();
 		}
 	}
 }

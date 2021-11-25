@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Script.Main.Character;
+using Script.Main.Enemy;
+using Script.Main.Enemy.Interface;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
