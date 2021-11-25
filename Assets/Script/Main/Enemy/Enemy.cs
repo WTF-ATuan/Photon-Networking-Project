@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 namespace Script.Main.Enemy{
 	public class Enemy : MonoBehaviour, IModifyHp{
-		public float hp = 100;
-		public Image hpBar;
 		public string ID{ get; private set; }
+		public EnemyStateDetermination StateDetermination{ get; private set; }
 
-		private EnemyStateDetermination _stateDetermination;
+		[SerializeField] private float hp = 100;
+		[SerializeField] private Image hpBar;
 
 		private void Start(){
 			var enemyRepository = SingleRepository.Query<EnemyRepository>();
 			ID = Guid.NewGuid().ToString();
 			enemyRepository.Save(ID, this);
-			_stateDetermination = new EnemyStateDetermination(this);
+			StateDetermination = new EnemyStateDetermination(this);
 		}
 
 		private void Update(){
-			_stateDetermination.UpdateState();
+			StateDetermination.UpdateState();
 		}
 
 		public void ModifyHp(float amount){
