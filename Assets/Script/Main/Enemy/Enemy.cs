@@ -30,5 +30,11 @@ namespace Script.Main.Enemy{
 				gameObject.SetActive(false);
 			}
 		}
+
+		public void Attack(Vector3 targetPosition){
+		}
+
+		public void Move(Vector2 targetPosition){
+		}
 	}
 }
