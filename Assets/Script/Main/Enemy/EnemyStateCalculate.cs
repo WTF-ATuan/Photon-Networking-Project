@@ -15,11 +15,10 @@ namespace Script.Main.Enemy{
 		public Vector3 GetClosestCharacterPosition(string enemyID){
 			var closestCharacter = GetClosestCharacter(enemyID);
 			var position = closestCharacter ? closestCharacter.transform.position : Vector3.zero;
-
 			return position;
 		}
 
-		public float GetDistanceOfClosestCharacter(string enemyID){
+		public float GetClosestCharacterDistance(string enemyID){
 			var enemy = _enemyRepository.Query(enemyID);
 			var closestCharacter = GetClosestCharacter(enemyID);
 			var enemyPosition = enemy.transform.position;
