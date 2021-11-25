@@ -12,6 +12,11 @@ namespace Script.Main.Enemy{
 			_characterRepository = SingleRepository.Query<CharacterRepository>();
 		}
 
+		public EnemyStateCalculate(CharacterRepository characterRepository, EnemyRepository enemyRepository){
+			_characterRepository = characterRepository;
+			_enemyRepository = enemyRepository;
+		}
+
 		public Vector3 GetClosestCharacterPosition(string enemyID){
 			var enemy = _enemyRepository.Query(enemyID);
 			var enemyPosition = enemy.transform.position;
