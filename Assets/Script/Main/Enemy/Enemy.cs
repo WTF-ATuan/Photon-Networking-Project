@@ -9,17 +9,17 @@ namespace Script.Main.Enemy{
 		public Image hpBar;
 
 		private string _id;
-		private EnemyStateCalculate _stateCalculate;
+		private EnemyStateCalculated _stateCalculated;
 
 		private void Start(){
 			var enemyRepository = SingleRepository.Query<EnemyRepository>();
 			_id = Guid.NewGuid().ToString();
 			enemyRepository.Save(_id, this);
-			_stateCalculate = SingleRepository.Query<EnemyStateCalculate>();
+			_stateCalculated = SingleRepository.Query<EnemyStateCalculated>();
 		}
 
 		private void Update(){
-			var closestCharacterDistance = _stateCalculate.GetClosestCharacterDistance(_id);
+			var closestCharacterDistance = _stateCalculated.GetClosestCharacterDistance(_id);
 			if(closestCharacterDistance < 3){
 				Debug.Log($"Attack");
 			}
