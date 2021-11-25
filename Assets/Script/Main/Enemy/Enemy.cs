@@ -7,26 +7,19 @@ namespace Script.Main.Enemy{
 	public class Enemy : MonoBehaviour, IModifyHp{
 		public float hp = 100;
 		public Image hpBar;
+		public string ID{ get; private set; }
 
-		private string _id;
-		private EnemyStateCalculated _stateCalculated;
+		private EnemyStateDetermination _stateDetermination;
 
 		private void Start(){
 			var enemyRepository = SingleRepository.Query<EnemyRepository>();
-			_id = Guid.NewGuid().ToString();
-			enemyRepository.Save(_id, this);
-			_stateCalculated = SingleRepository.Query<EnemyStateCalculated>();
+			ID = Guid.NewGuid().ToString();
+			enemyRepository.Save(ID, this);
+			_stateDetermination = new EnemyStateDetermination(this);
 		}
 
 		private void Update(){
-			var closestCharacterDistance = _stateCalculated.GetClosestCharacterDistance(_id);
-			if(closestCharacterDistance < 3){
-				Debug.Log($"Attack");
-			}
-
-			if(closestCharacterDistance > 3){
-				Debug.Log($"Move~~");
-			}
+			_stateDetermination.UpdateState();
 		}
 
 		public void ModifyHp(float amount){
