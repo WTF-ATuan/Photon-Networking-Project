@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Script.Main.Enemy{
 	public class EnemyBehavior{
-		private CharacterRepository _characterRepository;
-		private EnemyRepository _enemyRepository;
+		private readonly CharacterRepository _characterRepository;
+		private readonly EnemyRepository _enemyRepository;
 
 		public EnemyBehavior(){
 			_enemyRepository = SingleRepository.Query<EnemyRepository>();
