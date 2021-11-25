@@ -13,6 +13,22 @@ namespace Script.Main.Enemy{
 		}
 
 		public Vector3 GetClosestCharacterPosition(string enemyID){
+			var closestCharacter = GetClosestCharacter(enemyID);
+			var position = closestCharacter ? closestCharacter.transform.position : Vector3.zero;
+
+			return position;
+		}
+
+		public float GetDistanceOfClosestCharacter(string enemyID){
+			var enemy = _enemyRepository.Query(enemyID);
+			var closestCharacter = GetClosestCharacter(enemyID);
+			var enemyPosition = enemy.transform.position;
+			var characterPosition = closestCharacter.transform.position;
+			var distance = Vector3.Distance(characterPosition, enemyPosition);
+			return distance;
+		}
+
+		private Character.Character GetClosestCharacter(string enemyID){
 			var enemy = _enemyRepository.Query(enemyID);
 			var enemyPosition = enemy.transform.position;
 			var characters = _characterRepository.QueryAll();
@@ -26,18 +42,7 @@ namespace Script.Main.Enemy{
 				minDistance = distance;
 			}
 
-			var position = closestCharacter ? closestCharacter.transform.position : Vector3.zero;
-
-			return position;
-		}
-
-		public float GetDistanceOfCharacter(string enemyID, string characterID){
-			var enemy = _enemyRepository.Query(enemyID);
-			var character = _characterRepository.Query(characterID);
-			var enemyPosition = enemy.transform.position;
-			var characterPosition = character.transform.position;
-			var distance = Vector3.Distance(characterPosition, enemyPosition);
-			return distance;
+			return closestCharacter;
 		}
 	}
 }

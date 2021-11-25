@@ -9,6 +9,7 @@ namespace Script.Main.Installer{
 			SingleRepository.Create<CharacterRepository>();
 			SingleRepository.Create<CharacterEventHandler>();
 			SingleRepository.Create<EnemyRepository>();
+			SingleRepository.Create<EnemyStateCalculate>();
 		}
 	}
 }
