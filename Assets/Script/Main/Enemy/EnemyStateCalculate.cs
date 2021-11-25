@@ -3,11 +3,11 @@ using Script.Main.Utility;
 using UnityEngine;
 
 namespace Script.Main.Enemy{
-	public class EnemyBehavior{
+	public class EnemyStateCalculate{
 		private readonly CharacterRepository _characterRepository;
 		private readonly EnemyRepository _enemyRepository;
 
-		public EnemyBehavior(){
+		public EnemyStateCalculate(){
 			_enemyRepository = SingleRepository.Query<EnemyRepository>();
 			_characterRepository = SingleRepository.Query<CharacterRepository>();
 		}
