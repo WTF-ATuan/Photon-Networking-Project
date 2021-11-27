@@ -24,7 +24,9 @@ namespace Script.Main.Enemy{
 			ChaseBehavior(characterPosition, closestCharacterDistance);
 		}
 
-		private void AttackBehavior(Vector3 characterPosition){ }
+		private void AttackBehavior(Vector3 characterPosition){
+			Enemy.Attack(characterPosition);
+		}
 
 		private void ChaseBehavior(Vector3 characterPosition, float closestCharacterDistance){
 			Enemy.Move(characterPosition, closestCharacterDistance);

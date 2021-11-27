@@ -39,7 +39,17 @@ namespace Script.Main.Enemy{
 			}
 		}
 
-		public void Attack(Vector3 targetPosition){ }
+		public void Attack(Vector3 targetPosition){
+			DOTween.KillAll();
+			var position = transform.position;
+			var targetDirection = (targetPosition - position).normalized;
+			var bullet = GameObject.CreatePrimitive(PrimitiveType.Cube);
+			bullet.transform.position = position;
+			bullet.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+			var rigBody = bullet.AddComponent<Rigidbody>();
+			rigBody.AddForce(targetDirection * 10f, ForceMode.Impulse);
+		}
+
 
 		public void Move(Vector2 targetPosition, float closestCharacterDistance){
 			if(isMoving) return;
