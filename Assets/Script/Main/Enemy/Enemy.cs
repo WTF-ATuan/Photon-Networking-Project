@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using DG.Tweening;
 using Script.Main.Enemy.Interface;
 using Script.Main.Utility;
 using UnityEngine;
@@ -17,10 +19,14 @@ namespace Script.Main.Enemy{
 			ID = Guid.NewGuid().ToString();
 			enemyRepository.Save(ID, this);
 			Behavior = new EnemyBehavior(this);
+			UpdateState();
 		}
 
-		private void Update(){
-			Behavior.UpdateState();
+		private async void UpdateState(){
+			while(enabled){
+				await Task.Delay(1500);
+				Behavior.UpdateState();
+			}
 		}
 
 		public void ModifyHp(float amount){
@@ -33,8 +39,8 @@ namespace Script.Main.Enemy{
 
 		public void Attack(Vector3 targetPosition){ }
 
-		public void Move(Vector2 targetPosition){
-			transform.position = targetPosition;
+		public void Move(Vector2 targetPosition, float closestCharacterDistance){
+			transform.DOMove(targetPosition, closestCharacterDistance);
 		}
 	}
 }

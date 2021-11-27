@@ -6,6 +6,10 @@ namespace Script.Main.Enemy{
 		private Enemy Enemy{ get; }
 
 		private readonly EnemyStateCalculated _stateCalculated;
+		
+		//state
+		private bool isMoving;
+		
 
 		public EnemyBehavior(Enemy enemy){
 			Enemy = enemy;
@@ -16,12 +20,19 @@ namespace Script.Main.Enemy{
 			var closestCharacterDistance = _stateCalculated.GetClosestCharacterDistance(Enemy.ID);
 			var characterPosition = _stateCalculated.GetClosestCharacterPosition(Enemy.ID);
 			if(closestCharacterDistance <= 3){
-				Enemy.Attack(characterPosition);
+				AttackBehavior(characterPosition);
 				return;
 			}
 
-			var movePosition = (Vector2)characterPosition + Random.insideUnitCircle * 3;
-			Enemy.Move(movePosition);
+			ChaseBehavior(characterPosition);
+		}
+
+		private void AttackBehavior(Vector3 characterPosition){
+			
+		}
+
+		private void ChaseBehavior(Vector3 characterPosition){
+			
 		}
 	}
 }
