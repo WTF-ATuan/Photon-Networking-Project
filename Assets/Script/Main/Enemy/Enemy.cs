@@ -14,6 +14,8 @@ namespace Script.Main.Enemy{
 		[SerializeField] private float hp = 100;
 		[SerializeField] private Image hpBar;
 
+		private bool isMoving;
+
 		private void Start(){
 			var enemyRepository = SingleRepository.Query<EnemyRepository>();
 			ID = Guid.NewGuid().ToString();
@@ -40,7 +42,9 @@ namespace Script.Main.Enemy{
 		public void Attack(Vector3 targetPosition){ }
 
 		public void Move(Vector2 targetPosition, float closestCharacterDistance){
-			transform.DOMove(targetPosition, closestCharacterDistance);
+			if(isMoving) return;
+			transform.DOMove(targetPosition, closestCharacterDistance)
+					.OnComplete(() => isMoving = false);
 		}
 	}
 }

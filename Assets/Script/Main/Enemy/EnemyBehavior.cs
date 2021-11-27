@@ -6,10 +6,7 @@ namespace Script.Main.Enemy{
 		private Enemy Enemy{ get; }
 
 		private readonly EnemyStateCalculated _stateCalculated;
-		
-		//state
-		private bool isMoving;
-		
+
 
 		public EnemyBehavior(Enemy enemy){
 			Enemy = enemy;
@@ -24,15 +21,13 @@ namespace Script.Main.Enemy{
 				return;
 			}
 
-			ChaseBehavior(characterPosition);
+			ChaseBehavior(characterPosition, closestCharacterDistance);
 		}
 
-		private void AttackBehavior(Vector3 characterPosition){
-			
-		}
+		private void AttackBehavior(Vector3 characterPosition){ }
 
-		private void ChaseBehavior(Vector3 characterPosition){
-			
+		private void ChaseBehavior(Vector3 characterPosition, float closestCharacterDistance){
+			Enemy.Move(characterPosition, closestCharacterDistance);
 		}
 	}
 }
