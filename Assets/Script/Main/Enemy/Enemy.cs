@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace Script.Main.Enemy{
 	public class Enemy : MonoBehaviour, IModifyHp{
 		public string ID{ get; private set; }
-		public EnemyStateDetermination StateDetermination{ get; private set; }
+		public EnemyBehavior Behavior{ get; private set; }
 
 		[SerializeField] private float hp = 100;
 		[SerializeField] private Image hpBar;
@@ -16,11 +16,11 @@ namespace Script.Main.Enemy{
 			var enemyRepository = SingleRepository.Query<EnemyRepository>();
 			ID = Guid.NewGuid().ToString();
 			enemyRepository.Save(ID, this);
-			StateDetermination = new EnemyStateDetermination(this);
+			Behavior = new EnemyBehavior(this);
 		}
 
 		private void Update(){
-			StateDetermination.UpdateState();
+			Behavior.UpdateState();
 		}
 
 		public void ModifyHp(float amount){
