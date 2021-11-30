@@ -22,18 +22,18 @@ namespace Script.Main.InputData{
 		private void DetectMoveInput(){
 			var horizontalValue = Input.GetAxisRaw($"Horizontal");
 			var verticalValue = Input.GetAxisRaw($"Vertical");
-			var isTumbleRoll = Input.GetKeyDown(KeyCode.LeftShift);
+			var isTumbleRoll = Input.GetKeyDown(KeyCode.Space);
 			EventBus.Post(new MoveInputDetected(OwnerID, horizontalValue, verticalValue, isTumbleRoll));
 		}
 
 		private void DetectBaseSkillInput(){
-			if(Input.GetKeyDown(KeyCode.Q)){
+			if(Input.GetMouseButtonDown(0)){
 				EventBus.Post(new BaseSkillDetected(OwnerID, MouseWorldDirection()));
 			}
 		}
 
 		private void DetectStrongSkillInput(){
-			if(Input.GetKeyDown(KeyCode.E)){
+			if(Input.GetMouseButtonDown(1)){
 				EventBus.Post(new StrongSkillDetected(OwnerID, MouseWorldDirection()));
 			}
 		}
