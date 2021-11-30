@@ -1,74 +1,66 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ButtonSetting : MonoBehaviour    //¥H«ö¶s¦WºÙ§PÂ_«ö¤F¤°»ò«ö¶s    ¥H³õ´º¦WºÙ§ì¨ú­n¤Á´«ªº³õ´º
+public class ButtonSetting : MonoBehaviour //ä»¥æŒ‰éˆ•åç¨±åˆ¤æ–·æŒ‰äº†ä»€éº¼æŒ‰éˆ•    ä»¥å ´æ™¯åç¨±æŠ“å–è¦åˆ‡æ›çš„å ´æ™¯
 {
-    public GameObject MenuPrefab;  //ÂI¶}¾¦½ü ¥X²{ªº¿ï³æ
-    public GameObject VolumeControl;  //½Õ¾ã­µ¶qªº¤¶­±
-    public GameObject OriginalCanvas;  //½Õ¾ã­µ¶qªº¤¶­±¥´¶}®É ¥ı§â­ìcanvasÃö±¼
-    public static string GetButtonName; //ÂIÀ»ªº«ö¶s¦WºÙ
+	public GameObject MenuPrefab; //é»é–‹é½’è¼ª å‡ºç¾çš„é¸å–®
+	public GameObject VolumeControl; //èª¿æ•´éŸ³é‡çš„ä»‹é¢
+	public GameObject OriginalCanvas; //èª¿æ•´éŸ³é‡çš„ä»‹é¢æ‰“é–‹æ™‚ å…ˆæŠŠåŸcanvasé—œæ‰
+	public static string GetButtonName; //é»æ“Šçš„æŒ‰éˆ•åç¨±
 
-    public void ButtonIsClick()
-    {
-        Debug.Log("00");
+	public void ButtonIsClick(){
+		Debug.Log("00");
 
-        if (GetButtonName == "Button_GameStart")
-        {
-            SceneManager.LoadScene("SeverConnect");
-        }
+		if(GetButtonName == "Button_GameStart"){
+			SceneManager.LoadScene("CreateOrJoin");
+		}
 
-        if (GetButtonName == "Button_QuitGame")
-        {
-            Application.Quit();
-        }
-        
-        if (GetButtonName == "Button_BackToStart")
-        {
-            SceneManager.LoadScene("StartScenes");
-        }
+		if(GetButtonName == "Button_QuitGame"){
+			Application.Quit();
+		}
 
-        if (GetButtonName == "Button_BackToCreateOrJoin")
-        {
-            SceneManager.LoadScene("CreateOrJoin");
-        }
+		if(GetButtonName == "Button_BackToStart"){
+			SceneManager.LoadScene("StartScenes");
+		}
 
-        if (GetButtonName == "Button_VolumeSetting")
-        {
-            OriginalCanvas = GameObject.Find("Canvas");
-            OriginalCanvas.SetActive(false);
-            VolumeControl.SetActive(true);
-        }
+		if(GetButtonName == "Button_BackToCreateOrJoin"){
+			SceneManager.LoadScene("CreateOrJoin");
+		}
 
-        if (GetButtonName == "Button_CloseVolumeSetting")
-        {
-            OriginalCanvas.SetActive(true);
-            VolumeControl.SetActive(false);
-        }
+		if(GetButtonName == "Button_VolumeSetting"){
+			OriginalCanvas = GameObject.Find("Canvas");
+			OriginalCanvas.SetActive(false);
+			VolumeControl.SetActive(true);
+		}
 
-        //if (GetButtonName == "Button_EnterRoom")
-        //{
-        //    SceneManager.LoadScene(3);
-        //}
+		if(GetButtonName == "Button_CloseVolumeSetting"){
+			OriginalCanvas.SetActive(true);
+			VolumeControl.SetActive(false);
+		}
 
-        //if (GetButtonName == "Button_CreateRoom")
-        //{
-        //    SceneManager.LoadScene(3);
-        //}
+		//if (GetButtonName == "Button_EnterRoom")
+		//{
+		//    SceneManager.LoadScene(3);
+		//}
 
-        if (GetButtonName == "Button_JoinRoom")
-        {
-            SceneManager.LoadScene("JoinSetting");
-        }
+		if(GetButtonName == "Button_CreateRoom"){
+			SceneManager.LoadScene("ChooseCharacter");
+		}
 
-        if (GetButtonName == "Button_CloseMenu")
-        {
-            Destroy(GameObject.Find("Menu"));
-        }
+		if(GetButtonName == "Button_JoinRoom"){
+			SceneManager.LoadScene("ChooseCharacter");
+		}
 
-        if (GetButtonName == "Button_OpenMenu")
-        {
-            Instantiate(MenuPrefab);
-        }
-    }
+		if(GetButtonName == "Button_CloseMenu"){
+			Destroy(GameObject.Find("Menu"));
+		}
+
+		if(GetButtonName == "Button_OpenMenu"){
+			Instantiate(MenuPrefab);
+		}
+
+		if(GetButtonName == "Finish"){
+			SceneManager.LoadScene("Battle Scene_Offline");
+		}
+	}
 }

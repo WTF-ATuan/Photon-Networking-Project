@@ -1,0 +1,16 @@
+{
+    "name": "Jiang",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d40399ffa526b5e408044fd3b8f2680c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

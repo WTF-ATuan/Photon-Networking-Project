@@ -1,24 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using Script.Main;
+using Script.Main.Character.Event;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class CameraFollow : MonoBehaviour
-{
-    public Transform Player;
-    public float smothing = 5f;   //ÃèÀY¥­·Æ²¾°Êªº³t«×
-    Vector3 offset;  //¬Û¾÷©M¥D¨¤¤§¶¡ªº©T©w¶ZÂ÷
+namespace Script.Jiang{
+	public class CameraFollow : MonoBehaviour{
+		public Transform player;
+		public float smoothing = 5f; //é¡é ­å¹³æ»‘ç§»å‹•çš„é€Ÿåº¦
+		private Vector3 _offset; //ç›¸æ©Ÿå’Œä¸»è§’ä¹‹é–“çš„å›ºå®šè·é›¢
 
-    void Start()
-    {
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
-        offset = transform.position - Player.position;
-    }
+		private void Start(){
+			EventBus.Subscribe<CharacterCreated>(OnCharacterCreated);
+		}
 
-    void FixedUpdate()
-    {
-        Vector3 targetCampos = Player.position + offset;
+		private void OnCharacterCreated(CharacterCreated obj){
+			var character = obj.Character;
+			player = character.transform;
+			_offset = transform.position - player.position;
+		}
 
-        transform.position = Vector3.Lerp(transform.position, targetCampos, smothing * Time.deltaTime);  //¥H¤@©wªº³t«×¡A±qA¥­·Æ²¾°Ê¨ìB
-    }
+		private void FixedUpdate(){
+			var targetCampos = player.position + _offset;
+			transform.position =
+					Vector3.Lerp(transform.position, targetCampos, smoothing * Time.deltaTime); //ä»¥ä¸€å®šçš„é€Ÿåº¦ï¼Œå¾Aå¹³æ»‘ç§»å‹•åˆ°B
+		}
+	}
 }
-
