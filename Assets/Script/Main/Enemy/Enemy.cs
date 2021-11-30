@@ -25,7 +25,7 @@ namespace Script.Main.Enemy{
 		}
 
 		private async void UpdateState(){
-			while(enabled){
+			while(enabled && this){
 				await Task.Delay(1500);
 				if(!this) break;
 				Behavior.UpdateState();

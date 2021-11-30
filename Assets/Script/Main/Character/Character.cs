@@ -7,8 +7,8 @@ namespace Script.Main.Character{
 		public string characterID = "123";
 
 		private CharacterMovement _movement;
-		private string _baseSkillName = "DamageRoll";
-		private string _strongSkillName = "ExtraArrow";
+		private string _baseSkillName = "BasicArrow";
+		private string _strongSkillName = "FireBall2D";
 
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
