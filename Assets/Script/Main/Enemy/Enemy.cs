@@ -27,13 +27,16 @@ namespace Script.Main.Enemy{
 		private async void UpdateState(){
 			while(enabled){
 				await Task.Delay(1500);
+				if(!this) break;
 				Behavior.UpdateState();
 			}
 		}
 
 		public void ModifyHp(float amount){
 			hp += amount;
-			hpBar.GetComponent<RectTransform>().sizeDelta = new Vector2(hp - amount, 10);
+			var hpBarRect = hpBar.GetComponent<RectTransform>();
+			var height = hpBarRect.sizeDelta.y;
+			hpBarRect.sizeDelta = new Vector2(hp - amount, height);
 			if(hp <= 0){
 				gameObject.SetActive(false);
 			}
