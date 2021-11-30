@@ -1,6 +1,8 @@
-﻿using Script.Main.Character;
+﻿using System;
+using Script.Main.Character;
 using Script.Main.Utility;
 using UnityEngine;
+using WebSocketSharp;
 
 namespace Script.Main.Enemy{
 	public class EnemyStateCalculated{
@@ -13,12 +15,14 @@ namespace Script.Main.Enemy{
 		}
 
 		public Vector3 GetClosestCharacterPosition(string enemyID){
+			if(enemyID.IsNullOrEmpty()) throw new Exception("The enemyID is empty");
 			var closestCharacter = GetClosestCharacter(enemyID);
 			var position = closestCharacter ? closestCharacter.transform.position : Vector3.zero;
 			return position;
 		}
 
 		public float GetClosestCharacterDistance(string enemyID){
+			if(enemyID.IsNullOrEmpty()) throw new Exception("The enemyID is empty");
 			var enemy = _enemyRepository.Query(enemyID);
 			var closestCharacter = GetClosestCharacter(enemyID);
 			var enemyPosition = enemy.transform.position;
@@ -28,6 +32,7 @@ namespace Script.Main.Enemy{
 		}
 
 		private Character.Character GetClosestCharacter(string enemyID){
+			if(enemyID.IsNullOrEmpty()) throw new Exception("The enemyID is empty");
 			var enemy = _enemyRepository.Query(enemyID);
 			var enemyPosition = enemy.transform.position;
 			var characters = _characterRepository.QueryAll();

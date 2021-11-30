@@ -1,6 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Script.Main.Character;
-using Script.Main.Enemy;
 using Script.Main.Enemy.Interface;
 using UniRx;
 using UniRx.Triggers;
@@ -14,7 +12,7 @@ namespace Script.Main.Skill.SkillData.FireBall2D{
 			var originPosition = spawnInfo.OriginPosition;
 			var skillObject = Instantiate(fireballViewObject, originPosition, Quaternion.identity);
 			skillObject.OnCollisionEnter2DAsObservable()
-					.Subscribe(x => OnSkillObjectCollisionEnter(skillObject, x))
+					.Subscribe(x => OnSkillObjectCollisionEnter(skillObject))
 					.AddTo(skillObject);
 			OnSkillObjectCreated(skillObject, spawnInfo);
 		}
@@ -25,7 +23,7 @@ namespace Script.Main.Skill.SkillData.FireBall2D{
 			rigidbody2D.AddForce(direction * 10, ForceMode2D.Impulse);
 		}
 
-		private void OnSkillObjectCollisionEnter(GameObject skillObject, Collision2D collision){
+		private void OnSkillObjectCollisionEnter(GameObject skillObject){
 			var rigidbody2D = skillObject.GetComponent<Rigidbody2D>();
 			rigidbody2D.Sleep();
 			DelayExplode(500, skillObject);
@@ -33,6 +31,7 @@ namespace Script.Main.Skill.SkillData.FireBall2D{
 
 		private async void DelayExplode(int delayTime, GameObject skillObject){
 			await Task.Delay(delayTime);
+			if(!skillObject) return;
 			var skillObjectPosition = skillObject.transform.position;
 			var colliders = Physics2D.OverlapCircleAll(skillObjectPosition, 2.5f);
 			foreach(var nearObjectCollider in colliders){
