@@ -2,12 +2,13 @@
 using UnityEngine;
 
 namespace Script.Main.Enemy{
-	public class EnemyStateDetermination{
+	public class EnemyBehavior{
 		private Enemy Enemy{ get; }
 
 		private readonly EnemyStateCalculated _stateCalculated;
 
-		public EnemyStateDetermination(Enemy enemy){
+
+		public EnemyBehavior(Enemy enemy){
 			Enemy = enemy;
 			_stateCalculated = SingleRepository.Query<EnemyStateCalculated>();
 		}
@@ -15,16 +16,20 @@ namespace Script.Main.Enemy{
 		public void UpdateState(){
 			var closestCharacterDistance = _stateCalculated.GetClosestCharacterDistance(Enemy.ID);
 			var characterPosition = _stateCalculated.GetClosestCharacterPosition(Enemy.ID);
-			if(closestCharacterDistance < 3){
-				Debug.Log($"Attack");
-				Enemy.Attack(characterPosition);
+			if(closestCharacterDistance <= 3){
+				AttackBehavior(characterPosition);
+				return;
 			}
 
-			if(closestCharacterDistance > 3){
-				Debug.Log($"Move~~");
-				var movePosition = (Vector2)characterPosition + Random.insideUnitCircle * 3;
-				Enemy.Move(movePosition);
-			}
+			ChaseBehavior(characterPosition, closestCharacterDistance);
+		}
+
+		private void AttackBehavior(Vector3 characterPosition){
+			Enemy.Attack(characterPosition);
+		}
+
+		private void ChaseBehavior(Vector3 characterPosition, float closestCharacterDistance){
+			Enemy.Move(characterPosition, closestCharacterDistance);
 		}
 	}
 }
