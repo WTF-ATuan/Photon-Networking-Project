@@ -1,4 +1,5 @@
 ﻿using Script.Main.Character.Event;
+using Script.Main.Character.Interface;
 using Script.Main.Skill;
 using UnityEngine;
 
@@ -13,12 +14,16 @@ namespace Script.Main.Character{
 		[SerializeField] private float jumpForce;
 		[SerializeField] private float moveSpeed = 3;
 
+		private ICharacterAbility _characterAbility;
+
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
+			_characterAbility = GetComponent<ICharacterAbility>();
 		}
 
 		public void Move(float horizontal, float vertical){
-			var velocity = _movement.GetMoveVelocity(horizontal, vertical, moveSpeed);
+			var speed = _characterAbility.QueryAbility(CharacterAbilityType.MoveSpeed);
+			var velocity = _movement.GetMoveVelocity(horizontal, vertical, speed);
 			_movement.VelocityMove(velocity);
 		}
 
