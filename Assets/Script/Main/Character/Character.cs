@@ -10,10 +10,7 @@ namespace Script.Main.Character{
 		private CharacterMovement _movement;
 		private string _baseSkillName = "BasicArrow";
 		private string _strongSkillName = "FireBall2D";
-
-		[SerializeField] private float jumpForce;
-		[SerializeField] private float moveSpeed = 3;
-
+		
 		private ICharacterAbility _characterAbility;
 
 		private void Start(){
@@ -28,7 +25,8 @@ namespace Script.Main.Character{
 		}
 
 		public void Jump(float horizontal){
-			var jumpDirection = _movement.GetJumpDirection(horizontal, jumpForce);
+			var force = _characterAbility.QueryAbility(CharacterAbilityType.JumpForce);
+			var jumpDirection = _movement.GetJumpDirection(horizontal, force);
 			_movement.Jump(jumpDirection);
 		}
 

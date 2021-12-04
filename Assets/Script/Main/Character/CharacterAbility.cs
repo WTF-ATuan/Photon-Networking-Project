@@ -5,20 +5,21 @@ using UnityEngine;
 
 namespace Script.Main.Character{
 	public class CharacterAbility : MonoBehaviour, ICharacterAbility{
-		[SerializeField] private float moveSpeed;
-		[SerializeField] private float damage;
-		[SerializeField] private float jumpForce;
+		[SerializeField] private float defaultMoveSpeed = 3;
+		[SerializeField] private float defaultDamage = 2;
+		[SerializeField] private float defaultJumpForce = 5;
 
-		private Dictionary<CharacterAbilityType, float> _stateRepository = new Dictionary<CharacterAbilityType, float>();
+		private readonly Dictionary<CharacterAbilityType, float>
+				_stateRepository = new Dictionary<CharacterAbilityType, float>();
 
 		private void Start(){
 			SetDefaultState();
 		}
 
 		public void SetDefaultState(){
-			_stateRepository.Add(CharacterAbilityType.MoveSpeed, moveSpeed);
-			_stateRepository.Add(CharacterAbilityType.Damage, damage);
-			_stateRepository.Add(CharacterAbilityType.JumpForce, jumpForce);
+			_stateRepository.Add(CharacterAbilityType.MoveSpeed, defaultMoveSpeed);
+			_stateRepository.Add(CharacterAbilityType.Damage, defaultDamage);
+			_stateRepository.Add(CharacterAbilityType.JumpForce, defaultJumpForce);
 		}
 
 		public float QueryAbility(CharacterAbilityType abilityType){
