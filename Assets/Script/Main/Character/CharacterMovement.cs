@@ -20,7 +20,7 @@ namespace Script.Main.Character{
 			var targetPosition = originPosition + rollForce;
 			return targetPosition;
 		}
-		
+
 		public void VelocityMove(Vector2 velocity){
 			_rigidbody2D.velocity = velocity;
 		}
@@ -33,5 +33,11 @@ namespace Script.Main.Character{
 			var isRight = facingValue >= 0;
 			_spriteRenderer.flipX = !isRight;
 		}
+
+		public Vector2 GetJumpDirection(float horizontal, float jumpForce){
+			return default;
+		}
+
+		public void Jump(Vector2 jumpDirection){ }
 	}
 }
