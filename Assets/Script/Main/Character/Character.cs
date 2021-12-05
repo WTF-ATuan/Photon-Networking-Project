@@ -1,6 +1,7 @@
 ﻿using Script.Main.Character.Event;
 using Script.Main.Character.Interface;
 using Script.Main.Skill;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script.Main.Character{
@@ -10,7 +11,7 @@ namespace Script.Main.Character{
 		private CharacterMovement _movement;
 		private string _baseSkillName = "BasicArrow";
 		private string _strongSkillName = "FireBall2D";
-		
+
 		private ICharacterAbility _characterAbility;
 
 		private void Start(){
@@ -21,7 +22,7 @@ namespace Script.Main.Character{
 		public void Move(float horizontal, float vertical){
 			var speed = _characterAbility.QueryAbility(CharacterAbilityType.MoveSpeed);
 			var velocity = _movement.GetMoveVelocity(horizontal, vertical, speed);
-			_movement.VelocityMove(velocity);
+			_movement.AccelerationMove(velocity);
 		}
 
 		public void Jump(float horizontal){

@@ -21,7 +21,7 @@ namespace Script.Main.Character{
 			return targetPosition;
 		}
 
-		public void VelocityMove(Vector2 acceleration){
+		public void AccelerationMove(Vector2 acceleration){
 			var currentVelocity = _rigidbody2D.velocity;
 			var nextVelocity = new Vector2(acceleration.x, currentVelocity.y);
 			_rigidbody2D.velocity = nextVelocity;
