@@ -1,4 +1,5 @@
 ﻿using Script.Main.Character.Event;
+using Script.Main.Character.Interface;
 using Script.Main.Skill;
 using UnityEngine;
 
@@ -9,14 +10,24 @@ namespace Script.Main.Character{
 		private CharacterMovement _movement;
 		private string _baseSkillName = "BasicArrow";
 		private string _strongSkillName = "FireBall2D";
+		
+		private ICharacterAbility _characterAbility;
 
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
+			_characterAbility = GetComponent<ICharacterAbility>();
 		}
 
 		public void Move(float horizontal, float vertical){
-			var velocity = _movement.GetMoveVelocity(horizontal, vertical, 3);
+			var speed = _characterAbility.QueryAbility(CharacterAbilityType.MoveSpeed);
+			var velocity = _movement.GetMoveVelocity(horizontal, vertical, speed);
 			_movement.VelocityMove(velocity);
+		}
+
+		public void Jump(float horizontal){
+			var force = _characterAbility.QueryAbility(CharacterAbilityType.JumpForce);
+			var jumpDirection = _movement.GetJumpDirection(horizontal, force);
+			_movement.Jump(jumpDirection);
 		}
 
 		public void TumbleRoll(float horizontal, float vertical){
