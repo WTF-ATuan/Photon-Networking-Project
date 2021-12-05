@@ -12,14 +12,14 @@ namespace Script.Main.Character{
 			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
 			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
 			EventBus.Subscribe<CharacterCreated>(OnCharacterCreated);
-			EventBus.Subscribe<CharacterRolled>(OnCharacterRolled);
+			EventBus.Subscribe<CharacterJumped>(OnCharacterJumped);
 		}
 
-		private void OnCharacterRolled(CharacterRolled obj){
+		private void OnCharacterJumped(CharacterJumped obj){
 			var characterID = obj.CharacterID;
 			var direction = obj.Direction;
 			var character = CharacterRepository.Query(characterID);
-			character.TumbleRoll(direction.x, direction.y);
+			character.Jump(direction.x);
 		}
 
 		private void OnCharacterCreated(CharacterCreated obj){
