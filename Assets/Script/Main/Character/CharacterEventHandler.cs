@@ -34,11 +34,11 @@ namespace Script.Main.Character{
 			var character = CharacterRepository.Query(userId);
 			var horizontal = obj.Horizontal;
 			var vertical = obj.Vertical;
-			var isTumbleRoll = obj.IsTumbleRoll;
+			var isJump = obj.IsJump;
 			character.Move(horizontal, vertical);
 			character.SetFaceDirection(horizontal);
-			if(isTumbleRoll){
-				character.TumbleRoll(horizontal, vertical);
+			if(isJump){
+				character.Jump(horizontal);
 			}
 		}
 

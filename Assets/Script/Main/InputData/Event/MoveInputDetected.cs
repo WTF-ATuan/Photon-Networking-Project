@@ -3,13 +3,13 @@
 		public string UserId{ get; }
 		public float Horizontal{ get; }
 		public float Vertical{ get; }
-		public bool IsTumbleRoll{ get; }
+		public bool IsJump{ get; }
 
-		public MoveInputDetected(string userId, float horizontal, float vertical, bool isTumbleRoll){
+		public MoveInputDetected(string userId, float horizontal, float vertical, bool isJump){
 			UserId = userId;
 			Horizontal = horizontal;
 			Vertical = vertical;
-			IsTumbleRoll = isTumbleRoll;
+			IsJump = isJump;
 		}
 	}
 }

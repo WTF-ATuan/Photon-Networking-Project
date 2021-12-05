@@ -21,8 +21,10 @@ namespace Script.Main.Character{
 			return targetPosition;
 		}
 
-		public void VelocityMove(Vector2 velocity){
-			_rigidbody2D.velocity = velocity;
+		public void AccelerationMove(Vector2 acceleration){
+			var currentVelocity = _rigidbody2D.velocity;
+			var nextVelocity = new Vector2(acceleration.x, currentVelocity.y);
+			_rigidbody2D.velocity = nextVelocity;
 		}
 
 		public void RollMove(Vector2 targetPosition){
@@ -35,9 +37,12 @@ namespace Script.Main.Character{
 		}
 
 		public Vector2 GetJumpDirection(float horizontal, float jumpForce){
-			return default;
+			var jumpDirection = new Vector2(horizontal, 1f) * jumpForce;
+			return jumpDirection;
 		}
 
-		public void Jump(Vector2 jumpDirection){ }
+		public void Jump(Vector2 jumpDirection){
+			_rigidbody2D.AddForce(jumpDirection, ForceMode2D.Impulse);
+		}
 	}
 }
