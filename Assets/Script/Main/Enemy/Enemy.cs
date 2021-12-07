@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using Script.Main.Enemy.Interface;
 using Script.Main.Utility;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,6 +59,29 @@ namespace Script.Main.Enemy{
 			if(isMoving) return;
 			transform.DOMove(targetPosition, closestCharacterDistance)
 					.OnComplete(() => isMoving = false);
+		}
+
+		[Button]
+		public void SetFacingDirection(bool isRight){
+			var localScale = transform.localScale;
+			var localScaleX = localScale.x;
+			var isLeft = localScaleX > 0;
+			if(isRight){
+				localScaleX = isLeft ? localScaleX * -1 : localScaleX * 1;
+				localScale.x = localScaleX;
+				transform.localScale = localScale;
+			}
+			else{
+				localScaleX = isLeft ? localScaleX * 1 : localScaleX * -1;
+				localScale.x = localScaleX;
+				transform.localScale = localScale;
+			}
+		}
+
+		public Vector2 GetFaceVector(){
+			var isLeft = transform.localScale.x > 0;
+			var facingVector = isLeft ? Vector2.left : Vector2.right;
+			return facingVector;
 		}
 	}
 }
