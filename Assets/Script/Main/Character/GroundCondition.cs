@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Script.Main.Character{
-	public class GroundCondition : MonoBehaviour , IGround{
+	public class GroundCondition : MonoBehaviour, IGround{
 		private Collider2D _collider;
 		[SerializeField] private float distance = 0.5f;
 		[SerializeField] private LayerMask groundLayer;
@@ -24,10 +24,6 @@ namespace Script.Main.Character{
 		private void OnDrawGizmos(){
 			var colliderBounds = _collider.bounds;
 			var rayColor = IsGrounded() ? Color.green : Color.red;
-			Debug.DrawRay(colliderBounds.center + new Vector3(colliderBounds.extents.x, 0),
-				Vector2.down * (colliderBounds.extents.y + distance), rayColor);
-			Debug.DrawRay(colliderBounds.center - new Vector3(colliderBounds.extents.x, 0),
-				Vector2.down * (colliderBounds.extents.y + distance), rayColor);
 			Debug.DrawRay(
 				colliderBounds.center - new Vector3(colliderBounds.extents.x, colliderBounds.extents.y + distance),
 				Vector2.right * (colliderBounds.extents.x * 2), rayColor);
