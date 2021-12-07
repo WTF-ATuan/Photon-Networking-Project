@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using DG.Tweening;
 using Script.Main.Enemy.Interface;
 using Script.Main.Utility;
@@ -10,7 +9,6 @@ using UnityEngine.UI;
 namespace Script.Main.Enemy{
 	public class Enemy : MonoBehaviour, IModifyHp{
 		public string ID{ get; private set; }
-		public EnemyBehavior Behavior{ get; private set; }
 
 		[SerializeField] private float hp = 100;
 		[SerializeField] private Image hpBar;
@@ -21,17 +19,8 @@ namespace Script.Main.Enemy{
 			var enemyRepository = SingleRepository.Query<EnemyRepository>();
 			ID = Guid.NewGuid().ToString();
 			enemyRepository.Save(ID, this);
-			Behavior = new EnemyBehavior(this);
-			UpdateState();
 		}
 
-		private async void UpdateState(){
-			while(enabled && this){
-				await Task.Delay(1500);
-				if(!this) break;
-				Behavior.UpdateState();
-			}
-		}
 
 		public void ModifyHp(float amount){
 			hp += amount;
