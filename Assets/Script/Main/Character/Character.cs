@@ -29,10 +29,10 @@ namespace Script.Main.Character{
 		}
 
 		public void Jump(float horizontal){
-			if(!_groundCheck.IsGrounded()) return;
+			var canJump = _jump.CanJump(_groundCheck);
+			if(!canJump) return;
 			var force = _characterAbility.QueryAbility(CharacterAbilityType.JumpForce);
-			var jumpDirection = _movement.GetJumpDirection(horizontal, force);
-			_movement.Jump(jumpDirection);
+			_jump.Jump(horizontal, force);
 		}
 
 		public void TumbleRoll(float horizontal, float vertical){

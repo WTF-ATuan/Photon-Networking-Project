@@ -2,14 +2,29 @@
 using UnityEngine;
 
 namespace Script.Main.Character.Jump{
-	public class DoubleJump : MonoBehaviour , IJump{
-		
+	[RequireComponent(typeof(Rigidbody2D))]
+	public class DoubleJump : MonoBehaviour, IJump{
+		private Rigidbody2D _rigidbody2D;
+		private int _jumpCount = 0;
+
+		private void Start(){
+			_rigidbody2D = GetComponent<Rigidbody2D>();
+		}
+
 		public bool CanJump(IGround groundCondition){
-			throw new System.NotImplementedException();
+			var isGrounded = groundCondition.IsGrounded();
+			if(isGrounded){
+				_jumpCount = 0;
+				return true;
+			}
+
+			return _jumpCount <= 1;
 		}
 
 		public void Jump(float directionX, float jumpForce){
-			throw new System.NotImplementedException();
+			var jumpDirection = new Vector2(directionX, 1f) * jumpForce;
+			_rigidbody2D.AddForce(jumpDirection, ForceMode2D.Impulse);
+			_jumpCount++;
 		}
 	}
 }
