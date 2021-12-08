@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Script.Main.Enemy.Interface;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script.Main.Enemy{
-	public class AreaDetector : MonoBehaviour{
+	public class AreaDetector : MonoBehaviour , IDetector{
 		[SerializeField] private float detectRange;
 
 		[SerializeField] [ReadOnly] private Vector2 detectLimitPointLeft;
