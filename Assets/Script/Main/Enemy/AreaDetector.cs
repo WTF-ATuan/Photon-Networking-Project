@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script.Main.Enemy{
-	public class TargetDetector : MonoBehaviour{
+	public class AreaDetector : MonoBehaviour{
 		[SerializeField] private float detectRange;
 
 		[SerializeField] [ReadOnly] private Vector2 detectLimitPointLeft;
@@ -14,14 +12,7 @@ namespace Script.Main.Enemy{
 		private void Start(){
 			ProgressLimitPoint();
 		}
-
-		[Button]
-		private void TestButton(){
-			var detectTarget = Detect<Transform>();
-			var first = detectTarget.First();
-			Debug.Log($"first = {first}");
-		}
-
+		
 		public void ProgressLimitPoint(){
 			var detectOffset = detectRange / 2;
 			var position = transform.position;
