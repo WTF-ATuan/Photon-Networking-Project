@@ -37,9 +37,10 @@ namespace Script.Main.Character{
 			var force = _characterAbility.QueryAbility(CharacterAbilityType.JumpForce);
 			_jump.Jump(horizontal, force);
 		}
-		
+
 
 		public void SetFaceDirection(float direction){
+			if(direction == 0) return;
 			var isRight = direction < 0;
 			var localScale = transform.localScale;
 			var localScaleX = localScale.x;
