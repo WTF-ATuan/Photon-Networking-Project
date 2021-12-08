@@ -42,8 +42,19 @@ namespace Script.Main.Character{
 		}
 
 		public void SetFaceDirection(float direction){
-			if(direction != 0){
-				_movement.SetFaceDirection(direction);
+			var isRight = direction < 0;
+			var localScale = transform.localScale;
+			var localScaleX = localScale.x;
+			var isLeft = localScaleX > 0;
+			if(isRight){
+				localScaleX = isLeft ? localScaleX * -1 : localScaleX * 1;
+				localScale.x = localScaleX;
+				transform.localScale = localScale;
+			}
+			else{
+				localScaleX = isLeft ? localScaleX * 1 : localScaleX * -1;
+				localScale.x = localScaleX;
+				transform.localScale = localScale;
 			}
 		}
 
