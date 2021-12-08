@@ -13,11 +13,13 @@ namespace Script.Main.Character{
 
 		private ICharacterAbility _characterAbility;
 		private IGround _groundCheck;
+		private IJump _jump;
 
 		private void Start(){
 			_movement = GetComponent<CharacterMovement>();
 			_characterAbility = GetComponent<ICharacterAbility>();
 			_groundCheck = GetComponent<IGround>();
+			_jump = GetComponent<IJump>();
 		}
 
 		public void Move(float horizontal, float vertical){
