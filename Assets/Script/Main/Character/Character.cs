@@ -7,7 +7,6 @@ namespace Script.Main.Character{
 	public class Character : MonoBehaviour{
 		public string characterID = "123";
 
-		private CharacterMovement _movement;
 		private string _baseSkillName = "BasicArrow";
 		private string _strongSkillName = "FireBall2D";
 
@@ -15,8 +14,10 @@ namespace Script.Main.Character{
 		private IGround _groundCheck;
 		private IJump _jump;
 
+		private Rigidbody2D _rigidbody2D;
+
 		private void Start(){
-			_movement = GetComponent<CharacterMovement>();
+			_rigidbody2D = GetComponent<Rigidbody2D>();
 			_characterAbility = GetComponent<ICharacterAbility>();
 			_groundCheck = GetComponent<IGround>();
 			_jump = GetComponent<IJump>();
@@ -24,8 +25,10 @@ namespace Script.Main.Character{
 
 		public void Move(float horizontal, float vertical){
 			var speed = _characterAbility.QueryAbility(CharacterAbilityType.MoveSpeed);
-			var velocity = _movement.GetMoveVelocity(horizontal, vertical, speed);
-			_movement.AccelerationMove(velocity);
+			var acceleration = new Vector2(horizontal, vertical) * speed;
+			var currentVelocity = _rigidbody2D.velocity;
+			var nextVelocity = new Vector2(acceleration.x, currentVelocity.y);
+			_rigidbody2D.velocity = nextVelocity;
 		}
 
 		public void Jump(float horizontal){
@@ -34,12 +37,7 @@ namespace Script.Main.Character{
 			var force = _characterAbility.QueryAbility(CharacterAbilityType.JumpForce);
 			_jump.Jump(horizontal, force);
 		}
-
-		public void TumbleRoll(float horizontal, float vertical){
-			var direction = new Vector2(horizontal, vertical);
-			var targetPosition = _movement.GetRollTargetPosition(transform.position, direction, 2);
-			_movement.RollMove(targetPosition);
-		}
+		
 
 		public void SetFaceDirection(float direction){
 			var isRight = direction < 0;
