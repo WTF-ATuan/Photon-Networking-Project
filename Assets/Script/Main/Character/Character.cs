@@ -7,42 +7,58 @@ namespace Script.Main.Character{
 	public class Character : MonoBehaviour{
 		public string characterID = "123";
 
-		private CharacterMovement _movement;
 		private string _baseSkillName = "BasicArrow";
 		private string _strongSkillName = "FireBall2D";
 
 		private ICharacterAbility _characterAbility;
 		private IGround _groundCheck;
+		private IJump _jump;
+
+		private Rigidbody2D _rigidbody2D;
 
 		private void Start(){
-			_movement = GetComponent<CharacterMovement>();
+			_rigidbody2D = GetComponent<Rigidbody2D>();
 			_characterAbility = GetComponent<ICharacterAbility>();
 			_groundCheck = GetComponent<IGround>();
+			_jump = GetComponent<IJump>();
 		}
 
 		public void Move(float horizontal, float vertical){
 			var speed = _characterAbility.QueryAbility(CharacterAbilityType.MoveSpeed);
-			var velocity = _movement.GetMoveVelocity(horizontal, vertical, speed);
-			_movement.AccelerationMove(velocity);
+			var acceleration = new Vector2(horizontal, vertical) * speed;
+			var currentVelocity = _rigidbody2D.velocity;
+			var nextVelocity = new Vector2(acceleration.x, currentVelocity.y);
+			_rigidbody2D.velocity = nextVelocity;
 		}
 
 		public void Jump(float horizontal){
-			if(!_groundCheck.IsGrounded()) return;
+			var canJump = _jump.CanJump(_groundCheck);
+			if(!canJump) return;
 			var force = _characterAbility.QueryAbility(CharacterAbilityType.JumpForce);
-			var jumpDirection = _movement.GetJumpDirection(horizontal, force);
-			_movement.Jump(jumpDirection);
+			_jump.Jump(horizontal, force);
 		}
 
-		public void TumbleRoll(float horizontal, float vertical){
-			var direction = new Vector2(horizontal, vertical);
-			var targetPosition = _movement.GetRollTargetPosition(transform.position, direction, 2);
-			_movement.RollMove(targetPosition);
-		}
 
 		public void SetFaceDirection(float direction){
-			if(direction != 0){
-				_movement.SetFaceDirection(direction);
+			if(direction == 0) return;
+			var isRight = direction < 0;
+			var localScale = transform.localScale;
+			var localScaleX = localScale.x;
+			var isLeft = localScaleX > 0;
+			if(isRight){
+				localScaleX = isLeft ? localScaleX * -1 : localScaleX * 1;
+				localScale.x = localScaleX;
+				transform.localScale = localScale;
 			}
+			else{
+				localScaleX = isLeft ? localScaleX * 1 : localScaleX * -1;
+				localScale.x = localScaleX;
+				transform.localScale = localScale;
+			}
+		}
+
+		public void ModifyAbility(CharacterAbilityType ability, float amount){
+			_characterAbility.ModifyAbility(ability, amount);
 		}
 
 		public void CastSkill(Vector2 targetPosition, bool isBase){
@@ -55,6 +71,10 @@ namespace Script.Main.Character{
 				EventBus.Post(new SkillCasted(_strongSkillName,
 					new SkillSpawnInfo(characterID, transform.position, direction)));
 			}
+		}
+
+		public void ModifyHp(int amount){
+			Debug.Log($"{name} += {amount}");
 		}
 	}
 }

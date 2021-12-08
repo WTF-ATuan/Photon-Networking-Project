@@ -62,10 +62,8 @@ namespace Script.Main.Enemy{
 			}
 		}
 
-		public Vector2 GetFaceVector(){
-			var isLeft = transform.localScale.x > 0;
-			var facingVector = isLeft ? Vector2.left : Vector2.right;
-			return facingVector;
+		public void SetState(EnemyStateType state, float time){
+			Debug.Log($"Name.State = {state} after {time}");
 		}
 	}
 }
