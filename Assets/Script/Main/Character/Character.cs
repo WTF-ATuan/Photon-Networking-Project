@@ -57,6 +57,10 @@ namespace Script.Main.Character{
 			}
 		}
 
+		public void ModifyAbility(CharacterAbilityType ability, float amount){
+			_characterAbility.ModifyAbility(ability, amount);
+		}
+
 		public void CastSkill(Vector2 targetPosition, bool isBase){
 			var direction = (targetPosition - (Vector2)transform.position).normalized;
 			if(isBase){
