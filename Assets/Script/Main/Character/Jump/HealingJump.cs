@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Script.Main.Character.Jump{
 	[RequireComponent(typeof(Rigidbody2D))]
-	public class HealthJump : MonoBehaviour, IJump{
+	public class HealingJump : MonoBehaviour, IJump{
 		private Rigidbody2D _rigidbody2D;
 
 		[Header("ViewObject")] [SerializeField]
