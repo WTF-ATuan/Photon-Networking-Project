@@ -1,8 +1,8 @@
-﻿using Script.Main.Character.Interface;
+﻿using System;
+using Script.Main.Character.Interface;
 using Script.Main.Enemy;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Script.Main.Character.Jump{
 	[RequireComponent(typeof(Rigidbody2D))]
@@ -44,6 +44,12 @@ namespace Script.Main.Character.Jump{
 				var enemy = hitCollider.GetComponent<Enemy.Enemy>();
 				enemy?.SetState(EnemyStateType.Dizzy, 3f);
 			}
+		}
+
+		private void OnDrawGizmos(){
+			Gizmos.color = Color.blue;
+			Gizmos.DrawLine(limitPointLeft, limitPointLeft + (Vector2.up) / 2);
+			Gizmos.DrawLine(limitPointRight, limitPointRight + (Vector2.up) / 2);
 		}
 	}
 }
