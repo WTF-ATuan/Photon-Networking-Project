@@ -1,7 +1,6 @@
 ﻿using Script.Main.Character.Event;
 using Script.Main.Character.Interface;
 using Script.Main.Skill;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script.Main.Character{

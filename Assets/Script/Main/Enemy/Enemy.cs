@@ -2,7 +2,6 @@
 using DG.Tweening;
 using Script.Main.Enemy.Interface;
 using Script.Main.Utility;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,12 +12,12 @@ namespace Script.Main.Enemy{
 		[SerializeField] private float hp = 100;
 		[SerializeField] private Image hpBar;
 
-		private bool isMoving;
+		private IMove _move;
 
 		private void Start(){
-			var enemyRepository = SingleRepository.Query<EnemyRepository>();
 			ID = Guid.NewGuid().ToString();
-			enemyRepository.Save(ID, this);
+			SingleRepository.Query<EnemyRepository>().Save(ID, this);
+			_move = GetComponent<IMove>();
 		}
 
 
@@ -43,14 +42,10 @@ namespace Script.Main.Enemy{
 			rigBody.AddForce(targetDirection * 10f, ForceMode.Impulse);
 		}
 
-
-		public void Move(Vector2 targetPosition, float closestCharacterDistance){
-			if(isMoving) return;
-			transform.DOMove(targetPosition, closestCharacterDistance)
-					.OnComplete(() => isMoving = false);
+		public void Move(bool enable, Vector2 direction){
+			_move?.Move(enable, direction);
 		}
 
-		[Button]
 		public void SetFacingDirection(bool isRight){
 			var localScale = transform.localScale;
 			var localScaleX = localScale.x;
