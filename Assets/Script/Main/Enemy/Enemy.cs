@@ -32,6 +32,14 @@ namespace Script.Main.Enemy{
 			}
 		}
 
+		public Vector3 GetFacingDirection(){
+			var localScale = transform.localScale;
+			var localScaleX = localScale.x;
+			var isLeft = localScaleX > 0;
+			var direction = isLeft ? Vector2.left : Vector2.right;
+			return direction;
+		}
+
 		public void SetFacingDirection(bool isRight){
 			var localScale = transform.localScale;
 			var localScaleX = localScale.x;
