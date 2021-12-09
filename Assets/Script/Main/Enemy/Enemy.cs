@@ -9,9 +9,11 @@ namespace Script.Main.Enemy{
 		[SerializeField] private Image hpBar;
 
 		private IDetector _detector;
+		private IState _state;
 
 		private void Start(){
 			_detector = GetComponent<IDetector>();
+			_state = GetComponent<IState>();
 		}
 
 
@@ -49,6 +51,7 @@ namespace Script.Main.Enemy{
 		//TODO
 		public void SetState(EnemyStateType state, float time){
 			Debug.Log($"Name.State = {state} after {time}");
+			_state?.SetState(state , time);
 		}
 
 		//TODO
