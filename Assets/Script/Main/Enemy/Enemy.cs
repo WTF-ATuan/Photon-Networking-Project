@@ -56,8 +56,8 @@ namespace Script.Main.Enemy{
 		}
 
 		public TargetList<T> Detect<T>() where T : Component{
-			var detectList = _detector.Detect<T>();
-			return detectList;
+			var detectList = _detector?.Detect<T>();
+			return detectList ?? new TargetList<T>();
 		}
 
 		//TODO
