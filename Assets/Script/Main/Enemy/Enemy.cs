@@ -50,14 +50,14 @@ namespace Script.Main.Enemy{
 			}
 		}
 
-		//TODO
-		public void SetState(EnemyStateType state, float time){
-			Debug.Log($"Name.State = {state} after {time}");
-		}
-
 		public TargetList<T> Detect<T>() where T : Component{
 			var detectList = _detector?.Detect<T>();
 			return detectList ?? new TargetList<T>();
+		}
+
+		//TODO
+		public void SetState(EnemyStateType state, float time){
+			Debug.Log($"Name.State = {state} after {time}");
 		}
 
 		//TODO
