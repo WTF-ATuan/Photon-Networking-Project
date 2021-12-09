@@ -1,21 +1,16 @@
-﻿using System;
-using Script.Main.Enemy.Detector;
+﻿using Script.Main.Enemy.Detector;
 using Script.Main.Enemy.Interface;
-using Script.Main.Utility;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Script.Main.Enemy{
 	public class Enemy : MonoBehaviour, IModifyHp{
-
 		[SerializeField] private float hp = 100;
 		[SerializeField] private Image hpBar;
 
-		private IMove _move;
 		private IDetector _detector;
 
 		private void Start(){
-			_move = GetComponent<IMove>();
 			_detector = GetComponent<IDetector>();
 		}
 
@@ -28,10 +23,6 @@ namespace Script.Main.Enemy{
 			if(hp <= 0){
 				gameObject.SetActive(false);
 			}
-		}
-
-		public void Move(bool enable, Vector2 direction){
-			_move?.Move(enable, direction);
 		}
 
 		public void SetFacingDirection(bool isRight){
