@@ -34,18 +34,6 @@ namespace Script.Main.Enemy{
 				gameObject.SetActive(false);
 			}
 		}
-
-		public void Attack(Vector3 targetPosition){
-			DOTween.KillAll();
-			var position = transform.position;
-			var targetDirection = (targetPosition - position).normalized;
-			var bullet = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			bullet.transform.position = position;
-			bullet.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-			var rigBody = bullet.AddComponent<Rigidbody>();
-			rigBody.AddForce(targetDirection * 10f, ForceMode.Impulse);
-		}
-
 		public void Move(bool enable, Vector2 direction){
 			_move?.Move(enable, direction);
 		}
