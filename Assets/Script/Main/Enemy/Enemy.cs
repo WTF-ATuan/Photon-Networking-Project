@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Script.Main.Enemy.Interface;
 using Script.Main.Utility;
@@ -13,11 +14,13 @@ namespace Script.Main.Enemy{
 		[SerializeField] private Image hpBar;
 
 		private IMove _move;
+		private IDetector _detector;
 
 		private void Start(){
 			ID = Guid.NewGuid().ToString();
 			SingleRepository.Query<EnemyRepository>().Save(ID, this);
 			_move = GetComponent<IMove>();
+			_detector = GetComponent<IDetector>();
 		}
 
 
@@ -65,6 +68,18 @@ namespace Script.Main.Enemy{
 		//TODO
 		public void SetState(EnemyStateType state, float time){
 			Debug.Log($"Name.State = {state} after {time}");
+		}
+
+		public List<T> Detect<T>(){
+			var detectList = _detector?.Detect<T>();
+			return detectList ?? new List<T>();
+		}
+
+		public void Attack(){
+		}
+
+		public void SetTarget(Transform targetTransform){
+			
 		}
 	}
 }
