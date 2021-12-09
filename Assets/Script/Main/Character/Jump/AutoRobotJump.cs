@@ -54,9 +54,13 @@ namespace Script.Main.Character.Jump{
 			var times = 0;
 			while(times <= 14){
 				var enemies = _robot.Detect<Enemy.Enemy>();
-				var firstEnemy = enemies.GetClosestTarget(transform.position);
-				_robot.SetTarget(firstEnemy.transform);
-				_robot.Attack();
+				var enemiesIsEmpty = enemies.Count < 1;
+				if(!enemiesIsEmpty){
+					var firstEnemy = enemies.GetClosestTarget(transform.position);
+					_robot.SetTarget(firstEnemy.transform);
+					_robot.Attack();
+				}
+
 				times++;
 				yield return new WaitForSeconds(0.5f);
 			}
