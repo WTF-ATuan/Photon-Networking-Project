@@ -38,8 +38,8 @@ namespace Script.Main.Enemy.Detector{
 			var detectObject = Detect<Transform>();
 			var lineColor = detectObject.Count > 0 ? Color.red : Color.green;
 			Gizmos.color = lineColor;
-			Gizmos.DrawLine(detectLimitPointLeft + (Vector2.up), detectLimitPointLeft);
-			Gizmos.DrawLine(detectLimitPointRight + Vector2.up, detectLimitPointRight);
+			Gizmos.DrawLine(detectLimitPointLeft + (Vector2.up) / 2, detectLimitPointLeft + (Vector2.down) / 2);
+			Gizmos.DrawLine(detectLimitPointRight + (Vector2.up) / 2, detectLimitPointRight + (Vector2.down) / 2);
 		}
 	}
 }
