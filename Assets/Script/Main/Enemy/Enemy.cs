@@ -48,9 +48,7 @@ namespace Script.Main.Enemy{
 			return detectList ?? new TargetList<T>();
 		}
 
-		//TODO
 		public void SetState(EnemyStateType state, float time){
-			Debug.Log($"Name.State = {state} after {time}");
 			_state?.SetState(state , time);
 		}
 
