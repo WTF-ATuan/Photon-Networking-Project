@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using Script.Main.Enemy.Detector;
 using Script.Main.Enemy.Interface;
 using Script.Main.Utility;
 using UnityEngine;
@@ -70,16 +71,13 @@ namespace Script.Main.Enemy{
 			Debug.Log($"Name.State = {state} after {time}");
 		}
 
-		public List<T> Detect<T>(){
+		public TargetList<T> Detect<T>() where T : MonoBehaviour{
 			var detectList = _detector?.Detect<T>();
-			return detectList ?? new List<T>();
+			return detectList ?? new TargetList<T>();
 		}
 
-		public void Attack(){
-		}
+		public void Attack(){ }
 
-		public void SetTarget(Transform targetTransform){
-			
-		}
+		public void SetTarget(Transform targetTransform){ }
 	}
 }

@@ -52,7 +52,7 @@ namespace Script.Main.Character.Jump{
 			var robot = _robotObject.GetComponent<Enemy.Enemy>();
 			while(times <= 14){
 				var enemies = robot.Detect<Enemy.Enemy>();
-				var firstEnemy = enemies.First();
+				var firstEnemy = enemies.GetClosestTarget(transform.position);
 				robot.SetTarget(firstEnemy.transform);
 				robot.Attack();
 				times++;
