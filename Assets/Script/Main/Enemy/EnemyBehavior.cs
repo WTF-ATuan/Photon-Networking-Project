@@ -35,8 +35,7 @@ namespace Script.Main.Enemy{
 				var closestTarget = targetList.GetClosestTarget(transform.position);
 				var targetTransform = closestTarget.transform;
 				_enemy.Move(false);
-				_enemy.SetTarget(targetTransform);
-				_enemy.Attack();
+				_enemy.Attack(targetTransform);
 			}
 		}
 

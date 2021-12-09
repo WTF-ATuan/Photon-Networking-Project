@@ -58,16 +58,11 @@ namespace Script.Main.Enemy{
 		}
 
 		//TODO
-		public void Attack(){
-			_attack?.Attack();
-			Debug.Log($"{name} is Attacking");
-		}
-
-		//TODO
-		public void SetTarget(Transform targetTransform){
-			_attack?.SetTarget(targetTransform);
-			var targetName = targetTransform.name;
-			Debug.Log($"my target is {targetName}");
+		public void Attack(Transform targetTransform){
+			if(_attack == null) return;
+			var isReadyAttack = _attack.IsReadyAttack(targetTransform);
+			if(isReadyAttack)
+				_attack.Attack();
 		}
 
 		//TODO

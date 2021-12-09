@@ -57,8 +57,7 @@ namespace Script.Main.Character.Jump{
 				var enemiesIsEmpty = enemies.Count < 1;
 				if(!enemiesIsEmpty){
 					var firstEnemy = enemies.GetClosestTarget(transform.position);
-					_robot.SetTarget(firstEnemy.transform);
-					_robot.Attack();
+					_robot.Attack(firstEnemy.transform);
 				}
 
 				times++;

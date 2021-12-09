@@ -2,7 +2,7 @@
 
 namespace Script.Main.Enemy.Interface{
 	public interface IAttack{
-		void SetTarget(Transform targetTransform);
+		bool IsReadyAttack(Transform targetTransform);
 		void Attack();
 	}
 }
