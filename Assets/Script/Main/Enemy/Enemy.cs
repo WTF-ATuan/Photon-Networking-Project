@@ -62,6 +62,7 @@ namespace Script.Main.Enemy{
 			}
 		}
 
+		//TODO
 		public void SetState(EnemyStateType state, float time){
 			Debug.Log($"Name.State = {state} after {time}");
 		}

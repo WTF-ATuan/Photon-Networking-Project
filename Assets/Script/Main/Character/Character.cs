@@ -72,7 +72,7 @@ namespace Script.Main.Character{
 					new SkillSpawnInfo(characterID, transform.position, direction)));
 			}
 		}
-
+		//TODO
 		public void ModifyHp(int amount){
 			Debug.Log($"{name} += {amount}");
 		}
