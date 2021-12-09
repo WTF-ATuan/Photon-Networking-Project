@@ -21,6 +21,7 @@ namespace Script.Main.Enemy.Detector{
 		}
 
 		public TargetList<T> Detect<T>() where T : Component{
+			ProgressLimitPoint();
 			var targetList = new TargetList<T>();
 			// ReSharper disable once Unity.PreferNonAllocApi
 			var raycastHit2D = Physics2D.LinecastAll(detectLimitPointLeft, detectLimitPointRight);

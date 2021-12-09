@@ -13,9 +13,12 @@ namespace Script.Main.Character.Jump{
 
 		private GameObject _robotObject;
 
+		private Enemy.Enemy _robot;
+
 		private void Start(){
 			_rigidbody2D = GetComponent<Rigidbody2D>();
 			_robotObject = Instantiate(robotViewPrefab, transform.position, Quaternion.identity);
+			_robot = _robotObject.GetComponent<Enemy.Enemy>();
 			DestroyRobot();
 		}
 
@@ -43,21 +46,22 @@ namespace Script.Main.Character.Jump{
 			if(_activating != null){
 				StopCoroutine(_activating);
 			}
-			
+
 			_activating = StartCoroutine(Activating());
 		}
 
 		private IEnumerator Activating(){
 			var times = 0;
-			var robot = _robotObject.GetComponent<Enemy.Enemy>();
 			while(times <= 14){
-				var enemies = robot.Detect<Enemy.Enemy>();
+				var enemies = _robot.Detect<Enemy.Enemy>();
 				var firstEnemy = enemies.GetClosestTarget(transform.position);
-				robot.SetTarget(firstEnemy.transform);
-				robot.Attack();
+				_robot.SetTarget(firstEnemy.transform);
+				_robot.Attack();
 				times++;
 				yield return new WaitForSeconds(0.5f);
 			}
+
+			DestroyRobot();
 		}
 	}
 }

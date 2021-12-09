@@ -34,6 +34,7 @@ namespace Script.Main.Enemy{
 				gameObject.SetActive(false);
 			}
 		}
+
 		public void Move(bool enable, Vector2 direction){
 			_move?.Move(enable, direction);
 		}
@@ -60,11 +61,8 @@ namespace Script.Main.Enemy{
 		}
 
 		public TargetList<T> Detect<T>() where T : Component{
-			var detectList = _detector?.Detect<T>();
-			var type = typeof(T);
-			var typeName = type.Name;
-			Debug.Log($"Detect += {typeName}");
-			return detectList ?? new TargetList<T>();
+			var detectList = _detector.Detect<T>();
+			return detectList;
 		}
 
 		//TODO
