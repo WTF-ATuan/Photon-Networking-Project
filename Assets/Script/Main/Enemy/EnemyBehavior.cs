@@ -25,6 +25,7 @@ namespace Script.Main.Enemy{
 		}
 
 		private void EnemyCommand(){
+			if(_isDizzy) return;
 			var targetList = _enemy.Detect<Character.Character>();
 			var targetCount = targetList.Count;
 			if(targetCount < 1){
@@ -58,7 +59,10 @@ namespace Script.Main.Enemy{
 			stateTrigger.Invoke(false);
 		}
 
+		private bool _isDizzy;
+
 		private void Dizzy(bool enable){
+			_isDizzy = enable;
 			Debug.Log(enable ? $"Dizzy Enable" : $"DIzzy Disable");
 		}
 	}
