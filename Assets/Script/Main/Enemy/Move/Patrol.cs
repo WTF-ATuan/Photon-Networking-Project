@@ -44,14 +44,14 @@ namespace Script.Main.Enemy.Move{
 		private void DrawLine(float patrolX, Vector3 spawnPosition){
 			var spawnPositionY = spawnPosition.y;
 			var spawnPositionZ = spawnPosition.z;
-			var startPoint = new Vector3(patrolX, spawnPositionY, spawnPositionZ);
-			var endPoint = new Vector3(patrolX, spawnPositionY - 2.5f, spawnPositionZ);
+			var startPoint = new Vector3(patrolX, spawnPositionY + 2f, spawnPositionZ);
+			var endPoint = new Vector3(patrolX, spawnPositionY - 1f, spawnPositionZ);
 			Gizmos.DrawLine(startPoint, endPoint);
 		}
 
 
 		private void OnDrawGizmos(){
-			Gizmos.color = Color.green;
+			Gizmos.color = Color.magenta;
 			if(Application.isPlaying == false)
 				ProcessPatrolPositions();
 			DrawLine(leftPatrolX, _spawnPosition);
