@@ -49,7 +49,7 @@ namespace Script.Main.Enemy{
 		}
 
 		public void SetState(EnemyStateType state, float time){
-			_state?.SetState(state , time);
+			_state?.SetState(state, time);
 		}
 
 		//TODO
@@ -61,6 +61,11 @@ namespace Script.Main.Enemy{
 		public void SetTarget(Transform targetTransform){
 			var targetName = targetTransform.name;
 			Debug.Log($"my target is {targetName}");
+		}
+
+		//TODO
+		public void Move(bool enable){
+			
 		}
 	}
 }

@@ -9,8 +9,34 @@ namespace Script.Main.Enemy{
 		private readonly Dictionary<EnemyStateType, Action<bool>> _stateTriggerList =
 				new Dictionary<EnemyStateType, Action<bool>>();
 
+		private Enemy _enemy;
+
 		private void Start(){
+			_enemy = GetComponent<Enemy>();
+			RegisterStateTrigger();
+		}
+
+		private void RegisterStateTrigger(){
 			_stateTriggerList.Add(EnemyStateType.Dizzy, Dizzy);
+		}
+
+		private void FixedUpdate(){
+			EnemyCommand();
+		}
+
+		private void EnemyCommand(){
+			var targetList = _enemy.Detect<Character.Character>();
+			var targetCount = targetList.Count;
+			if(targetCount < 1){
+				_enemy.Move(true);
+			}
+			else{
+				var closestTarget = targetList.GetClosestTarget(transform.position);
+				var targetTransform = closestTarget.transform;
+				_enemy.Move(false);
+				_enemy.SetTarget(targetTransform);
+				_enemy.Attack();
+			}
 		}
 
 		private Coroutine _stateActivating;
