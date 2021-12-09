@@ -3,16 +3,12 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script.Main.Enemy.Detector{
-	public class AreaDetector : MonoBehaviour , IDetector{
+	public class AreaDetector : MonoBehaviour, IDetector{
 		[SerializeField] private float detectRange;
 
 		[SerializeField] [ReadOnly] private Vector2 detectLimitPointLeft;
 		[SerializeField] [ReadOnly] private Vector2 detectLimitPointRight;
 
-		private void Start(){
-			ProgressLimitPoint();
-		}
-		
 		public void ProgressLimitPoint(){
 			var detectOffset = detectRange / 2;
 			var position = transform.position;
@@ -31,6 +27,9 @@ namespace Script.Main.Enemy.Detector{
 				if(target != null)
 					targetList.SaveTarget(target);
 			}
+
+			var selfComponent = GetComponent<T>();
+			if(selfComponent) targetList.RemoveTarget(selfComponent);
 
 			return targetList;
 		}

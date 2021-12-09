@@ -66,9 +66,14 @@ namespace Script.Main.Enemy{
 		}
 
 		//TODO
-		public void Attack(){ }
+		public void Attack(){
+			Debug.Log($"{name} is Attacking");
+		}
 
 		//TODO
-		public void SetTarget(Transform targetTransform){ }
+		public void SetTarget(Transform targetTransform){
+			var targetName = targetTransform.name;
+			Debug.Log($"my target is {targetName}");
+		}
 	}
 }
