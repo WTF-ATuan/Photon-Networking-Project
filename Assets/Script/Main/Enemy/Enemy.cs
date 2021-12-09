@@ -1,5 +1,5 @@
 ﻿using System;
-using DG.Tweening;
+using Script.Main.Enemy.Detector;
 using Script.Main.Enemy.Interface;
 using Script.Main.Utility;
 using UnityEngine;
@@ -7,17 +7,16 @@ using UnityEngine.UI;
 
 namespace Script.Main.Enemy{
 	public class Enemy : MonoBehaviour, IModifyHp{
-		public string ID{ get; private set; }
 
 		[SerializeField] private float hp = 100;
 		[SerializeField] private Image hpBar;
 
 		private IMove _move;
+		private IDetector _detector;
 
 		private void Start(){
-			ID = Guid.NewGuid().ToString();
-			SingleRepository.Query<EnemyRepository>().Save(ID, this);
 			_move = GetComponent<IMove>();
+			_detector = GetComponent<IDetector>();
 		}
 
 
@@ -29,17 +28,6 @@ namespace Script.Main.Enemy{
 			if(hp <= 0){
 				gameObject.SetActive(false);
 			}
-		}
-
-		public void Attack(Vector3 targetPosition){
-			DOTween.KillAll();
-			var position = transform.position;
-			var targetDirection = (targetPosition - position).normalized;
-			var bullet = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			bullet.transform.position = position;
-			bullet.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-			var rigBody = bullet.AddComponent<Rigidbody>();
-			rigBody.AddForce(targetDirection * 10f, ForceMode.Impulse);
 		}
 
 		public void Move(bool enable, Vector2 direction){
@@ -62,8 +50,25 @@ namespace Script.Main.Enemy{
 			}
 		}
 
+		public TargetList<T> Detect<T>() where T : Component{
+			var detectList = _detector?.Detect<T>();
+			return detectList ?? new TargetList<T>();
+		}
+
+		//TODO
 		public void SetState(EnemyStateType state, float time){
 			Debug.Log($"Name.State = {state} after {time}");
+		}
+
+		//TODO
+		public void Attack(){
+			Debug.Log($"{name} is Attacking");
+		}
+
+		//TODO
+		public void SetTarget(Transform targetTransform){
+			var targetName = targetTransform.name;
+			Debug.Log($"my target is {targetName}");
 		}
 	}
 }
