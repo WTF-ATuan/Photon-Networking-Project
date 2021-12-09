@@ -10,10 +10,15 @@ namespace Script.Main.Enemy{
 
 		private IDetector _detector;
 		private IState _state;
+		private IMove _move;
+		private IAttack _attack;
+
 
 		private void Start(){
 			_detector = GetComponent<IDetector>();
 			_state = GetComponent<IState>();
+			_move = GetComponent<IMove>();
+			_attack = GetComponent<IAttack>();
 		}
 
 
@@ -54,18 +59,20 @@ namespace Script.Main.Enemy{
 
 		//TODO
 		public void Attack(){
+			_attack?.Attack();
 			Debug.Log($"{name} is Attacking");
 		}
 
 		//TODO
 		public void SetTarget(Transform targetTransform){
+			_attack?.SetTarget(targetTransform);
 			var targetName = targetTransform.name;
 			Debug.Log($"my target is {targetName}");
 		}
 
 		//TODO
 		public void Move(bool enable){
-			
+			_move?.Move(enable);
 		}
 	}
 }
