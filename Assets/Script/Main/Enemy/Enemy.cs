@@ -67,7 +67,8 @@ namespace Script.Main.Enemy{
 
 		//TODO
 		public void Move(bool enable){
-			_move?.Move(enable);
+			if(!enable) return;
+			_move?.Move();
 		}
 	}
 }
