@@ -71,13 +71,18 @@ namespace Script.Main.Enemy{
 			Debug.Log($"Name.State = {state} after {time}");
 		}
 
-		public TargetList<T> Detect<T>() where T : MonoBehaviour{
+		public TargetList<T> Detect<T>() where T : Component{
 			var detectList = _detector?.Detect<T>();
+			var type = typeof(T);
+			var typeName = type.Name;
+			Debug.Log($"Detect += {typeName}");
 			return detectList ?? new TargetList<T>();
 		}
 
+		//TODO
 		public void Attack(){ }
 
+		//TODO
 		public void SetTarget(Transform targetTransform){ }
 	}
 }
