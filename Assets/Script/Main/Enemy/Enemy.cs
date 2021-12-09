@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using DG.Tweening;
 using Script.Main.Enemy.Detector;
 using Script.Main.Enemy.Interface;
 using Script.Main.Utility;
@@ -9,7 +7,6 @@ using UnityEngine.UI;
 
 namespace Script.Main.Enemy{
 	public class Enemy : MonoBehaviour, IModifyHp{
-		public string ID{ get; private set; }
 
 		[SerializeField] private float hp = 100;
 		[SerializeField] private Image hpBar;
@@ -18,8 +15,6 @@ namespace Script.Main.Enemy{
 		private IDetector _detector;
 
 		private void Start(){
-			ID = Guid.NewGuid().ToString();
-			SingleRepository.Query<EnemyRepository>().Save(ID, this);
 			_move = GetComponent<IMove>();
 			_detector = GetComponent<IDetector>();
 		}
