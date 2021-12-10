@@ -1,22 +1,24 @@
-﻿using System;
-using Script.Main.Enemy.Detector;
+﻿using Script.Main.Enemy.Detector;
 using Script.Main.Enemy.Interface;
-using Script.Main.Utility;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Script.Main.Enemy{
 	public class Enemy : MonoBehaviour, IModifyHp{
-
 		[SerializeField] private float hp = 100;
 		[SerializeField] private Image hpBar;
 
-		private IMove _move;
 		private IDetector _detector;
+		private IState _state;
+		private IMove _move;
+		private IAttack _attack;
+
 
 		private void Start(){
-			_move = GetComponent<IMove>();
 			_detector = GetComponent<IDetector>();
+			_state = GetComponent<IState>();
+			_move = GetComponent<IMove>();
+			_attack = GetComponent<IAttack>();
 		}
 
 
@@ -30,8 +32,12 @@ namespace Script.Main.Enemy{
 			}
 		}
 
-		public void Move(bool enable, Vector2 direction){
-			_move?.Move(enable, direction);
+		public Vector3 GetFacingDirection(){
+			var localScale = transform.localScale;
+			var localScaleX = localScale.x;
+			var isLeft = localScaleX > 0;
+			var direction = isLeft ? Vector2.left : Vector2.right;
+			return direction;
 		}
 
 		public void SetFacingDirection(bool isRight){
@@ -55,20 +61,20 @@ namespace Script.Main.Enemy{
 			return detectList ?? new TargetList<T>();
 		}
 
-		//TODO
 		public void SetState(EnemyStateType state, float time){
-			Debug.Log($"Name.State = {state} after {time}");
+			_state?.SetState(state, time);
 		}
 
-		//TODO
-		public void Attack(){
-			Debug.Log($"{name} is Attacking");
+		public void Attack(Transform targetTransform){
+			if(_attack == null) return;
+			var isReadyAttack = _attack.IsReadyAttack(targetTransform);
+			if(isReadyAttack)
+				_attack.Attack();
 		}
 
-		//TODO
-		public void SetTarget(Transform targetTransform){
-			var targetName = targetTransform.name;
-			Debug.Log($"my target is {targetName}");
+		public void Move(bool enable){
+			if(!enable) return;
+			_move?.Move();
 		}
 	}
 }

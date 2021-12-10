@@ -22,6 +22,7 @@ namespace Script.Main.Character{
 		}
 
 		private void OnDrawGizmos(){
+			if(!Application.isPlaying) return;
 			var colliderBounds = _collider.bounds;
 			var rayColor = IsGrounded() ? Color.green : Color.red;
 			Debug.DrawRay(
