@@ -65,7 +65,6 @@ namespace Script.Main.Enemy{
 			_state?.SetState(state, time);
 		}
 
-		//TODO
 		public void Attack(Transform targetTransform){
 			if(_attack == null) return;
 			var isReadyAttack = _attack.IsReadyAttack(targetTransform);
@@ -73,7 +72,6 @@ namespace Script.Main.Enemy{
 				_attack.Attack();
 		}
 
-		//TODO
 		public void Move(bool enable){
 			if(!enable) return;
 			_move?.Move();
