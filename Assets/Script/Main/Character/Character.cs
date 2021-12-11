@@ -6,6 +6,9 @@ using UnityEngine;
 namespace Script.Main.Character{
 	public class Character : MonoBehaviour{
 		public string characterID = "123";
+		[SerializeField] private int defaultHealth = 100;
+		private int _currentHealth;
+
 
 		private string _baseSkillName = "BasicArrow";
 		private string _strongSkillName = "FireBall2D";
@@ -21,6 +24,7 @@ namespace Script.Main.Character{
 			_characterAbility = GetComponent<ICharacterAbility>();
 			_groundCheck = GetComponent<IGround>();
 			_jump = GetComponent<IJump>();
+			_currentHealth = defaultHealth;
 		}
 
 		public void Move(float horizontal, float vertical){
@@ -72,9 +76,12 @@ namespace Script.Main.Character{
 					new SkillSpawnInfo(characterID, transform.position, direction)));
 			}
 		}
+
 		//TODO
+		public void Die(){ }
+
 		public void ModifyHp(int amount){
-			Debug.Log($"{name} += {amount}");
+			EventBus.Post(new CharacterHealthModified(characterID, _currentHealth, amount));
 		}
 	}
 }
