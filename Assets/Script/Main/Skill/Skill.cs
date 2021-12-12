@@ -23,7 +23,7 @@ namespace Script.Main.Skill{
 
 
 		private ISkillCastData FindSkillCastData(string skillName){
-			if(skillName.IsNullOrEmpty()){
+			if(string.IsNullOrEmpty(skillName)){
 				throw new Exception("SkillName is Null");
 			}
 
