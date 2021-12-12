@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Script.Main.Character.Event;
 using UnityEngine;
-using WebSocketSharp;
 
 namespace Script.Main.Skill{
 	public class Skill : MonoBehaviour{
