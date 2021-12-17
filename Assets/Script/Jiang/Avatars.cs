@@ -11,4 +11,10 @@ public class Avatars : ScriptableObject
     public Sprite SkillIRollSkill;
     public Sprite BaseSkill;
     public Sprite StrongSkill;
+    public Sprite SkillIRollSkillDisabled;
+    public Sprite BaseSkillDisabled;
+    public Sprite StrongSkillDisabled;
+    public Sprite IntroductionOfSkillIRollSkill;
+    public Sprite IntroductionOfBaseSkill;
+    public Sprite IntroductionOfStrongSkill;
 }
