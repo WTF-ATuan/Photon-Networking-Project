@@ -32,13 +32,11 @@ namespace Script.Main{
 			var type = typeof(T);
 			var containsKey = DynamicPostBuffer.ContainsKey(type);
 			if(!containsKey) return;
-			var bufferObject = DynamicPostBuffer[type];
-			foreach(T obj in bufferObject){
-				callback.Invoke(obj);
-				bufferObject.Remove(obj);
-			}
-
-			DynamicPostBuffer[type] = bufferObject;
+			var bufferObjects = DynamicPostBuffer[type];
+			var invokeObject = bufferObjects.First();
+			callback.Invoke((T)invokeObject);
+			bufferObjects.Remove(invokeObject);
+			DynamicPostBuffer[type] = bufferObjects;
 		}
 
 		public static void Subscribe<T, TResult>(Func<T, TResult> callback){
