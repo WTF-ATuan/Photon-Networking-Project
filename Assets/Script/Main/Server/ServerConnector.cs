@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Photon.Bolt;
 using Photon.Bolt.Matchmaking;
 using Script.Main.Server.Event;
@@ -36,13 +37,10 @@ namespace Script.Main.Server{
 			BoltLauncher.StartClient();
 		}
 
-		public override void Connected(BoltConnection connection){
-			var connectionConnectionId = connection.ConnectionId;
-			Debug.Log($"connectionConnectionId = {connectionConnectionId}");
-		}
-
 		public override void BoltStartDone(){
 			BoltMatchmaking.CreateSession(_sessionID, sceneToLoad: _sceneName);
+			var playerID = Guid.NewGuid().ToString();
+			EventBus.Post(new PlayerJoined(playerID , _sessionID));
 		}
 
 		public override void SessionListUpdated(Map<Guid, UdpSession> sessionList){
@@ -50,6 +48,8 @@ namespace Script.Main.Server{
 				var updSession = session.Value;
 				if(updSession.Source == UdpSessionSource.Photon){
 					BoltMatchmaking.JoinSession(updSession);
+					var playerID = Guid.NewGuid().ToString();
+					EventBus.Post(new PlayerJoined(playerID , _sessionID));
 				}
 			}
 		}
