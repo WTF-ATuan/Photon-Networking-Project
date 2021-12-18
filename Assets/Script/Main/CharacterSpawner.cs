@@ -11,7 +11,7 @@ namespace Script.Main{
 
 
 		private void Awake(){
-			EventBus.Subscribe<PlayerJoined>(OnPlayerJoined);
+			EventBus.InvokePostBuffer<PlayerJoined>(OnPlayerJoined);
 		}
 
 		private void OnPlayerJoined(PlayerJoined obj){
