@@ -10,7 +10,7 @@ namespace Script.Main{
 		[SerializeField] private InputEventDetector inputEventDetector;
 
 
-		private void Awake(){
+		private void Start(){
 			EventBus.InvokePostBuffer<PlayerJoined>(OnPlayerJoined);
 		}
 

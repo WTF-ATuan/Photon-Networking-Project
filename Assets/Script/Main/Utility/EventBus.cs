@@ -61,7 +61,7 @@ namespace Script.Main{
 			}
 			else{
 				var fullName = type.Name;
-				Debug.Log($" Type {fullName}  is not Contain in EventBus");
+				Debug.Log($" Event {fullName}  is no subscriber");
 			}
 		}
 
