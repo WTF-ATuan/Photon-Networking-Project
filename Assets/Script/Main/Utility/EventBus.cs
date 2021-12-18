@@ -35,7 +35,10 @@ namespace Script.Main{
 			var bufferObject = DynamicPostBuffer[type];
 			foreach(T obj in bufferObject){
 				callback.Invoke(obj);
+				bufferObject.Remove(obj);
 			}
+
+			DynamicPostBuffer[type] = bufferObject;
 		}
 
 		public static void Subscribe<T, TResult>(Func<T, TResult> callback){
