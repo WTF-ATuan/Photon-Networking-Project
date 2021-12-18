@@ -13,6 +13,7 @@ namespace Script.Main.Server{
 
 		private void Awake(){
 			EventBus.Subscribe<SeverConnected>(OnSeverConnected);
+			DontDestroyOnLoad(this);
 		}
 
 		private void OnSeverConnected(SeverConnected obj){
@@ -39,8 +40,8 @@ namespace Script.Main.Server{
 
 		public override void BoltStartDone(){
 			BoltMatchmaking.CreateSession(_sessionID, sceneToLoad: _sceneName);
-			var playerID = Guid.NewGuid().ToString();
-			EventBus.Post(new PlayerJoined(playerID , _sessionID));
+			// var playerID = Guid.NewGuid().ToString();
+			// EventBus.Post(new PlayerJoined(playerID, _sessionID));
 		}
 
 		public override void SessionListUpdated(Map<Guid, UdpSession> sessionList){
@@ -48,10 +49,16 @@ namespace Script.Main.Server{
 				var updSession = session.Value;
 				if(updSession.Source == UdpSessionSource.Photon){
 					BoltMatchmaking.JoinSession(updSession);
-					var playerID = Guid.NewGuid().ToString();
-					EventBus.Post(new PlayerJoined(playerID , _sessionID));
+					// var playerID = Guid.NewGuid().ToString();
+					// EventBus.Post(new PlayerJoined(playerID, _sessionID));
 				}
 			}
+		}
+
+		public override void SceneLoadRemoteDone(BoltConnection connection, IProtocolToken token){
+			var connectionId = connection.ConnectionId.ToString();
+			EventBus.Post(new PlayerJoined(connectionId, _sessionID));
+			Debug.Log($"connectionId = {connectionId}");
 		}
 	}
 }
