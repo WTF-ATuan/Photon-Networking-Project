@@ -28,11 +28,14 @@ namespace Script.Main.Character{
 		}
 
 		public void Move(float horizontal, float vertical){
+			var originPosition = _rigidbody2D.position;
 			var speed = _characterAbility.QueryAbility(CharacterAbilityType.MoveSpeed);
 			var acceleration = new Vector2(horizontal, vertical) * speed;
 			var currentVelocity = _rigidbody2D.velocity;
 			var nextVelocity = new Vector2(acceleration.x, currentVelocity.y);
 			_rigidbody2D.velocity = nextVelocity;
+			var nextPosition = _rigidbody2D.position;
+			EventBus.Post(new CharacterMoved(originPosition, nextPosition));
 		}
 
 		public void Jump(float horizontal){
