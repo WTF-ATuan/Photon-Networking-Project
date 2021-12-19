@@ -7,7 +7,7 @@ public class AvatarsDisplay : MonoBehaviour
 {
     public Image AvatarImage;
     public Image AvatarIntroduce;
-    public Image SkillIRollSkill;
+    public Image RollSkill;
     public Image BaseSkill;
     public Image StrongSkill;
     public Image SkillIntroduce;
@@ -22,23 +22,21 @@ public class AvatarsDisplay : MonoBehaviour
     void Start()
     {
         avatar = avatars[0];
-
-        
     }
 
     void FixedUpdate()
     {
         AvatarImage.sprite = avatar.AvatarImage;
         AvatarIntroduce.sprite = avatar.AvatarIntroduce;
-        SkillIRollSkill.sprite = avatar.SkillIRollSkill;
+        RollSkill.sprite = avatar.RollSkill;
         BaseSkill.sprite = avatar.BaseSkill;
         StrongSkill.sprite = avatar.StrongSkill;
 
         avatar = avatars[NumOfAvatarsArray];
 
-        if (ChickWhichSkillntroduce == "SkillIRollSkill")
+        if (ChickWhichSkillntroduce == "RollSkill")
         {
-            SkillIntroduce.sprite = avatar.IntroductionOfSkillIRollSkill;
+            SkillIntroduce.sprite = avatar.IntroductionOfRollSkill;
         }
         else if (ChickWhichSkillntroduce == "BaseSkill")
         {
