@@ -5,18 +5,6 @@ using UnityEngine;
 public class ChooseCharacter : MonoBehaviour
 {
     public int ForCount;
-    
-    public void ButtonClick()
-    {
-        if (gameObject.name == "Right")
-        {
-            RightButton();
-        }
-        else if (gameObject.name == "Left")
-        {
-            LeftButton();
-        }
-    }
 
     public void RightButton()
     {
