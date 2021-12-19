@@ -19,7 +19,7 @@ namespace Script.Main.Character{
 
 		private Rigidbody2D _rigidbody2D;
 
-		private void Start(){
+		public void Initialize(){
 			_rigidbody2D = GetComponent<Rigidbody2D>();
 			_characterAbility = GetComponent<ICharacterAbility>();
 			_groundCheck = GetComponent<IGround>();
@@ -28,14 +28,13 @@ namespace Script.Main.Character{
 		}
 
 		public void Move(float horizontal, float vertical){
-			var originPosition = _rigidbody2D.position;
 			var speed = _characterAbility.QueryAbility(CharacterAbilityType.MoveSpeed);
 			var acceleration = new Vector2(horizontal, vertical) * speed;
 			var currentVelocity = _rigidbody2D.velocity;
 			var nextVelocity = new Vector2(acceleration.x, currentVelocity.y);
 			_rigidbody2D.velocity = nextVelocity;
-			var nextPosition = _rigidbody2D.position;
-			EventBus.Post(new CharacterMoved(originPosition, nextPosition));
+			var currentPosition = transform.position;
+			EventBus.Post(new CharacterPositionUpdated(characterID , currentPosition));
 		}
 
 		public void Jump(float horizontal){

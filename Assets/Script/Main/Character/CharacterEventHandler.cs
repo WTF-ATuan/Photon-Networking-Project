@@ -13,11 +13,12 @@ namespace Script.Main.Character{
 			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
 			EventBus.Subscribe<CharacterCreated>(OnCharacterCreated);
 		}
-		
+
 		private void OnCharacterCreated(CharacterCreated obj){
 			var characterID = obj.CharacterID;
 			var character = obj.Character;
 			character.characterID = characterID;
+			character.Initialize();
 			CharacterRepository.Save(characterID, character);
 		}
 

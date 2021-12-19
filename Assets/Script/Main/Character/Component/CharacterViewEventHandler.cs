@@ -1,18 +1,16 @@
 ﻿using Photon.Bolt;
 using Script.Main.Character.Event;
-using UnityEngine;
 
 namespace Script.Main.Character.Component{
 	public class CharacterViewEventHandler : EntityBehaviour<ICharacterState>{
 		public override void Attached(){
-			EventBus.Subscribe<CharacterMoved>(OnCharacterMoved);
+			EventBus.Subscribe<CharacterPositionUpdated>(OnCharacterPositionUpdated);
 			state.SetTransforms(state.CharacterTranform, transform);
 		}
 
-		private void OnCharacterMoved(CharacterMoved obj){
-			var originPosition = obj.OriginPosition;
-			var targetPosition = obj.TargetPosition;
-			
+		private void OnCharacterPositionUpdated(CharacterPositionUpdated obj){
+			var updatePosition = obj.UpdatePosition;
+			transform.position = updatePosition;
 		}
 	}
 }
