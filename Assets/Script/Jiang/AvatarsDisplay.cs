@@ -15,20 +15,27 @@ public class AvatarsDisplay : MonoBehaviour
     public static  string ChickWhichSkillntroduce;
 
     public Avatars[] avatars = new Avatars[4];
+    public static int NumOfAvatarsArray;
     Avatars avatar;
 
 
     void Start()
+    {
+        avatar = avatars[0];
+
+        
+    }
+
+    void FixedUpdate()
     {
         AvatarImage.sprite = avatar.AvatarImage;
         AvatarIntroduce.sprite = avatar.AvatarIntroduce;
         SkillIRollSkill.sprite = avatar.SkillIRollSkill;
         BaseSkill.sprite = avatar.BaseSkill;
         StrongSkill.sprite = avatar.StrongSkill;
-    }
 
-    void FixedUpdate()
-    {
+        avatar = avatars[NumOfAvatarsArray];
+
         if (ChickWhichSkillntroduce == "SkillIRollSkill")
         {
             SkillIntroduce.sprite = avatar.IntroductionOfSkillIRollSkill;
