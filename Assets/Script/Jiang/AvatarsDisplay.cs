@@ -7,12 +7,17 @@ public class AvatarsDisplay : MonoBehaviour
 {
     public Image AvatarImage;
     public Image AvatarIntroduce;
-    public Image RollSkill;
-    public Image BaseSkill;
-    public Image StrongSkill;
+    public Button RollSkill;
+    public Button BaseSkill;
+    public Button StrongSkill;
     public Image SkillIntroduce;
 
-    public static  string ChickWhichSkillntroduce;
+    SpriteState Roll = new SpriteState();
+    SpriteState Base = new SpriteState();
+    SpriteState Strong = new SpriteState();
+
+
+    public static string ChickWhichSkillntroduce;
 
     public Avatars[] avatars = new Avatars[4];
     public static int NumOfAvatarsArray;
@@ -26,13 +31,25 @@ public class AvatarsDisplay : MonoBehaviour
 
     void FixedUpdate()
     {
+        avatar = avatars[NumOfAvatarsArray];
+
         AvatarImage.sprite = avatar.AvatarImage;
         AvatarIntroduce.sprite = avatar.AvatarIntroduce;
-        RollSkill.sprite = avatar.RollSkill;
-        BaseSkill.sprite = avatar.BaseSkill;
-        StrongSkill.sprite = avatar.StrongSkill;
+        RollSkill.image.sprite = avatar.RollSkill;
+        BaseSkill.image.sprite = avatar.BaseSkill;
+        StrongSkill.image.sprite = avatar.StrongSkill;
 
-        avatar = avatars[NumOfAvatarsArray];
+        Roll.highlightedSprite = avatar.RollSkillDisabled;
+        Base.highlightedSprite = avatar.BaseSkillDisabled;
+        Strong.highlightedSprite = avatar.StrongSkillDisabled;
+
+        Roll.disabledSprite = avatar.RollSkillDisabled;
+        Base.disabledSprite = avatar.BaseSkillDisabled;
+        Strong.disabledSprite = avatar.StrongSkillDisabled;
+
+        RollSkill.spriteState = Roll;
+        BaseSkill.spriteState = Base;
+        StrongSkill.spriteState = Strong;
 
         if (ChickWhichSkillntroduce == "RollSkill")
         {
