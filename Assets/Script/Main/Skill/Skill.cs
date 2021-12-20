@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Script.Main.Character.Event;
 using UnityEngine;
-using WebSocketSharp;
 
 namespace Script.Main.Skill{
 	public class Skill : MonoBehaviour{
@@ -24,7 +23,7 @@ namespace Script.Main.Skill{
 
 
 		private ISkillCastData FindSkillCastData(string skillName){
-			if(skillName.IsNullOrEmpty()){
+			if(string.IsNullOrEmpty(skillName)){
 				throw new Exception("SkillName is Null");
 			}
 
