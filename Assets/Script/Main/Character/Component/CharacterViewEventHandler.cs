@@ -8,7 +8,7 @@ namespace Script.Main.Character.Component{
 		public override void Attached(){
 			CharacterID = GetComponent<Character>().characterID;
 			EventBus.Subscribe<PositionUpdated>(OnCharacterPositionUpdated);
-			EventBus.Subscribe<FaceDirectionModified>(OnCharacterFaceDirectionModified);
+			EventBus.Subscribe<FaceDirectionFliped>(OnCharacterFaceDirectionModified);
 			state.SetTransforms(state.CharacterTranform, transform);
 		}
 
@@ -19,7 +19,7 @@ namespace Script.Main.Character.Component{
 			transform.position = updatePosition;
 		}
 
-		private void OnCharacterFaceDirectionModified(FaceDirectionModified obj){
+		private void OnCharacterFaceDirectionModified(FaceDirectionFliped obj){
 			var characterID = obj.CharacterID;
 			if(!string.Equals(characterID, CharacterID)) return;
 			var localScale = obj.LocalScale;

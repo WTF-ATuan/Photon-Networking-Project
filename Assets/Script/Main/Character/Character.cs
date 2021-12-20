@@ -63,7 +63,7 @@ namespace Script.Main.Character{
 				transform.localScale = localScale;
 			}
 
-			EventBus.Post(new FaceDirectionModified(characterID, localScale));
+			EventBus.Post(new FaceDirectionFliped(characterID, localScale));
 		}
 
 		public void ModifyAbility(CharacterAbilityType ability, float amount){
