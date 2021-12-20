@@ -35,7 +35,7 @@ namespace Script.Main.Character{
 			var nextVelocity = new Vector2(acceleration.x, currentVelocity.y);
 			_rigidbody2D.velocity = nextVelocity;
 			var currentPosition = transform.position;
-			EventBus.Post(new PositionUpdated(characterID , currentPosition));
+			EventBus.Post(new PositionUpdated(characterID, currentPosition));
 		}
 
 		public void Jump(float horizontal){
@@ -62,6 +62,8 @@ namespace Script.Main.Character{
 				localScale.x = localScaleX;
 				transform.localScale = localScale;
 			}
+
+			EventBus.Post(new FaceDirectionModified(characterID, localScale));
 		}
 
 		public void ModifyAbility(CharacterAbilityType ability, float amount){
