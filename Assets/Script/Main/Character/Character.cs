@@ -2,11 +2,12 @@
 using Script.Main.Character.Event.ViewEvent;
 using Script.Main.Character.Interface;
 using Script.Main.Skill;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script.Main.Character{
 	public class Character : MonoBehaviour{
-		public string characterID = "123";
+		[ReadOnly] public string characterID = "BIG_BOSS";
 		[SerializeField] private int defaultHealth = 100;
 		private int _currentHealth;
 
