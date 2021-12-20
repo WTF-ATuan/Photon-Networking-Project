@@ -3,6 +3,7 @@ using Photon.Bolt;
 using Photon.Bolt.Matchmaking;
 using Script.Main.Server.Event;
 using UdpKit;
+using UnityEngine;
 
 namespace Script.Main.Server{
 	public class ServerConnector : GlobalEventListener{
@@ -39,8 +40,12 @@ namespace Script.Main.Server{
 		public override void BoltStartDone(){
 			if(!BoltNetwork.IsServer) return;
 			BoltMatchmaking.CreateSession(_sessionID, sceneToLoad: _sceneName);
-			var playerID = Guid.NewGuid().ToString();
-			EventBus.DynamicPost(new PlayerJoined(playerID, _sessionID));
+		}
+
+		public override void EntityAttached(BoltEntity entity){
+			var networkId = entity.NetworkId.ToString();
+			var entityGameObject = entity.gameObject;
+			EventBus.Post(new EntityAttached(networkId, entityGameObject));
 		}
 
 		public override void SessionListUpdated(Map<Guid, UdpSession> sessionList){
@@ -48,8 +53,6 @@ namespace Script.Main.Server{
 				var updSession = session.Value;
 				if(updSession.Source == UdpSessionSource.Photon){
 					BoltMatchmaking.JoinSession(updSession);
-					var playerID = Guid.NewGuid().ToString();
-					EventBus.DynamicPost(new PlayerJoined(playerID, _sessionID));
 				}
 			}
 		}
