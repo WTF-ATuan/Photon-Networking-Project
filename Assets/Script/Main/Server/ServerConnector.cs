@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
 using Photon.Bolt;
 using Photon.Bolt.Matchmaking;
 using Script.Main.Server.Event;
 using UdpKit;
-using UnityEngine;
 
 namespace Script.Main.Server{
 	public class ServerConnector : GlobalEventListener{
@@ -39,6 +37,7 @@ namespace Script.Main.Server{
 		}
 
 		public override void BoltStartDone(){
+			if(!BoltNetwork.IsServer) return;
 			BoltMatchmaking.CreateSession(_sessionID, sceneToLoad: _sceneName);
 			var playerID = Guid.NewGuid().ToString();
 			EventBus.DynamicPost(new PlayerJoined(playerID, _sessionID));

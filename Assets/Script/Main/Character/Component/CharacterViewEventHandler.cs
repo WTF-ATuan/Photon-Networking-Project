@@ -1,5 +1,6 @@
 ﻿using Photon.Bolt;
 using Script.Main.Character.Event.ViewEvent;
+using UnityEngine;
 
 namespace Script.Main.Character.Component{
 	public class CharacterViewEventHandler : EntityBehaviour<ICharacterState>{
@@ -10,6 +11,7 @@ namespace Script.Main.Character.Component{
 			EventBus.Subscribe<PositionUpdated>(OnCharacterPositionUpdated);
 			EventBus.Subscribe<FaceDirectionFlipped>(OnCharacterFaceDirectionFlipped);
 			state.SetTransforms(state.CharacterTranform, transform);
+			state.SetAnimator(GetComponent<Animator>());
 		}
 
 		private void OnCharacterPositionUpdated(PositionUpdated obj){

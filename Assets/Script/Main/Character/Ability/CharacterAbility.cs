@@ -12,7 +12,7 @@ namespace Script.Main.Character{
 		private readonly Dictionary<CharacterAbilityType, float>
 				_abilityRepository = new Dictionary<CharacterAbilityType, float>();
 
-		private void Start(){
+		private void Awake(){
 			SetDefaultAbility();
 		}
 
