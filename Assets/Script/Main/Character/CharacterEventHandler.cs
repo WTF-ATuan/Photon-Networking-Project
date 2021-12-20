@@ -30,7 +30,9 @@ namespace Script.Main.Character{
 			var character = entityObject.GetComponent<Character>();
 			if(character == null) return;
 			character.characterID = entityID;
-			CharacterRepository.Save(entityID, character);
+			if(CharacterRepository.ContainCharacter(entityID)){
+				CharacterRepository.Save(entityID, character);
+			}
 		}
 
 		private void OnMoveInputDetected(MoveInputDetected obj){
