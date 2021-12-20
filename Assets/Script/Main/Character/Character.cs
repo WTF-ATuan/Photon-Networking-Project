@@ -48,11 +48,11 @@ namespace Script.Main.Character{
 
 		public void SetFaceDirection(float direction){
 			if(direction == 0) return;
-			var isRight = direction < 0;
+			var isLeft = direction < 0;
 			var rightRotation = Vector3.zero;
 			var leftRotation = new Vector3(0, 180, 0);
 			var characterTransform = transform;
-			characterTransform.eulerAngles = isRight ? rightRotation : leftRotation;
+			characterTransform.eulerAngles = isLeft ? leftRotation : rightRotation;
 			EventBus.Post(new FaceDirectionFlipped(characterID, characterTransform.eulerAngles));
 		}
 
