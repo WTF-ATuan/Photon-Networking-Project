@@ -49,21 +49,11 @@ namespace Script.Main.Character{
 		public void SetFaceDirection(float direction){
 			if(direction == 0) return;
 			var isRight = direction < 0;
-			var localScale = transform.localScale;
-			var localScaleX = localScale.x;
-			var isLeft = localScaleX > 0;
-			if(isRight){
-				localScaleX = isLeft ? localScaleX * -1 : localScaleX * 1;
-				localScale.x = localScaleX;
-				transform.localScale = localScale;
-			}
-			else{
-				localScaleX = isLeft ? localScaleX * 1 : localScaleX * -1;
-				localScale.x = localScaleX;
-				transform.localScale = localScale;
-			}
-
-			EventBus.Post(new FaceDirectionFlipped(characterID, localScale));
+			var rightRotation = Vector3.zero;
+			var leftRotation = new Vector3(0, 180, 0);
+			var characterTransform = transform;
+			characterTransform.eulerAngles = isRight ? rightRotation : leftRotation;
+			EventBus.Post(new FaceDirectionFlipped(characterID, characterTransform.eulerAngles));
 		}
 
 		public void ModifyAbility(CharacterAbilityType ability, float amount){
