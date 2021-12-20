@@ -12,23 +12,23 @@ namespace Script.Main.Server{
 		private string _sceneName;
 
 		private void Awake(){
-			EventBus.Subscribe<SeverConnected>(OnSeverConnected);
+			EventBus.Subscribe<ServerConnected>(OnServerConnected);
 			DontDestroyOnLoad(this);
 		}
 
-		private void OnSeverConnected(SeverConnected obj){
+		private void OnServerConnected(ServerConnected obj){
 			var isSever = obj.IsSever;
 			var sceneName = obj.SceneName;
 			var sessionID = obj.SessionID;
 			if(isSever){
-				ConnectAsSever(sessionID, sceneName);
+				ConnectAsServer(sessionID, sceneName);
 			}
 			else{
 				ConnectAsClient();
 			}
 		}
 
-		private void ConnectAsSever(string sessionID, string sceneName){
+		private void ConnectAsServer(string sessionID, string sceneName){
 			_sessionID = sessionID;
 			_sceneName = sceneName;
 			BoltLauncher.StartServer();
