@@ -8,7 +8,7 @@ namespace Script.Main.Menu{
 		[SerializeField] private SceneObject scene;
 
 
-		public void ConnectSever(){
+		public void ConnectServer(){
 			EventBus.Post(new ServerConnected(true, sessionID.text, scene.ToString()));
 		}
 
