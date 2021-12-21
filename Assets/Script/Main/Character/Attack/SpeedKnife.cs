@@ -5,15 +5,13 @@ using Script.Main.Enemy.Interface;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using UnityEngine.Serialization;
 using IAttack = Script.Main.Character.Interface.IAttack;
 
 namespace Script.Main.Character.Attack{
 	public class SpeedKnife : MonoBehaviour, IAttack{
 		[SerializeField] private GameObject knifePre;
 
-		[FormerlySerializedAs("throwSpeed")] [SerializeField]
-		private float throwPower;
+		[SerializeField] private float throwPower;
 
 
 		private Character _character;
