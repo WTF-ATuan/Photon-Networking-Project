@@ -32,7 +32,6 @@ namespace Script.Main.Server{
 			_sceneName = sceneName;
 			BoltLauncher.StartServer();
 		}
-
 		private void ConnectAsClient(){
 			BoltLauncher.StartClient();
 		}
@@ -55,6 +54,14 @@ namespace Script.Main.Server{
 					BoltMatchmaking.JoinSession(updSession);
 				}
 			}
+		}
+		
+		public override void SceneLoadLocalDone(string scene, IProtocolToken token){
+			Debug.Log($"Local");
+		}
+
+		public override void SceneLoadRemoteDone(BoltConnection connection, IProtocolToken token){
+			Debug.Log($"Remote");
 		}
 	}
 }
