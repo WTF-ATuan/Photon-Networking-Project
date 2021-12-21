@@ -11,16 +11,12 @@ namespace Script.Main.Character{
 		[ReadOnly] public string characterID = "BIG_BOSS";
 		[SerializeField] private int defaultHealth = 100;
 		private int _currentHealth;
-
-
-		private string _baseSkillName = "BasicArrow";
-		private string _strongSkillName = "FireBall2D";
-
+		
 		private ICharacterAbility _characterAbility;
 		private IGround _groundCheck;
 		private IJump _jump;
 		private IAttack _attack;
-
+		
 		private Rigidbody2D _rigidbody2D;
 		private SkeletonAnimation _animation;
 

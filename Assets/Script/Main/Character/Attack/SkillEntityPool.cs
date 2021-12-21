@@ -17,10 +17,10 @@ namespace Script.Main.Character.Attack{
 			}
 		}
 
-		public void SubscribeSkillTriggered(Action<BoltEntity> skillEntity){
+		public void SubscribeSkillTriggered(Action<BoltEntity, Collider2D> callbackAction){
 			foreach(var boltEntity in _entities){
 				boltEntity.OnTriggerEnter2DAsObservable()
-						.Subscribe(x => skillEntity(boltEntity))
+						.Subscribe(x => callbackAction(boltEntity, x))
 						.AddTo(boltEntity.gameObject);
 			}
 		}
