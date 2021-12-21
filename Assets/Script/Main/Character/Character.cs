@@ -1,28 +1,33 @@
 ﻿using Script.Main.Character.Event;
 using Script.Main.Character.Event.ViewEvent;
 using Script.Main.Character.Interface;
-using Script.Main.Skill;
 using Sirenix.OdinInspector;
 using Spine.Unity;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Script.Main.Character{
 	public class Character : MonoBehaviour{
 		[ReadOnly] public string characterID = "BIG_BOSS";
 		[SerializeField] private int defaultHealth = 100;
 		private int _currentHealth;
-		
+
 		private ICharacterAbility _characterAbility;
 		private IGround _groundCheck;
 		private IJump _jump;
 		private IAttack _attack;
-		
+
 		private Rigidbody2D _rigidbody2D;
+
 		private SkeletonAnimation _animation;
+
+		//FOR TEST
+		private Image _hpBar;
 
 		public void Initialize(){
 			_rigidbody2D = GetComponent<Rigidbody2D>();
 			_animation = GetComponent<SkeletonAnimation>();
+			_hpBar = GetComponent<Image>();
 			_characterAbility = GetComponent<ICharacterAbility>();
 			_groundCheck = GetComponent<IGround>();
 			_jump = GetComponent<IJump>();
@@ -82,13 +87,21 @@ namespace Script.Main.Character{
 			_animation.timeScale = animationTimeScale;
 		}
 
+
+		public void ModifyHp(int amount){
+			_currentHealth += amount;
+			EventBus.Post(new CharacterHealthModified(characterID, _currentHealth, amount));
+			var hpBarRect = _hpBar.GetComponent<RectTransform>();
+			var height = hpBarRect.sizeDelta.y;
+			hpBarRect.sizeDelta = new Vector2(_currentHealth - amount, height);
+			if(_currentHealth <= 0){
+				Die();
+			}
+		}
+
 		//TODO
 		public void Die(){
 			gameObject.SetActive(false);
-		}
-
-		public void ModifyHp(int amount){
-			EventBus.Post(new CharacterHealthModified(characterID, _currentHealth, amount));
 		}
 	}
 }
