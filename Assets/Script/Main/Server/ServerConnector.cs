@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Photon.Bolt;
 using Photon.Bolt.Matchmaking;
 using Script.Main.Server.Event;
@@ -12,23 +11,23 @@ namespace Script.Main.Server{
 		private string _sceneName;
 
 		private void Awake(){
-			EventBus.Subscribe<SeverConnected>(OnSeverConnected);
+			EventBus.Subscribe<ServerConnected>(OnServerConnected);
 			DontDestroyOnLoad(this);
 		}
 
-		private void OnSeverConnected(SeverConnected obj){
+		private void OnServerConnected(ServerConnected obj){
 			var isSever = obj.IsSever;
 			var sceneName = obj.SceneName;
 			var sessionID = obj.SessionID;
 			if(isSever){
-				ConnectAsSever(sessionID, sceneName);
+				ConnectAsServer(sessionID, sceneName);
 			}
 			else{
 				ConnectAsClient();
 			}
 		}
 
-		private void ConnectAsSever(string sessionID, string sceneName){
+		private void ConnectAsServer(string sessionID, string sceneName){
 			_sessionID = sessionID;
 			_sceneName = sceneName;
 			BoltLauncher.StartServer();
@@ -39,9 +38,14 @@ namespace Script.Main.Server{
 		}
 
 		public override void BoltStartDone(){
+			if(!BoltNetwork.IsServer) return;
 			BoltMatchmaking.CreateSession(_sessionID, sceneToLoad: _sceneName);
-			var playerID = Guid.NewGuid().ToString();
-			EventBus.DynamicPost(new PlayerJoined(playerID, _sessionID));
+		}
+
+		public override void EntityAttached(BoltEntity entity){
+			var networkId = entity.NetworkId.ToString();
+			var entityGameObject = entity.gameObject;
+			EventBus.Post(new EntityAttached(networkId, entityGameObject));
 		}
 
 		public override void SessionListUpdated(Map<Guid, UdpSession> sessionList){
@@ -49,8 +53,6 @@ namespace Script.Main.Server{
 				var updSession = session.Value;
 				if(updSession.Source == UdpSessionSource.Photon){
 					BoltMatchmaking.JoinSession(updSession);
-					var playerID = Guid.NewGuid().ToString();
-					EventBus.DynamicPost(new PlayerJoined(playerID, _sessionID));
 				}
 			}
 		}

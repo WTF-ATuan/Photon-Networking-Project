@@ -9,11 +9,11 @@ namespace Script.Main.Menu{
 
 
 		public void ConnectSever(){
-			EventBus.Post(new SeverConnected(true, sessionID.text, scene.ToString()));
+			EventBus.Post(new ServerConnected(true, sessionID.text, scene.ToString()));
 		}
 
 		public void ConnectClient(){
-			EventBus.Post(new SeverConnected(false, sessionID.text, scene.ToString()));
+			EventBus.Post(new ServerConnected(false, sessionID.text, scene.ToString()));
 		}
 	}
 }

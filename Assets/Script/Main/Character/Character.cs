@@ -1,11 +1,13 @@
 ﻿using Script.Main.Character.Event;
+using Script.Main.Character.Event.ViewEvent;
 using Script.Main.Character.Interface;
 using Script.Main.Skill;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script.Main.Character{
 	public class Character : MonoBehaviour{
-		public string characterID = "123";
+		[ReadOnly] public string characterID = "BIG_BOSS";
 		[SerializeField] private int defaultHealth = 100;
 		private int _currentHealth;
 
@@ -19,7 +21,7 @@ namespace Script.Main.Character{
 
 		private Rigidbody2D _rigidbody2D;
 
-		private void Start(){
+		public void Initialize(){
 			_rigidbody2D = GetComponent<Rigidbody2D>();
 			_characterAbility = GetComponent<ICharacterAbility>();
 			_groundCheck = GetComponent<IGround>();
@@ -33,6 +35,8 @@ namespace Script.Main.Character{
 			var currentVelocity = _rigidbody2D.velocity;
 			var nextVelocity = new Vector2(acceleration.x, currentVelocity.y);
 			_rigidbody2D.velocity = nextVelocity;
+			var currentPosition = transform.position;
+			EventBus.Post(new PositionUpdated(characterID, currentPosition));
 		}
 
 		public void Jump(float horizontal){
@@ -45,20 +49,12 @@ namespace Script.Main.Character{
 
 		public void SetFaceDirection(float direction){
 			if(direction == 0) return;
-			var isRight = direction < 0;
-			var localScale = transform.localScale;
-			var localScaleX = localScale.x;
-			var isLeft = localScaleX > 0;
-			if(isRight){
-				localScaleX = isLeft ? localScaleX * -1 : localScaleX * 1;
-				localScale.x = localScaleX;
-				transform.localScale = localScale;
-			}
-			else{
-				localScaleX = isLeft ? localScaleX * 1 : localScaleX * -1;
-				localScale.x = localScaleX;
-				transform.localScale = localScale;
-			}
+			var isLeft = direction < 0;
+			var rightRotation = Vector3.zero;
+			var leftRotation = new Vector3(0, 180, 0);
+			var characterTransform = transform;
+			characterTransform.eulerAngles = isLeft ? leftRotation : rightRotation;
+			EventBus.Post(new FaceDirectionFlipped(characterID, characterTransform.eulerAngles));
 		}
 
 		public void ModifyAbility(CharacterAbilityType ability, float amount){

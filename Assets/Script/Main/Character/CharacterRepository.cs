@@ -22,6 +22,11 @@ namespace Script.Main.Character{
 			return character;
 		}
 
+		public bool ContainCharacter(string characterID){
+			var containsKey = _characters.ContainsKey(characterID);
+			return containsKey;
+		}
+
 		public List<Character> QueryAll(){
 			var characters = _characters.Values.ToList();
 			return characters;
