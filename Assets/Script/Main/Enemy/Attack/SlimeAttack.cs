@@ -1,5 +1,4 @@
 ﻿using Script.Main.Enemy.Interface;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script.Main.Enemy.Attack{
@@ -28,7 +27,7 @@ namespace Script.Main.Enemy.Attack{
 		}
 
 		public void Attack(){
-			var bulletObject = Instantiate(attackObject, transform.position, Quaternion.identity);
+			var bulletObject = Instantiate(attackObject, transform.position + Vector3.up, Quaternion.identity);
 			var bulletRigidbody = bulletObject.GetComponent<Rigidbody2D>();
 			bulletRigidbody.AddForce(_attackDirection * bulletSpeed, ForceMode2D.Impulse);
 			ResetAttackColdDown();
