@@ -1,7 +1,10 @@
-﻿using Script.Main.Character.Event;
+﻿using Script.Main.Character.Component;
+using Script.Main.Character.Event;
+using Script.Main.Character.Interface;
 using Script.Main.InputData.Event;
 using Script.Main.Server.Event;
 using Script.Main.Utility;
+using Sirenix.Utilities;
 
 namespace Script.Main.Character{
 	public class CharacterEventHandler{
@@ -29,6 +32,8 @@ namespace Script.Main.Character{
 			var entityID = obj.EntityID;
 			var character = entityObject.GetComponent<Character>();
 			if(character == null) return;
+			var characterIdentities = entityObject.GetComponents<ICharacterIdentity>();
+			characterIdentities.ForEach(x => x.SetCharacterID(entityID));
 			character.characterID = entityID;
 			if(CharacterRepository.ContainCharacter(entityID)){
 				CharacterRepository.Save(entityID, character);
