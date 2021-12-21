@@ -20,7 +20,7 @@ namespace Script.Jiang{
 		}
 
 		private void FixedUpdate(){
-			var targetCampos = player.position + _offset;
+			var targetCampos = player.position + _offset + Vector3.up;
 			transform.position =
 					Vector3.Lerp(transform.position, targetCampos, smoothing * Time.deltaTime); //以一定的速度，從A平滑移動到B
 		}
