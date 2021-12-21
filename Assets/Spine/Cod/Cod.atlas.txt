@@ -1,195 +1,55 @@
 
 Cod.png
-size: 1024,256
+size: 512,256
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Cod/Cod arm1
-  rotate: false
-  xy: 271, 8
+  rotate: true
+  xy: 152, 117
   size: 135, 83
   orig: 135, 83
   offset: 0, 0
   index: -1
 Cod/Cod arm2
-  rotate: true
-  xy: 575, 134
+  rotate: false
+  xy: 152, 38
   size: 120, 77
   orig: 120, 77
   offset: 0, 0
   index: -1
 Cod/Cod body1
   rotate: true
-  xy: 617, 22
+  xy: 237, 142
   size: 110, 78
   orig: 110, 78
   offset: 0, 0
   index: -1
 Cod/Cod body2
   rotate: false
-  xy: 685, 161
+  xy: 2, 30
   size: 41, 44
   orig: 41, 44
   offset: 0, 0
   index: -1
 Cod/Cod hand1
-  rotate: false
-  xy: 654, 198
+  rotate: true
+  xy: 45, 53
   size: 21, 56
   orig: 21, 56
   offset: 0, 0
   index: -1
 Cod/Cod head
   rotate: true
-  xy: 2, 78
+  xy: 2, 76
   size: 176, 148
   orig: 176, 148
   offset: 0, 0
   index: -1
 Cod/Cod leg1
-  rotate: false
-  xy: 132, 19
+  rotate: true
+  xy: 2, 2
   size: 26, 57
   orig: 26, 57
-  offset: 0, 0
-  index: -1
-Giles/Giles arm
-  rotate: true
-  xy: 555, 32
-  size: 79, 25
-  orig: 79, 25
-  offset: 0, 0
-  index: -1
-Giles/Giles body1
-  rotate: false
-  xy: 81, 18
-  size: 49, 58
-  orig: 49, 58
-  offset: 0, 0
-  index: -1
-Giles/Giles body2
-  rotate: false
-  xy: 654, 149
-  size: 29, 47
-  orig: 29, 47
-  offset: 0, 0
-  index: -1
-Giles/Giles hand1
-  rotate: false
-  xy: 2, 7
-  size: 22, 69
-  orig: 22, 69
-  offset: 0, 0
-  index: -1
-Giles/Giles head
-  rotate: false
-  xy: 440, 113
-  size: 133, 141
-  orig: 133, 141
-  offset: 0, 0
-  index: -1
-Giles/Giles leg1
-  rotate: false
-  xy: 50, 9
-  size: 29, 67
-  orig: 29, 67
-  offset: 0, 0
-  index: -1
-Joseph/Joseph arm
-  rotate: false
-  xy: 685, 135
-  size: 42, 24
-  orig: 42, 24
-  offset: 0, 0
-  index: -1
-Joseph/Joseph body1
-  rotate: false
-  xy: 408, 2
-  size: 78, 96
-  orig: 78, 96
-  offset: 0, 0
-  index: -1
-Joseph/Joseph hair
-  rotate: true
-  xy: 677, 207
-  size: 47, 23
-  orig: 47, 23
-  offset: 0, 0
-  index: -1
-Joseph/Joseph hand1
-  rotate: false
-  xy: 26, 8
-  size: 22, 68
-  orig: 22, 68
-  offset: 0, 0
-  index: -1
-Joseph/Joseph head
-  rotate: false
-  xy: 301, 100
-  size: 137, 154
-  orig: 137, 154
-  offset: 0, 0
-  index: -1
-Joseph/Joseph leg1
-  rotate: false
-  xy: 160, 4
-  size: 31, 87
-  orig: 31, 87
-  offset: 0, 0
-  index: -1
-Joseph/Joseph scarf1
-  rotate: false
-  xy: 582, 54
-  size: 31, 78
-  orig: 31, 78
-  offset: 0, 0
-  index: -1
-Varan/Varan arm
-  rotate: true
-  xy: 488, 10
-  size: 101, 29
-  orig: 101, 29
-  offset: 0, 0
-  index: -1
-Varan/Varan body1
-  rotate: true
-  xy: 193, 5
-  size: 86, 76
-  orig: 86, 76
-  offset: 0, 0
-  index: -1
-Varan/Varan bra1
-  rotate: false
-  xy: 519, 3
-  size: 39, 26
-  orig: 39, 26
-  offset: 0, 0
-  index: -1
-Varan/Varan bra2
-  rotate: true
-  xy: 702, 218
-  size: 36, 35
-  orig: 36, 35
-  offset: 0, 0
-  index: -1
-Varan/Varan hand1
-  rotate: true
-  xy: 560, 5
-  size: 25, 55
-  orig: 25, 55
-  offset: 0, 0
-  index: -1
-Varan/Varan head
-  rotate: true
-  xy: 152, 93
-  size: 161, 147
-  orig: 161, 147
-  offset: 0, 0
-  index: -1
-Varan/Varan leg1
-  rotate: false
-  xy: 519, 31
-  size: 34, 80
-  orig: 34, 80
   offset: 0, 0
   index: -1
