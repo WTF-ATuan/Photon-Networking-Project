@@ -19,6 +19,7 @@ namespace Script.Main.Character{
 		private ICharacterAbility _characterAbility;
 		private IGround _groundCheck;
 		private IJump _jump;
+		private IAttack _attack;
 
 		private Rigidbody2D _rigidbody2D;
 		private SkeletonAnimation _animation;
@@ -29,6 +30,7 @@ namespace Script.Main.Character{
 			_characterAbility = GetComponent<ICharacterAbility>();
 			_groundCheck = GetComponent<IGround>();
 			_jump = GetComponent<IJump>();
+			_attack = GetComponent<IAttack>();
 			_currentHealth = defaultHealth;
 		}
 
@@ -44,6 +46,7 @@ namespace Script.Main.Character{
 			else{
 				PlayAnimation("Run", 2);
 			}
+
 			EventBus.Post(new PositionUpdated(characterID, transform.position));
 		}
 
@@ -71,13 +74,9 @@ namespace Script.Main.Character{
 
 		public void CastSkill(Vector2 targetPosition, bool isBase){
 			var direction = (targetPosition - (Vector2)transform.position).normalized;
-			if(isBase){
-				EventBus.Post(new SkillCasted(_baseSkillName,
-					new SkillSpawnInfo(characterID, transform.position, direction)));
-			}
-			else{
-				EventBus.Post(new SkillCasted(_strongSkillName,
-					new SkillSpawnInfo(characterID, transform.position, direction)));
+			var canAttack = _attack.CanAttack();
+			if(canAttack){
+				_attack.Attack(direction, targetPosition);
 			}
 		}
 
