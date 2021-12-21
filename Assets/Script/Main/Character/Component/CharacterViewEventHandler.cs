@@ -4,12 +4,13 @@ using Script.Main.Character.Interface;
 using UnityEngine;
 
 namespace Script.Main.Character.Component{
-	public class CharacterViewIdentityHandler : EntityBehaviour<ICharacterState> , ICharacterIdentity{
+	public class CharacterViewEventHandler : EntityBehaviour<ICharacterState>, ICharacterIdentity{
 		private string CharacterID{ get; set; }
 
 		public void SetCharacterID(string characterID){
 			CharacterID = characterID;
 		}
+
 		public override void Attached(){
 			EventBus.Subscribe<PositionUpdated>(OnCharacterPositionUpdated);
 			EventBus.Subscribe<FaceDirectionFlipped>(OnCharacterFaceDirectionFlipped);
