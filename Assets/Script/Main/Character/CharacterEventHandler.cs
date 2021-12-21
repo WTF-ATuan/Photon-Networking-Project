@@ -17,6 +17,15 @@ namespace Script.Main.Character{
 			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
 			EventBus.Subscribe<CharacterCreated>(OnCharacterCreated);
 			EventBus.Subscribe<EntityAttached>(OnEntityAttached);
+			EventBus.Subscribe<CharacterAnimated>(OnCharacterAnimated);
+		}
+
+		private void OnCharacterAnimated(CharacterAnimated obj){
+			var characterID = obj.CharacterID;
+			var animationName = obj.AnimationName;
+			var timeScale = obj.AnimationTimeScale;
+			var character = CharacterRepository.Query(characterID);
+			character.PlayAnimation(animationName, timeScale);
 		}
 
 		private void OnCharacterCreated(CharacterCreated obj){
