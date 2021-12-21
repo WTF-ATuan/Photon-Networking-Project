@@ -1,13 +1,17 @@
 ﻿using Photon.Bolt;
 using Script.Main.Character.Event.ViewEvent;
+using Script.Main.Character.Interface;
 using UnityEngine;
 
 namespace Script.Main.Character.Component{
-	public class CharacterViewEventHandler : EntityBehaviour<ICharacterState>{
+	public class CharacterViewEventHandler : EntityBehaviour<ICharacterState>, ICharacterIdentity{
 		private string CharacterID{ get; set; }
 
+		public void SetCharacterID(string characterID){
+			CharacterID = characterID;
+		}
+
 		public override void Attached(){
-			CharacterID = GetComponent<Character>().characterID;
 			EventBus.Subscribe<PositionUpdated>(OnCharacterPositionUpdated);
 			EventBus.Subscribe<FaceDirectionFlipped>(OnCharacterFaceDirectionFlipped);
 			state.SetTransforms(state.CharacterTranform, transform);

@@ -1,13 +1,15 @@
 ﻿using Script.Main.Enemy.Interface;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script.Main.Enemy.Attack{
 	public class SlimeAttack : MonoBehaviour, IAttack{
 		[SerializeField] private float attackColdDown = 0.5f;
 		[SerializeField] private float bulletSpeed = 5f;
+		[SerializeField] private GameObject attackObject;
+
 
 		private Vector2 _attackDirection = Vector2.zero;
-
 		private float _coldDownTimeTrack;
 		private Enemy _enemy;
 
@@ -26,11 +28,9 @@ namespace Script.Main.Enemy.Attack{
 		}
 
 		public void Attack(){
-			var bulletObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			bulletObject.transform.position = transform.position;
-			bulletObject.transform.localScale = new Vector3(0.3f, 0.3f, 0);
-			var bulletRigidbody = bulletObject.AddComponent<Rigidbody>();
-			bulletRigidbody.AddForce(_attackDirection * bulletSpeed, ForceMode.Impulse);
+			var bulletObject = Instantiate(attackObject, transform.position, Quaternion.identity);
+			var bulletRigidbody = bulletObject.GetComponent<Rigidbody2D>();
+			bulletRigidbody.AddForce(_attackDirection * bulletSpeed, ForceMode2D.Impulse);
 			ResetAttackColdDown();
 		}
 
