@@ -1,0 +1,55 @@
+
+Varan2.png
+size: 256,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Varan/Varan arm
+  rotate: true
+  xy: 165, 40
+  size: 101, 29
+  orig: 101, 29
+  offset: 0, 0
+  index: -1
+Varan/Varan body1
+  rotate: false
+  xy: 165, 143
+  size: 86, 76
+  orig: 86, 76
+  offset: 0, 0
+  index: -1
+Varan/Varan bra1
+  rotate: false
+  xy: 2, 44
+  size: 39, 26
+  orig: 39, 26
+  offset: 0, 0
+  index: -1
+Varan/Varan bra2
+  rotate: true
+  xy: 2, 2
+  size: 36, 35
+  orig: 36, 35
+  offset: 0, 0
+  index: -1
+Varan/Varan hand1
+  rotate: true
+  xy: 196, 34
+  size: 25, 55
+  orig: 25, 55
+  offset: 0, 0
+  index: -1
+Varan/Varan head
+  rotate: false
+  xy: 2, 72
+  size: 161, 147
+  orig: 161, 147
+  offset: 0, 0
+  index: -1
+Varan/Varan leg1
+  rotate: false
+  xy: 196, 61
+  size: 34, 80
+  orig: 34, 80
+  offset: 0, 0
+  index: -1
