@@ -3,6 +3,7 @@ using Script.Main.Character.Event.ViewEvent;
 using Script.Main.Character.Interface;
 using Script.Main.Skill;
 using Sirenix.OdinInspector;
+using Spine.Unity;
 using UnityEngine;
 
 namespace Script.Main.Character{
@@ -20,9 +21,11 @@ namespace Script.Main.Character{
 		private IJump _jump;
 
 		private Rigidbody2D _rigidbody2D;
+		private SkeletonAnimation _animation;
 
 		public void Initialize(){
 			_rigidbody2D = GetComponent<Rigidbody2D>();
+			_animation = GetComponent<SkeletonAnimation>();
 			_characterAbility = GetComponent<ICharacterAbility>();
 			_groundCheck = GetComponent<IGround>();
 			_jump = GetComponent<IJump>();
@@ -35,8 +38,13 @@ namespace Script.Main.Character{
 			var currentVelocity = _rigidbody2D.velocity;
 			var nextVelocity = new Vector2(acceleration.x, currentVelocity.y);
 			_rigidbody2D.velocity = nextVelocity;
-			var currentPosition = transform.position;
-			EventBus.Post(new PositionUpdated(characterID, currentPosition));
+			if(nextVelocity == Vector2.zero){
+				PlayAnimation("idle", 1);
+			}
+			else{
+				PlayAnimation("Run", 2);
+			}
+			EventBus.Post(new PositionUpdated(characterID, transform.position));
 		}
 
 		public void Jump(float horizontal){
@@ -73,8 +81,16 @@ namespace Script.Main.Character{
 			}
 		}
 
+		[Button]
+		public void PlayAnimation(string animationName, float animationTimeScale){
+			_animation.AnimationName = animationName;
+			_animation.timeScale = animationTimeScale;
+		}
+
 		//TODO
-		public void Die(){ }
+		public void Die(){
+			gameObject.SetActive(false);
+		}
 
 		public void ModifyHp(int amount){
 			EventBus.Post(new CharacterHealthModified(characterID, _currentHealth, amount));
