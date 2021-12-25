@@ -28,7 +28,7 @@ namespace Script.Main.Enemy.Detector{
 			var offsetX = Vector2.Distance(detectLimitPointRight, detectLimitPointLeft);
 			// ReSharper disable once Unity.PreferNonAllocApi
 			var raycastHit2D = Physics2D.BoxCastAll(_centerPosition, new Vector2(offsetX, boxRaySizeOffsetY), 0,
-				Vector2.zero);
+				Vector2.zero, layer);
 			foreach(var raycastHit in raycastHit2D){
 				var hitCollider = raycastHit.collider;
 				var target = hitCollider.GetComponent<T>();
@@ -47,7 +47,7 @@ namespace Script.Main.Enemy.Detector{
 			var lineColor = detectObject.Count > 0 ? Color.red : Color.green;
 			Gizmos.color = lineColor;
 			var offsetX = Vector2.Distance(detectLimitPointRight, detectLimitPointLeft);
-			Gizmos.DrawWireCube(_centerPosition, new Vector3(offsetX, boxRaySizeOffsetY , 0));
+			Gizmos.DrawWireCube(_centerPosition, new Vector3(offsetX, boxRaySizeOffsetY, 0));
 		}
 	}
 }
