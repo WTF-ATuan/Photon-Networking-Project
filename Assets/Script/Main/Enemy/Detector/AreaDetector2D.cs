@@ -22,7 +22,7 @@ namespace Script.Main.Enemy.Detector{
 			detectLimitPointRight = new Vector2(_centerPosition.x + detectOffset, _centerPosition.y);
 		}
 
-		public TargetList<T> Detect<T>() where T : Component{
+		public TargetList<T> Detect<T>(int layer = default) where T : Component{
 			ProgressLimitPoint();
 			var targetList = new TargetList<T>();
 			var offsetX = Vector2.Distance(detectLimitPointRight, detectLimitPointLeft);

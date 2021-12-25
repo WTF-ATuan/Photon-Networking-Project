@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Script.Main.Enemy.Move{
 	public class BackAndForth : MonoBehaviour, IMove{
 		[SerializeField] private bool defaultFaceDirectionIsRight;
+		[SerializeField] private LayerMask detectLayer;
 
 
 		private Enemy _enemy;
@@ -16,12 +17,13 @@ namespace Script.Main.Enemy.Move{
 		}
 
 		public void Move(bool enable){
+			if(!enable) return;
 			DetectFacing();
 			transform.position += _enemy.GetFacingDirection() * Time.deltaTime;
 		}
 
 		private void DetectFacing(){
-			var targetList = _enemy.Detect<Collider2D>();
+			var targetList = _enemy.Detect<Collider2D>(detectLayer.value);
 			var isEmpty = targetList.Count < 1;
 			if(isEmpty) return;
 			_faceDirectionIsRight = !_faceDirectionIsRight;
