@@ -31,6 +31,7 @@ namespace Script.Main.Enemy.Move{
 		}
 
 		public void Move(bool enable){
+			if(!enable) return;
 			DetectFacing();
 			transform.position += _enemy.GetFacingDirection() * Time.deltaTime;
 		}
