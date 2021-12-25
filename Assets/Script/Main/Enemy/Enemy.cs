@@ -56,8 +56,8 @@ namespace Script.Main.Enemy{
 			}
 		}
 
-		public TargetList<T> Detect<T>() where T : Component{
-			var detectList = _detector?.Detect<T>();
+		public TargetList<T> Detect<T>(int layer = default) where T : Component{
+			var detectList = _detector?.Detect<T>(layer);
 			return detectList ?? new TargetList<T>();
 		}
 
@@ -73,8 +73,7 @@ namespace Script.Main.Enemy{
 		}
 
 		public void Move(bool enable){
-			if(!enable) return;
-			_move?.Move();
+			_move?.Move(enable);
 		}
 	}
 }

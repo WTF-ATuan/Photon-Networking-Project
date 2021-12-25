@@ -4,6 +4,6 @@ using UnityEngine;
 
 namespace Script.Main.Enemy.Interface{
 	public interface IDetector{
-		TargetList<T> Detect<T>() where T : Component;
+		TargetList<T> Detect<T>(int layer = default) where T : Component;
 	}
 }

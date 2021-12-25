@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Script.Main.Enemy.Detector{
@@ -29,6 +30,10 @@ namespace Script.Main.Enemy.Detector{
 			}
 
 			return closestTarget;
+		}
+
+		public T GetFirstTarget(){
+			return _targetList.First();
 		}
 	}
 }
