@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script.Main.Enemy.Detector{
-	public class AreaDetector : MonoBehaviour, IDetector{
+	public class AreaDetector2D : MonoBehaviour, IDetector{
 		[SerializeField] private float detectRange;
 
 		[SerializeField] [ReadOnly] private Vector2 detectLimitPointLeft;
