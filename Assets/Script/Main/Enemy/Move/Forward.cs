@@ -5,7 +5,7 @@ namespace Script.Main.Enemy.Move{
 	public class Forward : MonoBehaviour , IMove{
 		
 		
-		public void Move(){
+		public void Move(bool enable){
 			DetectFacing();
 		}
 		private void DetectFacing(){

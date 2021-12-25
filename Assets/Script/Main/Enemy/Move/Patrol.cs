@@ -30,7 +30,7 @@ namespace Script.Main.Enemy.Move{
 			rightPatrolX = spawnPositionX + patrolOffsetX;
 		}
 
-		public void Move(){
+		public void Move(bool enable){
 			DetectFacing();
 			transform.position += _enemy.GetFacingDirection() * Time.deltaTime;
 		}
