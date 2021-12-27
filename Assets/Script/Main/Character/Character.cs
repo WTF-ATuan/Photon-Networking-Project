@@ -27,7 +27,7 @@ namespace Script.Main.Character{
 		public void Initialize(){
 			_rigidbody2D = GetComponent<Rigidbody2D>();
 			_animation = GetComponent<SkeletonAnimation>();
-			_hpBar = GetComponent<Image>();
+			_hpBar = GetComponentInChildren<Image>();
 			_characterAbility = GetComponent<ICharacterAbility>();
 			_groundCheck = GetComponent<IGround>();
 			_jump = GetComponent<IJump>();
