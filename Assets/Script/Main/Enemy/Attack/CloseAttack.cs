@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Script.Main.Enemy.Attack{
 	public class CloseAttack : MonoBehaviour, IAttack{
-		[SerializeField] private float attackColdDown = 0.5f;
+		[SerializeField] private float attackColdDown = 2f;
 
 
 		private float _coldDownTimeTrack;
@@ -23,10 +23,10 @@ namespace Script.Main.Enemy.Attack{
 		}
 
 		public void Attack(){
+			ResetAttackColdDown();
 			var targetList = _enemy.Detect<Character.Character>();
 			var closestTarget = targetList.GetClosestTarget(transform.position);
-			closestTarget.ModifyHp(-10);
-			ResetAttackColdDown();
+			closestTarget?.ModifyHp(-10);
 		}
 
 		private void DetectAttackDirection(Vector3 direction){
