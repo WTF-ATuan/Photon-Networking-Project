@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Script.Main.Enemy.Attack{
-	public class SlimeAttack : MonoBehaviour, IAttack{
+	public class BulletAttack : MonoBehaviour, IAttack{
 		[SerializeField] private float attackColdDown = 0.5f;
 		[SerializeField] private float bulletSpeed = 5f;
 		[SerializeField] private GameObject attackObject;
