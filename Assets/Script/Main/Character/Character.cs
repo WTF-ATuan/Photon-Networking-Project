@@ -74,11 +74,19 @@ namespace Script.Main.Character{
 		}
 
 		public void CastSkill(Vector2 targetPosition, bool isBase){
-			var direction = (targetPosition - (Vector2)transform.position).normalized;
+			var direction = GetFacingDirection();
 			var canAttack = _attack.CanAttack();
 			if(canAttack){
 				_attack.Attack(direction, targetPosition);
 			}
+		}
+
+		private Vector3 GetFacingDirection(){
+			var leftRotation = new Vector3(0, 180, 0);
+			var characterRotation = transform.eulerAngles;
+			var isLeft = characterRotation == leftRotation;
+			var direction = isLeft ? Vector2.left : Vector2.right;
+			return direction;
 		}
 
 		[Button]
