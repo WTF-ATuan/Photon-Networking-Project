@@ -9,13 +9,22 @@ namespace Script.Main{
 
 
 		private void Start(){
-			Debug.Log($"123 = {123}");
 			var randomPosition = Random.insideUnitCircle * 3;
-			var entity = BoltNetwork.Instantiate(characterPre, randomPosition, Quaternion.identity);
-			var character = entity.GetComponent<Character.Character>();
-			var id = entity.NetworkId.ToString();
-			character.gameObject.AddComponent<InputEventDetector>().Init(id);
-			EventBus.Post(new CharacterCreated(id, character));
+			var isRunning = BoltNetwork.IsRunning;
+			if(isRunning){
+				var entity = BoltNetwork.Instantiate(characterPre, randomPosition, Quaternion.identity);
+				var character = entity.GetComponent<Character.Character>();
+				var id = entity.NetworkId.ToString();
+				character.gameObject.AddComponent<InputEventDetector>().Init(id);
+				EventBus.Post(new CharacterCreated(id, character));
+			}
+			else{
+				var entity = Instantiate(characterPre, randomPosition, Quaternion.identity);
+				var character = entity.GetComponent<Character.Character>();
+				var id = entity.GetInstanceID().ToString();
+				character.gameObject.AddComponent<InputEventDetector>().Init(id);
+				EventBus.Post(new CharacterCreated(id, character));
+			}
 		}
 	}
 }
