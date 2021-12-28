@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Script.Main.Enemy.Extension;
 using Script.Main.Utility;
 using Sirenix.OdinInspector;
@@ -49,14 +48,16 @@ namespace Script.Main.Enemy{
 			var enemyTypeCount = enemyType.Count;
 			var range = Random.Range(0, enemyTypeCount);
 			var spawnEnemy = enemyType[range];
+			if(_currentWave >= waveEnemyCount.Count) return;
 			var maxEnemyCount = waveEnemyCount[_currentWave];
 			var randomPosition = RandomSpawnPosition();
 			var enemy = Instantiate(spawnEnemy, randomPosition, Quaternion.identity);
 			var enemyID = enemy.GetInstanceID().ToString();
+			enemy.EnemyID = enemyID;
 			_repository.Save(enemyID, enemy);
 			if(_currentWaveEnemyCount >= maxEnemyCount){
 				_currentWave++;
-				_currentWaveEnemyCount = 0;
+				_currentWaveEnemyCount = 1;
 			}
 			else{
 				_currentWaveEnemyCount++;

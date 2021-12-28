@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace Script.Main.Enemy{
 	public class Enemy : MonoBehaviour, IModifyHp{
+		public string EnemyID{ get; set; }
 		[SerializeField] private float hp = 100;
 		[SerializeField] private Image hpBar;
 
@@ -30,8 +31,7 @@ namespace Script.Main.Enemy{
 			hpBarRect.sizeDelta = new Vector2(hp - amount, height);
 			if(hp <= 0){
 				gameObject.SetActive(false);
-				var id = gameObject.GetInstanceID().ToString();
-				var enemyDead = new EnemyDead(id);
+				var enemyDead = new EnemyDead(EnemyID);
 				EventBus.Post(enemyDead);
 			}
 		}

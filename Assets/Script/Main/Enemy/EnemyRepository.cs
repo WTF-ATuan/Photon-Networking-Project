@@ -20,5 +20,18 @@ namespace Script.Main.Enemy{
 			var Enemy = _enemyList[enemyID];
 			return Enemy;
 		}
+
+		public void Remove(string enemyID){
+			var containsKey = _enemyList.ContainsKey(enemyID);
+			if(!containsKey){
+				throw new Exception($"{enemyID} Not Found ");
+			}
+
+			_enemyList.Remove(enemyID);
+		}
+
+		public int Count(){
+			return _enemyList.Count;
+		}
 	}
 }
