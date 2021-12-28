@@ -1,4 +1,5 @@
 ﻿using Script.Main.Enemy.Detector;
+using Script.Main.Enemy.Event;
 using Script.Main.Enemy.Interface;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,9 @@ namespace Script.Main.Enemy{
 			hpBarRect.sizeDelta = new Vector2(hp - amount, height);
 			if(hp <= 0){
 				gameObject.SetActive(false);
+				var id = gameObject.GetInstanceID().ToString();
+				var enemyDead = new EnemyDead(id);
+				EventBus.Post(enemyDead);
 			}
 		}
 

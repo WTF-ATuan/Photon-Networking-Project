@@ -2,7 +2,7 @@
 
 namespace Script.Main.Enemy.Extension{
 	public class ColdDownTimer{
-		public float During{ get; private set; }
+		private float During{ get; set; }
 		private float TrackTime{ get; set; }
 
 		public ColdDownTimer(float during){
@@ -20,7 +20,7 @@ namespace Script.Main.Enemy.Extension{
 			return currentTime > TrackTime;
 		}
 
-		public void ResetColdTimer(){
+		public void ResetColdDown(){
 			var currentTime = Time.time;
 			TrackTime = currentTime + During;
 		}
