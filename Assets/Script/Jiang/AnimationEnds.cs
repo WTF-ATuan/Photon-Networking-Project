@@ -7,7 +7,7 @@ public class AnimationEnds : MonoBehaviour
     public GameObject VideoPlayer; // 影片撥放器
     public GameObject BattleUI; // 起始場景UI
 
-    float VideoDuration = 5; // 劇情影片時長
+    float VideoDuration = 16; // 劇情影片時長
 
     void Start()
     {
