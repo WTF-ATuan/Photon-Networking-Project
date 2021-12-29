@@ -1,0 +1,83 @@
+
+Boss.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Boss/Boss Lhand1
+  rotate: false
+  xy: 269, 29
+  size: 74, 98
+  orig: 74, 98
+  offset: 0, 0
+  index: -1
+Boss/Boss Lhand2
+  rotate: false
+  xy: 345, 2
+  size: 71, 54
+  orig: 71, 54
+  offset: 0, 0
+  index: -1
+Boss/Boss Lhand3
+  rotate: false
+  xy: 154, 129
+  size: 128, 125
+  orig: 128, 125
+  offset: 0, 0
+  index: -1
+Boss/Boss Lleg
+  rotate: false
+  xy: 377, 136
+  size: 86, 118
+  orig: 86, 118
+  offset: 0, 0
+  index: -1
+Boss/Boss Rhand1
+  rotate: false
+  xy: 194, 22
+  size: 73, 105
+  orig: 73, 105
+  offset: 0, 0
+  index: -1
+Boss/Boss Rhand2
+  rotate: false
+  xy: 410, 63
+  size: 57, 71
+  orig: 57, 71
+  offset: 0, 0
+  index: -1
+Boss/Boss Rhand3
+  rotate: false
+  xy: 345, 58
+  size: 63, 76
+  orig: 63, 76
+  offset: 0, 0
+  index: -1
+Boss/Boss Rleg
+  rotate: false
+  xy: 284, 136
+  size: 91, 118
+  orig: 91, 118
+  offset: 0, 0
+  index: -1
+Boss/Boss body
+  rotate: false
+  xy: 2, 93
+  size: 150, 161
+  orig: 150, 161
+  offset: 0, 0
+  index: -1
+Boss/Boss head
+  rotate: false
+  xy: 2, 2
+  size: 103, 89
+  orig: 103, 89
+  offset: 0, 0
+  index: -1
+Boss/Boss shirt
+  rotate: true
+  xy: 107, 2
+  size: 89, 85
+  orig: 89, 85
+  offset: 0, 0
+  index: -1

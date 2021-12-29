@@ -1,0 +1,41 @@
+
+Mudra.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Mudra/Mudra Larm
+  rotate: true
+  xy: 2, 2
+  size: 119, 223
+  orig: 119, 223
+  offset: 0, 0
+  index: -1
+Mudra/Mudra Rarm
+  rotate: false
+  xy: 490, 19
+  size: 84, 102
+  orig: 84, 102
+  offset: 0, 0
+  index: -1
+Mudra/Mudra body1
+  rotate: true
+  xy: 576, 24
+  size: 97, 88
+  orig: 97, 88
+  offset: 0, 0
+  index: -1
+Mudra/Mudra body2
+  rotate: false
+  xy: 393, 26
+  size: 95, 95
+  orig: 95, 95
+  offset: 0, 0
+  index: -1
+Mudra/Mudra head
+  rotate: true
+  xy: 227, 13
+  size: 108, 164
+  orig: 108, 164
+  offset: 0, 0
+  index: -1
