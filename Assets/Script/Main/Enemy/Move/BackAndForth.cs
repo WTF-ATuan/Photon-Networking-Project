@@ -23,7 +23,7 @@ namespace Script.Main.Enemy.Move{
 		}
 
 		private void DetectFacing(){
-			var targetList = _enemy.Detect<Collider2D>(detectLayer.value);
+			var targetList = _enemy.Detect<Collider2D>(LayerMask.NameToLayer("Ground"));
 			var isEmpty = targetList.Count < 1;
 			if(isEmpty) return;
 			_faceDirectionIsRight = !_faceDirectionIsRight;
