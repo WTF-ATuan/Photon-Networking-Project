@@ -4,7 +4,6 @@ using UnityEngine;
 namespace Script.Main.Enemy.Move{
 	public class BackAndForth : MonoBehaviour, IMove{
 		[SerializeField] private bool defaultFaceDirectionIsRight;
-		[SerializeField] private LayerMask detectLayer;
 
 
 		private Enemy _enemy;
