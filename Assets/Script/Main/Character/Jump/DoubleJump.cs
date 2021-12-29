@@ -27,7 +27,7 @@ namespace Script.Main.Character.Jump{
 		public void Jump(float directionX, float jumpForce){
 			var jumpDirection = new Vector2(directionX, 1f) * jumpForce;
 			_rigidbody2D.AddForce(jumpDirection, ForceMode2D.Impulse);
-			_character.PlayAnimation("Jump", 1);
+			_character.PlayAnimation("Jump", 2);
 			_jumpCount++;
 		}
 	}

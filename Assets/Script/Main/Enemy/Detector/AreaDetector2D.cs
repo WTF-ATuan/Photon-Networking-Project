@@ -28,12 +28,21 @@ namespace Script.Main.Enemy.Detector{
 			var offsetX = Vector2.Distance(detectLimitPointRight, detectLimitPointLeft);
 			// ReSharper disable once Unity.PreferNonAllocApi
 			var raycastHit2D = Physics2D.BoxCastAll(_centerPosition, new Vector2(offsetX, boxRaySizeOffsetY), 0,
-				Vector2.zero, layer);
+				Vector2.zero);
 			foreach(var raycastHit in raycastHit2D){
 				var hitCollider = raycastHit.collider;
 				var target = hitCollider.GetComponent<T>();
-				if(target != null)
-					targetList.SaveTarget(target);
+				var hitLayer = raycastHit.collider.gameObject.layer;
+				if(layer == default){
+					if(target != null){
+						targetList.SaveTarget(target);
+					}
+				}
+				else{
+					if(hitLayer == layer && target != null){
+						targetList.SaveTarget(target);
+					}
+				}
 			}
 
 			var selfComponent = GetComponent<T>();
