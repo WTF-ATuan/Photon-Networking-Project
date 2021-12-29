@@ -11,9 +11,11 @@ namespace Script.Main.Character.Jump{
 		[SerializeField] private int dizzyRange;
 		[SerializeField] [ReadOnly] private Vector2 limitPointLeft;
 		[SerializeField] [ReadOnly] private Vector2 limitPointRight;
+		private Character _character;
 
 
 		private void Start(){
+			_character = GetComponent<Character>();
 			_rigidbody2D = GetComponent<Rigidbody2D>();
 		}
 
@@ -33,6 +35,7 @@ namespace Script.Main.Character.Jump{
 			ProgressDizzyRange();
 			var jumpDirection = new Vector2(directionX, 1f) * jumpForce;
 			_rigidbody2D.AddForce(jumpDirection, ForceMode2D.Impulse);
+			_character.PlayAnimation("Jump", 1);
 			Dizzy();
 		}
 

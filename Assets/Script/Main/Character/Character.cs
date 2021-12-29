@@ -91,6 +91,15 @@ namespace Script.Main.Character{
 
 		[Button]
 		public void PlayAnimation(string animationName, float animationTimeScale){
+			if(animationName == "idle" || animationName == "Run"){
+				var currentAnimationName = _animation.AnimationName;
+				if(currentAnimationName == "idle" || currentAnimationName == "Run"){
+					_animation.AnimationName = animationName;
+				}
+				var entry = _animation.state.GetCurrent(0);
+				if(!entry.IsComplete) return;
+			}
+
 			_animation.AnimationName = animationName;
 			_animation.timeScale = animationTimeScale;
 		}
