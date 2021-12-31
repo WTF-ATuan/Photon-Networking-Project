@@ -14,8 +14,8 @@ namespace Script.Jiang{
 		[SerializeField] [LabelText("相機最大移動距離")] [PropertyOrder(0)]
 		private float maxMoveLimitX = 10f;
 
-		private float leftLimitX;
-		private float rightLimitX;
+		private float _leftLimitX;
+		private float _rightLimitX;
 
 
 		private void Start(){
@@ -25,8 +25,8 @@ namespace Script.Jiang{
 
 		private void ProcessPatrolPositions(){
 			var spawnPositionX = transform.position.x;
-			leftLimitX = spawnPositionX - maxMoveLimitX;
-			rightLimitX = spawnPositionX + maxMoveLimitX;
+			_leftLimitX = spawnPositionX - maxMoveLimitX;
+			_rightLimitX = spawnPositionX + maxMoveLimitX;
 		}
 
 		private void OnCharacterCreated(CharacterCreated obj){
@@ -38,7 +38,7 @@ namespace Script.Jiang{
 		private void FixedUpdate(){
 			var targetPosition = player.position + _offset + Vector3.up;
 			var targetPositionX = targetPosition.x;
-			if(targetPositionX > rightLimitX || targetPositionX < leftLimitX) return;
+			if(targetPositionX > _rightLimitX || targetPositionX < _leftLimitX) return;
 			transform.position =
 					Vector3.Lerp(transform.position, targetPosition, smoothing * Time.deltaTime); //以一定的速度，從A平滑移動到B
 		}
@@ -57,8 +57,8 @@ namespace Script.Jiang{
 			if(Application.isPlaying == false)
 				ProcessPatrolPositions();
 			var position = transform.position;
-			DrawLine(leftLimitX, position);
-			DrawLine(rightLimitX, position);
+			DrawLine(_leftLimitX, position);
+			DrawLine(_rightLimitX, position);
 		}
 	}
 }
