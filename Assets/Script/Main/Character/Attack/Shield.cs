@@ -1,5 +1,6 @@
 ﻿using Script.Main.Character.Interface;
 using Script.Main.Enemy;
+using Script.Main.Enemy.Extension;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -7,15 +8,21 @@ using UnityEngine;
 namespace Script.Main.Character.Attack{
 	public class Shield : MonoBehaviour, IAttack{
 		[SerializeField] private GameObject shieldPre;
-		private Character _character;
 		[SerializeField] private float throwPower;
+		[SerializeField] private float coldDown = 1f;
+		
+
+		private Character _character;
+		private ColdDownTimer _timer;
 
 		private void Start(){
 			_character = GetComponent<Character>();
+			_timer = new ColdDownTimer(coldDown);
 		}
 
 		public bool CanAttack(){
-			return true;
+			var canInvoke = _timer.CanInvoke();
+			return canInvoke;
 		}
 
 		public void Attack(Vector2 attackDirection, Vector2 targetPosition){
@@ -28,6 +35,7 @@ namespace Script.Main.Character.Attack{
 					.AddTo(entity);
 			var entityRig = entity.GetComponent<Rigidbody2D>();
 			entityRig.AddForce(attackDirection * throwPower, ForceMode2D.Impulse);
+			_timer.Reset();
 			Destroy(entity, 5f);
 		}
 
