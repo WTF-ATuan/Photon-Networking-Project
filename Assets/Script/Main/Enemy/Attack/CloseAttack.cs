@@ -5,6 +5,7 @@ using UnityEngine.Events;
 namespace Script.Main.Enemy.Attack{
 	public class CloseAttack : MonoBehaviour, IAttack{
 		[SerializeField] private float attackColdDown = 2f;
+		[SerializeField] private int attackDamage = 10;
 		[SerializeField] private UnityEvent onAttack;
 
 
@@ -29,7 +30,7 @@ namespace Script.Main.Enemy.Attack{
 			onAttack?.Invoke();
 			var targetList = _enemy.Detect<Character.Character>();
 			var closestTarget = targetList.GetClosestTarget(transform.position);
-			closestTarget?.ModifyHp(-10);
+			closestTarget?.ModifyHp(-attackDamage);
 		}
 
 		private void DetectAttackDirection(Vector3 direction){

@@ -2,9 +2,10 @@
 using UnityEngine;
 
 namespace Script.Main.Enemy.Attack{
-	public class BulletAttack : MonoBehaviour, IAttack{
+	public class LongRangeAttack : MonoBehaviour, IAttack{
 		[SerializeField] private float attackColdDown = 0.5f;
-		[SerializeField] private float bulletSpeed = 5f;
+		[SerializeField] private float attackObjectMoveSpeed = 5f;
+		[SerializeField] private int attackDamage;
 		[SerializeField] private GameObject attackObject;
 
 
@@ -29,7 +30,7 @@ namespace Script.Main.Enemy.Attack{
 		public void Attack(){
 			var bulletObject = Instantiate(attackObject, transform.position + Vector3.up, Quaternion.identity);
 			var bulletRigidbody = bulletObject.GetComponent<Rigidbody2D>();
-			bulletRigidbody.AddForce(_attackDirection * bulletSpeed, ForceMode2D.Impulse);
+			bulletRigidbody.AddForce(_attackDirection * attackObjectMoveSpeed, ForceMode2D.Impulse);
 			ResetAttackColdDown();
 		}
 
