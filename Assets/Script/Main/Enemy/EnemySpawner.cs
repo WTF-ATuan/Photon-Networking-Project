@@ -63,7 +63,7 @@ namespace Script.Main.Enemy{
 				_currentWaveEnemyCount++;
 			}
 
-			_timer.ResetColdDown();
+			_timer.Reset();
 		}
 
 		private Vector2 RandomSpawnPosition(){

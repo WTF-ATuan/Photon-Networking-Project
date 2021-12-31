@@ -33,7 +33,7 @@ namespace Script.Main.Enemy.Move{
 			if(isEmpty) return;
 			_faceDirectionIsRight = !_faceDirectionIsRight;
 			_enemy.SetFacingDirection(_faceDirectionIsRight);
-			_timer.ResetColdDown();
+			_timer.Reset();
 		}
 	}
 }

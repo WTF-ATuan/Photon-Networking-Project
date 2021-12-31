@@ -1,6 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using Photon.Bolt;
+using Script.Main.Enemy.Extension;
 using Script.Main.Enemy.Interface;
 using UniRx;
 using UniRx.Triggers;
@@ -10,18 +9,21 @@ using IAttack = Script.Main.Character.Interface.IAttack;
 namespace Script.Main.Character.Attack{
 	public class SpeedKnife : MonoBehaviour, IAttack{
 		[SerializeField] private GameObject knifePre;
-
+		[SerializeField] private float coldDown = 0.5f;
 		[SerializeField] private float throwPower;
 
 
+		private ColdDownTimer _timer;
 		private Character _character;
 
 		private void Start(){
 			_character = GetComponent<Character>();
+			_timer = new ColdDownTimer(coldDown);
 		}
 
 		public bool CanAttack(){
-			return true;
+			var canInvoke = _timer.CanInvoke();
+			return canInvoke;
 		}
 
 		private Coroutine _throwingTimer;
@@ -33,6 +35,7 @@ namespace Script.Main.Character.Attack{
 			}
 
 			_throwingTimer = StartCoroutine(SecondThrowTimer(attackDirection));
+			_timer.Reset();
 		}
 
 		private IEnumerator SecondThrowTimer(Vector2 direction){
