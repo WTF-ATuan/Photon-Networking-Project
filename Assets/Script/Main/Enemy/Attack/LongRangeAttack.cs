@@ -1,12 +1,15 @@
 ﻿using Script.Main.Enemy.Interface;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Script.Main.Enemy.Attack{
 	public class LongRangeAttack : MonoBehaviour, IAttack{
 		[SerializeField] private float attackColdDown = 0.5f;
 		[SerializeField] private float attackObjectMoveSpeed = 5f;
 		[SerializeField] private int attackDamage;
-		[SerializeField] private GameObject attackObject;
+		[SerializeField] private GameObject preAttackObject;
 
 
 		private Vector2 _attackDirection = Vector2.zero;
@@ -28,10 +31,19 @@ namespace Script.Main.Enemy.Attack{
 		}
 
 		public void Attack(){
-			var bulletObject = Instantiate(attackObject, transform.position + Vector3.up, Quaternion.identity);
+			var bulletObject = Instantiate(preAttackObject, transform.position + Vector3.up, Quaternion.identity);
+			bulletObject.OnTriggerEnter2DAsObservable().Subscribe(x => OnAttackObjectTriggerEnter(bulletObject, x))
+					.AddTo(bulletObject);
 			var bulletRigidbody = bulletObject.GetComponent<Rigidbody2D>();
 			bulletRigidbody.AddForce(_attackDirection * attackObjectMoveSpeed, ForceMode2D.Impulse);
 			ResetAttackColdDown();
+			Destroy(bulletObject, 5f);
+		}
+
+		private void OnAttackObjectTriggerEnter(GameObject attackObject, Collider2D other){
+			var modifyHp = other.GetComponent<IModifyHp>();
+			modifyHp?.ModifyHp(-attackDamage);
+			Destroy(attackObject);
 		}
 
 		private void DetectAttackDirection(Vector3 direction){
