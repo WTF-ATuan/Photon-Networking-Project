@@ -98,6 +98,7 @@ namespace Script.Main.Enemy{
 		}
 
 		public void Move(bool enable){
+			PlayAnimation("idle", 1);
 			_move?.Move(enable);
 		}
 	}
