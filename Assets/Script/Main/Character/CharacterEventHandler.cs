@@ -52,9 +52,8 @@ namespace Script.Main.Character{
 			var userId = obj.UserId;
 			var character = CharacterRepository.Query(userId);
 			var horizontal = obj.Horizontal;
-			var vertical = obj.Vertical;
 			var isJump = obj.IsJump;
-			character.Move(horizontal, vertical);
+			character.Move(horizontal);
 			character.SetFaceDirection(horizontal);
 			if(isJump){
 				character.Jump(horizontal);
