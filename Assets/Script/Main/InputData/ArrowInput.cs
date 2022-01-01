@@ -20,7 +20,7 @@ namespace Script.Main.InputData{
 
 		private void DetectMoveInput(){
 			var horizontalValue = HorizontalValue();
-			var isJump = Input.GetKeyDown(KeyCode.W);
+			var isJump = Input.GetKeyDown(KeyCode.UpArrow);
 			EventBus.Post(new MoveInputDetected(OwnerID, horizontalValue, isJump));
 		}
 
