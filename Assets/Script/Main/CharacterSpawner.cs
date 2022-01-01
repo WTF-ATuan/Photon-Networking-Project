@@ -16,7 +16,7 @@ namespace Script.Main{
 				CreateCharacterOnServer(randomPosition);
 			}
 			else{
-				CreateCharacterOnLocal(randomPosition);
+				CreateCharacterOnLocal(0, randomPosition);
 			}
 		}
 
@@ -28,11 +28,17 @@ namespace Script.Main{
 			EventBus.Post(new CharacterCreated(id, character));
 		}
 		[Button]
-		public void CreateCharacterOnLocal(Vector3 spawnPosition){
+		public void CreateCharacterOnLocal(int playerIndex, Vector3 spawnPosition){
 			var entity = Instantiate(characterPre, spawnPosition, Quaternion.identity);
 			var character = entity.GetComponent<Character.Character>();
 			var id = entity.GetInstanceID().ToString();
-			character.gameObject.AddComponent<InputEventDetector>().Init(id);
+			if(playerIndex == 0){
+				character.gameObject.AddComponent<WasdInput>().Init(id);
+			}
+			else{
+				character.gameObject.AddComponent<ArrowInput>().Init(id);
+			}
+
 			EventBus.Post(new CharacterCreated(id, character));
 		}
 	}
