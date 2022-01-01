@@ -16,7 +16,6 @@ namespace Script.Main.InputData{
 
 			DetectMoveInput();
 			DetectBaseSkillInput();
-			DetectStrongSkillInput();
 		}
 
 		private void DetectMoveInput(){
@@ -31,13 +30,7 @@ namespace Script.Main.InputData{
 				EventBus.Post(new BaseSkillDetected(OwnerID, MouseWorldDirection()));
 			}
 		}
-
-		private void DetectStrongSkillInput(){
-			if(Input.GetMouseButtonDown(1)){
-				EventBus.Post(new StrongSkillDetected(OwnerID, MouseWorldDirection()));
-			}
-		}
-
+		
 		private Vector3 MouseWorldDirection(){
 			if(Camera.main == null) return Vector3.zero;
 			var mousePos = Input.mousePosition;

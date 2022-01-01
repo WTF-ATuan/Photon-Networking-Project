@@ -14,7 +14,6 @@ namespace Script.Main.Character{
 			CharacterRepository = SingleRepository.Query<CharacterRepository>();
 			EventBus.Subscribe<MoveInputDetected>(OnMoveInputDetected);
 			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
-			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
 			EventBus.Subscribe<CharacterCreated>(OnCharacterCreated);
 			EventBus.Subscribe<EntityAttached>(OnEntityAttached);
 			EventBus.Subscribe<CharacterAnimated>(OnCharacterAnimated);
@@ -61,14 +60,7 @@ namespace Script.Main.Character{
 				character.Jump(horizontal);
 			}
 		}
-
-		private void OnStrongSkillDetected(StrongSkillDetected obj){
-			var userId = obj.UserId;
-			var character = CharacterRepository.Query(userId);
-			var direction = obj.MouseWorldPosition;
-			character.CastSkill(direction, false);
-		}
-
+		
 		private void OnBaseSkillDetected(BaseSkillDetected obj){
 			var userId = obj.UserId;
 			var character = CharacterRepository.Query(userId);
