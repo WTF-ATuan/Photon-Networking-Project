@@ -35,11 +35,11 @@ namespace Script.Main.Character{
 			_currentHealth = defaultHealth;
 		}
 
-		public void Move(float horizontal, float vertical){
+		public void Move(float horizontal){
 			var speed = _characterAbility.QueryAbility(CharacterAbilityType.MoveSpeed);
-			var acceleration = new Vector2(horizontal, vertical) * speed;
+			var acceleration = horizontal * speed;
 			var currentVelocity = _rigidbody2D.velocity;
-			var nextVelocity = new Vector2(acceleration.x, currentVelocity.y);
+			var nextVelocity = new Vector2(acceleration, currentVelocity.y);
 			_rigidbody2D.velocity = nextVelocity;
 			if(nextVelocity == Vector2.zero){
 				PlayAnimation("idle", 1);
@@ -73,11 +73,11 @@ namespace Script.Main.Character{
 			_characterAbility.ModifyAbility(ability, amount);
 		}
 
-		public void CastSkill(Vector2 targetPosition, bool isBase){
+		public void CastSkill(bool isBase){
 			var direction = GetFacingDirection();
 			var canAttack = _attack.CanAttack();
 			if(canAttack){
-				_attack.Attack(direction, targetPosition);
+				_attack.Attack(direction);
 			}
 		}
 
