@@ -25,7 +25,7 @@ namespace Script.Main.Character.Attack{
 			return canInvoke;
 		}
 
-		public void Attack(Vector2 attackDirection, Vector2 targetPosition){
+		public void Attack(Vector2 attackDirection){
 			_character.PlayAnimation("Attack", 1);
 			var entity = Instantiate(shieldPre, transform.position + new Vector3(transform.right.x, 1, 0),
 				Quaternion.identity);

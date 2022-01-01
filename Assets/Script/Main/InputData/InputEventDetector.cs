@@ -27,16 +27,8 @@ namespace Script.Main.InputData{
 
 		private void DetectBaseSkillInput(){
 			if(Input.GetMouseButtonDown(0)){
-				EventBus.Post(new BaseSkillDetected(OwnerID, MouseWorldDirection()));
+				EventBus.Post(new BaseSkillDetected(OwnerID));
 			}
-		}
-		
-		private Vector3 MouseWorldDirection(){
-			if(Camera.main == null) return Vector3.zero;
-			var mousePos = Input.mousePosition;
-			mousePos.z = -Camera.main.transform.position.z;
-			var worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
-			return worldPosition;
 		}
 	}
 }

@@ -28,7 +28,7 @@ namespace Script.Main.Character.Attack{
 
 		private Coroutine _throwingTimer;
 
-		public void Attack(Vector2 attackDirection, Vector2 targetPosition){
+		public void Attack(Vector2 attackDirection){
 			_character.PlayAnimation("Attack", 1);
 			if(_throwingTimer != null){
 				StopCoroutine(_throwingTimer);

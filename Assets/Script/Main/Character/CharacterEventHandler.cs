@@ -64,8 +64,7 @@ namespace Script.Main.Character{
 		private void OnBaseSkillDetected(BaseSkillDetected obj){
 			var userId = obj.UserId;
 			var character = CharacterRepository.Query(userId);
-			var direction = obj.MouseWorldPosition;
-			character.CastSkill(direction, true);
+			character.CastSkill(true);
 		}
 	}
 }

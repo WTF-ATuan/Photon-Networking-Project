@@ -73,11 +73,11 @@ namespace Script.Main.Character{
 			_characterAbility.ModifyAbility(ability, amount);
 		}
 
-		public void CastSkill(Vector2 targetPosition, bool isBase){
+		public void CastSkill(bool isBase){
 			var direction = GetFacingDirection();
 			var canAttack = _attack.CanAttack();
 			if(canAttack){
-				_attack.Attack(direction, targetPosition);
+				_attack.Attack(direction);
 			}
 		}
 
