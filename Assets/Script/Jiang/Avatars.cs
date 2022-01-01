@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 [CreateAssetMenu(menuName = "Avatar", fileName = "NewAvatar")]
 public class Avatars : ScriptableObject{
-	public GameObject preBattleCharacter;
+	[FormerlySerializedAs("preBattleCharacter")] public GameObject characterPrefab;
 	public Sprite AvatarImage;
 	public Sprite AvatarIntroduce;
 	public Sprite RollSkill;
