@@ -1,6 +1,7 @@
 ﻿using Script.Main.Enemy.Detector;
 using Script.Main.Enemy.Event;
 using Script.Main.Enemy.Interface;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,12 +16,15 @@ namespace Script.Main.Enemy{
 		private IMove _move;
 		private IAttack _attack;
 
+		private SkeletonAnimation _animation;
+
 
 		private void Start(){
 			_detector = GetComponent<IDetector>();
 			_state = GetComponent<IState>();
 			_move = GetComponent<IMove>();
 			_attack = GetComponent<IAttack>();
+			_animation = GetComponent<SkeletonAnimation>();
 		}
 
 
@@ -72,11 +76,29 @@ namespace Script.Main.Enemy{
 		public void Attack(Transform targetTransform){
 			if(_attack == null) return;
 			var isReadyAttack = _attack.IsReadyAttack(targetTransform);
-			if(isReadyAttack)
+			if(isReadyAttack){
 				_attack.Attack();
+				PlayAnimation("Attack", 1);
+			}
+		}
+
+		public void PlayAnimation(string animationName, float animationTimeScale){
+			if(animationName == "idle" || animationName == "Run"){
+				var currentAnimationName = _animation.AnimationName;
+				if(currentAnimationName == "idle" || currentAnimationName == "Run"){
+					_animation.AnimationName = animationName;
+				}
+
+				var entry = _animation.state.GetCurrent(0);
+				if(!entry.IsComplete) return;
+			}
+
+			_animation.AnimationName = animationName;
+			_animation.timeScale = animationTimeScale;
 		}
 
 		public void Move(bool enable){
+			PlayAnimation("idle", 1);
 			_move?.Move(enable);
 		}
 	}

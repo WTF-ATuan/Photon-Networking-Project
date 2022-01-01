@@ -20,7 +20,7 @@ namespace Script.Main.Enemy.Extension{
 			return currentTime > TrackTime;
 		}
 
-		public void ResetColdDown(){
+		public void Reset(){
 			var currentTime = Time.time;
 			TrackTime = currentTime + During;
 		}
