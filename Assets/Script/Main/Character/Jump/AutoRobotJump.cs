@@ -11,17 +11,19 @@ namespace Script.Main.Character.Jump{
 		private Rigidbody2D _rigidbody2D;
 
 		[SerializeField] private float coldDown = 12f;
-		
+
 		[Header("ViewObject")] [SerializeField]
 		private GameObject robotViewPrefab;
 
 		private GameObject _robotObject;
+		private Character _character;
 
 		private Enemy.Enemy _robot;
 
 		private ColdDownTimer _timer;
 
 		private void Start(){
+			_character = GetComponent<Character>();
 			_rigidbody2D = GetComponent<Rigidbody2D>();
 			_robotObject = Instantiate(robotViewPrefab, transform.position, Quaternion.identity);
 			_robot = _robotObject.GetComponent<Enemy.Enemy>();
@@ -43,6 +45,8 @@ namespace Script.Main.Character.Jump{
 			if(_timer.CanInvoke()){
 				ActiveRobot();
 			}
+
+			_character.PlayAnimation("jump", 1);
 			var jumpDirection = new Vector2(directionX, 1f) * jumpForce;
 			_rigidbody2D.AddForce(jumpDirection, ForceMode2D.Impulse);
 		}

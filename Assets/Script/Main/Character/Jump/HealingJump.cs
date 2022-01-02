@@ -15,10 +15,12 @@ namespace Script.Main.Character.Jump{
 		private GameObject healObjectViewPrefab;
 
 		private GameObject _healObject;
+		private Character _character;
 
 		private readonly List<Character> _areaCharacters = new List<Character>();
 
 		private void Start(){
+			_character = GetComponent<Character>();
 			_rigidbody2D = GetComponent<Rigidbody2D>();
 			_healObject = Instantiate(healObjectViewPrefab, transform.position, Quaternion.identity);
 			_healObject.OnCollisionEnter2DAsObservable()
@@ -51,6 +53,7 @@ namespace Script.Main.Character.Jump{
 		public void Jump(float directionX, float jumpForce){
 			var jumpDirection = new Vector2(directionX, 1f) * jumpForce;
 			_rigidbody2D.AddForce(jumpDirection, ForceMode2D.Impulse);
+			_character.PlayAnimation("Jump", 1);
 			ActiveHealArea();
 		}
 
