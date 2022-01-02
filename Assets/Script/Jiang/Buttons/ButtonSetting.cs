@@ -12,7 +12,7 @@ public class ButtonSetting : MonoBehaviour //以按鈕名稱判斷按了什麼�
     public void ButtonIsClick()
     {
         if (GetButtonName == "Button_GameStart") {
-            SceneManager.LoadScene("CreateOrJoin");
+            SceneManager.LoadScene("ChooseCharacter");
         }
 
         if (GetButtonName == "Button_QuitGame") {
@@ -23,9 +23,9 @@ public class ButtonSetting : MonoBehaviour //以按鈕名稱判斷按了什麼�
             SceneManager.LoadScene("StartScenes");
         }
 
-        if (GetButtonName == "Button_BackToCreateOrJoin") {
-            SceneManager.LoadScene("CreateOrJoin");
-        }
+        //if (GetButtonName == "Button_BackToCreateOrJoin") {
+        //    SceneManager.LoadScene("CreateOrJoin");
+        //}
 
         if (GetButtonName == "Button_VolumeSetting") {
             VolumeControl.SetActive(true);
@@ -35,23 +35,23 @@ public class ButtonSetting : MonoBehaviour //以按鈕名稱判斷按了什麼�
             VolumeControl.SetActive(false);
         }
 
-        if (GetButtonName == "Button_Join")
-        {
-            SceneManager.LoadScene("ChooseCharacter");
-        }
+        //if (GetButtonName == "Button_Join")
+        //{
+        //    SceneManager.LoadScene("ChooseCharacter");
+        //}
 
-        if (GetButtonName == "Button_Create")
-        {
-            SceneManager.LoadScene("ChooseCharacter");
-        }
+        //if (GetButtonName == "Button_Create")
+        //{
+        //    SceneManager.LoadScene("ChooseCharacter");
+        //}
 
-        if (GetButtonName == "Button_CreateRoom") {
-            SceneManager.LoadScene("CreateSetting");
-        }
+        //if (GetButtonName == "Button_CreateRoom") {
+        //    SceneManager.LoadScene("CreateSetting");
+        //}
 
-        if (GetButtonName == "Button_JoinRoom") {
-            SceneManager.LoadScene("JoinSetting");
-        }
+        //if (GetButtonName == "Button_JoinRoom") {
+        //    SceneManager.LoadScene("JoinSetting");
+        //}
 
         if (GetButtonName == "Button_CloseMenu") {
             Destroy(GameObject.Find("Menu"));
