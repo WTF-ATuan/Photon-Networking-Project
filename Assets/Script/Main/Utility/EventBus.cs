@@ -9,7 +9,7 @@ namespace Script.Main{
 		private static readonly Dictionary<Type, List<Action<object>>> NonCallbackActions =
 				new Dictionary<Type, List<Action<object>>>();
 
-		private static readonly Dictionary<Type, List<object>> DynamicPostBuffer =
+		private static readonly Dictionary<Type, List<object>> PostBuffer =
 				new Dictionary<Type, List<object>>();
 
 		private static readonly Dictionary<Type, List<Func<object, object>>> CallbackActions =
@@ -28,15 +28,15 @@ namespace Script.Main{
 			}
 		}
 
-		public static void InvokePostBuffer<T>(Action<T> callback){
+		public static void ExecutePostBuffer<T>(Action<T> callback){
 			var type = typeof(T);
-			var containsKey = DynamicPostBuffer.ContainsKey(type);
+			var containsKey = PostBuffer.ContainsKey(type);
 			if(!containsKey) return;
-			var bufferObjects = DynamicPostBuffer[type];
-			var invokeObject = bufferObjects.First();
-			callback.Invoke((T)invokeObject);
-			bufferObjects.Remove(invokeObject);
-			DynamicPostBuffer[type] = bufferObjects;
+			var bufferDataList = PostBuffer[type];
+			foreach(var data in bufferDataList.Cast<T>()){
+				callback.Invoke(data);
+			}
+			PostBuffer[type].Clear();
 		}
 
 		public static void Subscribe<T, TResult>(Func<T, TResult> callback){
@@ -73,14 +73,14 @@ namespace Script.Main{
 				actions.ForEach(o => o.Invoke(obj));
 			}
 			else{
-				var bufferContain = DynamicPostBuffer.ContainsKey(type);
+				var bufferContain = PostBuffer.ContainsKey(type);
 				if(bufferContain){
-					var postObject = DynamicPostBuffer[type];
+					var postObject = PostBuffer[type];
 					postObject.Add(obj);
 				}
 				else{
 					var postList = new List<object>{ obj };
-					DynamicPostBuffer.Add(type, postList);
+					PostBuffer.Add(type, postList);
 				}
 			}
 		}
