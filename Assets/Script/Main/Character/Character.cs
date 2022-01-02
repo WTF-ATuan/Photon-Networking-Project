@@ -96,6 +96,7 @@ namespace Script.Main.Character{
 				if(currentAnimationName == "idle" || currentAnimationName == "Run"){
 					_animation.AnimationName = animationName;
 				}
+
 				var entry = _animation.state.GetCurrent(0);
 				if(!entry.IsComplete) return;
 			}
@@ -119,6 +120,15 @@ namespace Script.Main.Character{
 		//TODO
 		public void Die(){
 			gameObject.SetActive(false);
+			EventBus.Post(new CharacterDead(characterID));
+		}
+	}
+
+	public class CharacterDead{
+		public string CharacterID{ get; }
+
+		public CharacterDead(string characterID){
+			CharacterID = characterID;
 		}
 	}
 }

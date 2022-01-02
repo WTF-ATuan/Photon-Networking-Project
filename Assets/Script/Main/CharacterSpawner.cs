@@ -6,30 +6,33 @@ using UnityEngine;
 
 namespace Script.Main{
 	public class CharacterSpawner : MonoBehaviour{
-		[SerializeField] private GameObject characterPre;
-
-
 		private void Start(){
+			EventBus.ExecutePostBuffer<CharacterChosen>(OnCharacterChosen);
+		}
+
+		private void OnCharacterChosen(CharacterChosen obj){
+			var characterPrefab = obj.CharacterPrefab;
 			var randomPosition = Random.insideUnitCircle * 3;
 			var isRunning = BoltNetwork.IsRunning;
 			if(isRunning){
-				CreateCharacterOnServer(randomPosition);
+				CreateCharacterOnServer(characterPrefab, randomPosition);
 			}
 			else{
-				CreateCharacterOnLocal(0, randomPosition);
+				CreateCharacterOnLocal(characterPrefab, 0, randomPosition);
 			}
 		}
 
-		public void CreateCharacterOnServer(Vector3 spawnPosition){
-			var entity = BoltNetwork.Instantiate(characterPre, spawnPosition, Quaternion.identity);
+		public void CreateCharacterOnServer(GameObject characterPrefab, Vector3 spawnPosition){
+			var entity = BoltNetwork.Instantiate(characterPrefab, spawnPosition, Quaternion.identity);
 			var character = entity.GetComponent<Character.Character>();
 			var id = entity.NetworkId.ToString();
 			character.gameObject.AddComponent<InputEventDetector>().Init(id);
 			EventBus.Post(new CharacterCreated(id, character));
 		}
+
 		[Button]
-		public void CreateCharacterOnLocal(int playerIndex, Vector3 spawnPosition){
-			var entity = Instantiate(characterPre, spawnPosition, Quaternion.identity);
+		public void CreateCharacterOnLocal(GameObject characterPrefab, int playerIndex, Vector3 spawnPosition){
+			var entity = Instantiate(characterPrefab, spawnPosition, Quaternion.identity);
 			var character = entity.GetComponent<Character.Character>();
 			var id = entity.GetInstanceID().ToString();
 			if(playerIndex == 0){
