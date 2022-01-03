@@ -3,11 +3,12 @@ using Script.Main.Enemy.Extension;
 using Script.Main.Utility;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Script.Main.Enemy{
 	public class EnemySpawner : MonoBehaviour{
-		[SerializeField] [BoxGroup("Basic")] private List<Enemy> enemyType;
+		[SerializeField] [BoxGroup("Basic")] private List<Enemy> randomEnemyType;
 		[SerializeField] [BoxGroup("Basic")] private List<int> waveEnemyCount = new List<int>();
 		[SerializeField] [BoxGroup("Basic")] private float spawnDuring;
 
@@ -45,9 +46,9 @@ namespace Script.Main.Enemy{
 		}
 
 		public void Spawn(){
-			var enemyTypeCount = enemyType.Count;
+			var enemyTypeCount = randomEnemyType.Count;
 			var range = Random.Range(0, enemyTypeCount);
-			var spawnEnemy = enemyType[range];
+			var spawnEnemy = randomEnemyType[range];
 			if(_currentWave >= waveEnemyCount.Count) return;
 			var maxEnemyCount = waveEnemyCount[_currentWave];
 			var randomPosition = RandomSpawnPosition();
