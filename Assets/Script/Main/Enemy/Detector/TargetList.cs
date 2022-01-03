@@ -35,5 +35,9 @@ namespace Script.Main.Enemy.Detector{
 		public T GetFirstTarget(){
 			return _targetList.First();
 		}
+
+		public List<T> GetAllTarget(){
+			return _targetList;
+		}
 	}
 }
