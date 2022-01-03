@@ -6,25 +6,26 @@ public class ChooseCharacter : MonoBehaviour{
 	public int ForCount;
 
 	public void RightButton(){
-		ForCount = AvatarsDisplay.NumOfAvatarsArray;
-		ForCount++;
+        ForCount = transform.parent.GetComponent<AvatarsDisplay>().NumOfAvatarsArray;
+
+        ForCount++;
 
 		if(ForCount > 3){
 			ForCount = 0;
 		}
 
-		AvatarsDisplay.NumOfAvatarsArray = ForCount;
+		transform.parent.GetComponent<AvatarsDisplay>().NumOfAvatarsArray = ForCount;
 	}
 
 	public void LeftButton(){
-		ForCount = AvatarsDisplay.NumOfAvatarsArray;
-		ForCount--;
+        ForCount = transform.parent.GetComponent<AvatarsDisplay>().NumOfAvatarsArray;
+
+        ForCount--;
 
 		if(ForCount < 0){
 			ForCount = 3;
 		}
 
-		AvatarsDisplay.NumOfAvatarsArray = ForCount;
-	}
-	
+        transform.parent.GetComponent<AvatarsDisplay>().NumOfAvatarsArray = ForCount;
+    }
 }
