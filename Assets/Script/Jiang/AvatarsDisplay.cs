@@ -7,11 +7,13 @@ using UnityEngine.UI;
 
 public class AvatarsDisplay : MonoBehaviour{
 	public Image AvatarImage;
-	public Image AvatarIntroduce;
+	//public Image AvatarIntroduce;
 	public Button RollSkill;
 	public Button BaseSkill;
-	public Button StrongSkill;
-	public Image SkillIntroduce;
+	//public Button StrongSkill;
+
+        //Todo 換方式呈現
+	//public Image SkillIntroduce;
 
 	SpriteState Roll = new SpriteState();
 	SpriteState Base = new SpriteState();
@@ -34,32 +36,34 @@ public class AvatarsDisplay : MonoBehaviour{
 
 		//AvatarImage.sprite = avatar.AvatarImage;
 		gameObject.GetComponent<Image>().sprite = avatar.AvatarImage;
-		AvatarIntroduce.sprite = avatar.AvatarIntroduce;
+		//AvatarIntroduce.sprite = avatar.AvatarIntroduce;
 		RollSkill.image.sprite = avatar.RollSkill;
 		BaseSkill.image.sprite = avatar.BaseSkill;
-		StrongSkill.image.sprite = avatar.StrongSkill;
+		//StrongSkill.image.sprite = avatar.StrongSkill;
 
-		Roll.highlightedSprite = avatar.RollSkillDisabled;
+        
+ 		Roll.highlightedSprite = avatar.RollSkillDisabled;
 		Base.highlightedSprite = avatar.BaseSkillDisabled;
-		Strong.highlightedSprite = avatar.StrongSkillDisabled;
+		//Strong.highlightedSprite = avatar.StrongSkillDisabled;
 
 		Roll.disabledSprite = avatar.RollSkillDisabled;
 		Base.disabledSprite = avatar.BaseSkillDisabled;
-		Strong.disabledSprite = avatar.StrongSkillDisabled;
+		//Strong.disabledSprite = avatar.StrongSkillDisabled;
 
 		RollSkill.spriteState = Roll;
 		BaseSkill.spriteState = Base;
-		StrongSkill.spriteState = Strong;
+		//StrongSkill.spriteState = Strong;
 
-		if(ChickWhichSkillntroduce == "RollSkill"){
-			SkillIntroduce.sprite = avatar.IntroductionOfRollSkill;
-		}
-		else if(ChickWhichSkillntroduce == "BaseSkill"){
-			SkillIntroduce.sprite = avatar.IntroductionOfBaseSkill;
-		}
-		else if(ChickWhichSkillntroduce == "StrongSkill"){
-			SkillIntroduce.sprite = avatar.IntroductionOfStrongSkill;
-		}
+        //Todo 要換方式呈現
+        // if (ChickWhichSkillntroduce == "RollSkill"){
+		//	SkillIntroduce.sprite = avatar.IntroductionOfRollSkill;
+		//}
+		//else if(ChickWhichSkillntroduce == "BaseSkill"){
+		//	SkillIntroduce.sprite = avatar.IntroductionOfBaseSkill;
+		//}
+		//else if(ChickWhichSkillntroduce == "StrongSkill"){
+		//	SkillIntroduce.sprite = avatar.IntroductionOfStrongSkill;
+		//}
 	}
 
 	public void ChooseCharacter(int indexOfPlayer){
