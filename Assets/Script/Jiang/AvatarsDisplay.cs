@@ -21,7 +21,8 @@ public class AvatarsDisplay : MonoBehaviour{
 	public static string ChickWhichSkillntroduce;
 
 	public Avatars[] avatars = new Avatars[4];
-	public static int NumOfAvatarsArray;
+	//public static int NumOfAvatarsArray;
+	public int NumOfAvatarsArray;
 	Avatars avatar;
 
 	void Start(){
@@ -31,7 +32,8 @@ public class AvatarsDisplay : MonoBehaviour{
 	void FixedUpdate(){
 		avatar = avatars[NumOfAvatarsArray];
 
-		AvatarImage.sprite = avatar.AvatarImage;
+		//AvatarImage.sprite = avatar.AvatarImage;
+		gameObject.GetComponent<Image>().sprite = avatar.AvatarImage;
 		AvatarIntroduce.sprite = avatar.AvatarIntroduce;
 		RollSkill.image.sprite = avatar.RollSkill;
 		BaseSkill.image.sprite = avatar.BaseSkill;
