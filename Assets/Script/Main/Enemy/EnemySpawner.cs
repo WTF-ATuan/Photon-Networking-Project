@@ -85,5 +85,13 @@ namespace Script.Main.Enemy{
 			DrawLine(leftLimitX, position);
 			DrawLine(rightLimitX, position);
 		}
+
+		[Button]
+		private void ClearAllEnemy(){
+			var enemies = _repository.QueryAll();
+			foreach(var enemy in enemies){
+				enemy.Die();
+			}
+		}
 	}
 }
