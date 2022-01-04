@@ -14,7 +14,6 @@ public class GameOver_UI : MonoBehaviour
         InvokeRepeating("AddA", 0, 0.05f);
     }
     
-
     void AddA()
     {
         if (A < 1)
