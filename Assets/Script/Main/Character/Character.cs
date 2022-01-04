@@ -117,18 +117,9 @@ namespace Script.Main.Character{
 			}
 		}
 
-		//TODO
 		public void Die(){
 			gameObject.SetActive(false);
 			EventBus.Post(new CharacterDead(characterID));
-		}
-	}
-
-	public class CharacterDead{
-		public string CharacterID{ get; }
-
-		public CharacterDead(string characterID){
-			CharacterID = characterID;
 		}
 	}
 }
