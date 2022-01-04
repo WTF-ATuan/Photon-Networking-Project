@@ -1,0 +1,55 @@
+
+Cod.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Cod/Cod arm1
+  rotate: true
+  xy: 152, 117
+  size: 135, 83
+  orig: 135, 83
+  offset: 0, 0
+  index: -1
+Cod/Cod arm2
+  rotate: false
+  xy: 152, 38
+  size: 120, 77
+  orig: 120, 77
+  offset: 0, 0
+  index: -1
+Cod/Cod body1
+  rotate: true
+  xy: 237, 142
+  size: 110, 78
+  orig: 110, 78
+  offset: 0, 0
+  index: -1
+Cod/Cod body2
+  rotate: false
+  xy: 2, 30
+  size: 41, 44
+  orig: 41, 44
+  offset: 0, 0
+  index: -1
+Cod/Cod hand1
+  rotate: true
+  xy: 45, 53
+  size: 21, 56
+  orig: 21, 56
+  offset: 0, 0
+  index: -1
+Cod/Cod head
+  rotate: true
+  xy: 2, 76
+  size: 176, 148
+  orig: 176, 148
+  offset: 0, 0
+  index: -1
+Cod/Cod leg1
+  rotate: true
+  xy: 2, 2
+  size: 26, 57
+  orig: 26, 57
+  offset: 0, 0
+  index: -1

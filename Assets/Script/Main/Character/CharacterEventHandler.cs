@@ -1,6 +1,10 @@
-﻿using Script.Main.Character.Event;
+﻿using Script.Main.Character.Component;
+using Script.Main.Character.Event;
+using Script.Main.Character.Interface;
 using Script.Main.InputData.Event;
+using Script.Main.Server.Event;
 using Script.Main.Utility;
+using Sirenix.Utilities;
 
 namespace Script.Main.Character{
 	public class CharacterEventHandler{
@@ -10,50 +14,56 @@ namespace Script.Main.Character{
 			CharacterRepository = SingleRepository.Query<CharacterRepository>();
 			EventBus.Subscribe<MoveInputDetected>(OnMoveInputDetected);
 			EventBus.Subscribe<BaseSkillDetected>(OnBaseSkillDetected);
-			EventBus.Subscribe<StrongSkillDetected>(OnStrongSkillDetected);
 			EventBus.Subscribe<CharacterCreated>(OnCharacterCreated);
-			EventBus.Subscribe<CharacterRolled>(OnCharacterRolled);
+			EventBus.Subscribe<EntityAttached>(OnEntityAttached);
+			EventBus.Subscribe<CharacterAnimated>(OnCharacterAnimated);
 		}
 
-		private void OnCharacterRolled(CharacterRolled obj){
+		private void OnCharacterAnimated(CharacterAnimated obj){
 			var characterID = obj.CharacterID;
-			var direction = obj.Direction;
+			var animationName = obj.AnimationName;
+			var timeScale = obj.AnimationTimeScale;
 			var character = CharacterRepository.Query(characterID);
-			character.TumbleRoll(direction.x, direction.y);
+			character.PlayAnimation(animationName, timeScale);
 		}
 
 		private void OnCharacterCreated(CharacterCreated obj){
 			var characterID = obj.CharacterID;
 			var character = obj.Character;
 			character.characterID = characterID;
+			character.Initialize();
 			CharacterRepository.Save(characterID, character);
+		}
+
+		private void OnEntityAttached(EntityAttached obj){
+			var entityObject = obj.Entity;
+			var entityID = obj.EntityID;
+			var character = entityObject.GetComponent<Character>();
+			if(character == null) return;
+			var characterIdentities = entityObject.GetComponents<ICharacterIdentity>();
+			characterIdentities.ForEach(x => x.SetCharacterID(entityID));
+			character.characterID = entityID;
+			if(CharacterRepository.ContainCharacter(entityID)){
+				CharacterRepository.Save(entityID, character);
+			}
 		}
 
 		private void OnMoveInputDetected(MoveInputDetected obj){
 			var userId = obj.UserId;
 			var character = CharacterRepository.Query(userId);
 			var horizontal = obj.Horizontal;
-			var vertical = obj.Vertical;
-			var isTumbleRoll = obj.IsTumbleRoll;
-			character.Move(horizontal, vertical);
+			var isJump = obj.IsJump;
+			character.Move(horizontal);
 			character.SetFaceDirection(horizontal);
-			if(isTumbleRoll){
-				character.TumbleRoll(horizontal, vertical);
+			if(isJump){
+				character.Jump(horizontal);
 			}
 		}
-
-		private void OnStrongSkillDetected(StrongSkillDetected obj){
-			var userId = obj.UserId;
-			var character = CharacterRepository.Query(userId);
-			var direction = obj.MouseWorldPosition;
-			character.CastSkill(direction, false);
-		}
-
+		
 		private void OnBaseSkillDetected(BaseSkillDetected obj){
 			var userId = obj.UserId;
 			var character = CharacterRepository.Query(userId);
-			var direction = obj.MouseWorldPosition;
-			character.CastSkill(direction, true);
+			character.CastSkill(true);
 		}
 	}
 }

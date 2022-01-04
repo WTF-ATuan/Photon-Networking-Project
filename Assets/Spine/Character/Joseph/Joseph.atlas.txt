@@ -1,0 +1,55 @@
+
+Joseph.png
+size: 256,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Joseph/Joseph arm
+  rotate: true
+  xy: 115, 56
+  size: 42, 24
+  orig: 42, 24
+  offset: 0, 0
+  index: -1
+Joseph/Joseph body1
+  rotate: false
+  xy: 2, 2
+  size: 78, 96
+  orig: 78, 96
+  offset: 0, 0
+  index: -1
+Joseph/Joseph hair
+  rotate: true
+  xy: 141, 118
+  size: 47, 23
+  orig: 47, 23
+  offset: 0, 0
+  index: -1
+Joseph/Joseph hand1
+  rotate: false
+  xy: 174, 186
+  size: 22, 68
+  orig: 22, 68
+  offset: 0, 0
+  index: -1
+Joseph/Joseph head
+  rotate: false
+  xy: 2, 100
+  size: 137, 154
+  orig: 137, 154
+  offset: 0, 0
+  index: -1
+Joseph/Joseph leg1
+  rotate: false
+  xy: 141, 167
+  size: 31, 87
+  orig: 31, 87
+  offset: 0, 0
+  index: -1
+Joseph/Joseph scarf1
+  rotate: false
+  xy: 82, 20
+  size: 31, 78
+  orig: 31, 78
+  offset: 0, 0
+  index: -1

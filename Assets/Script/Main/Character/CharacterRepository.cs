@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Script.Main.Character{
 	public class CharacterRepository{
@@ -19,6 +20,26 @@ namespace Script.Main.Character{
 			if(!containsKey) throw new Exception($"can,t Find this Character : {characterID}");
 			var character = _characters[characterID];
 			return character;
+		}
+
+		public bool ContainCharacter(string characterID){
+			var containsKey = _characters.ContainsKey(characterID);
+			return containsKey;
+		}
+
+		public List<Character> QueryAll(){
+			var characters = _characters.Values.ToList();
+			return characters;
+		}
+
+		public void Remove(string characterID){
+			var containsKey = _characters.ContainsKey(characterID);
+			if(!containsKey) return;
+			_characters.Remove(characterID);
+		}
+
+		public int Count(){
+			return _characters.Count;
 		}
 	}
 }

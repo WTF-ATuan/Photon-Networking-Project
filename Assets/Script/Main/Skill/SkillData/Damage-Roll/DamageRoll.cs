@@ -1,10 +1,12 @@
 ﻿using Script.Main.Character;
 using Script.Main.Character.Event;
+using Script.Main.Enemy;
+using Script.Main.Enemy.Interface;
 using UnityEngine;
 
 namespace Script.Main.Skill.Damage_Roll{
-	public class DamageRoll : AbstractSkill{
-		public override void OnSkillCasted(SkillSpawnInfo spawnInfo){
+	public class DamageRoll : AbstractSkillData{
+		public override void CastSkill(SkillSpawnInfo spawnInfo){
 			var direction = spawnInfo.Direction;
 			var characterID = spawnInfo.OwnerID;
 			var originPosition = spawnInfo.OriginPosition;

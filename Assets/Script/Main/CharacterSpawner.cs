@@ -1,29 +1,51 @@
-﻿using Script.Main.Character.Event;
+﻿using Photon.Bolt;
+using Script.Main.Character.Event;
 using Script.Main.InputData;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script.Main{
 	public class CharacterSpawner : MonoBehaviour{
-		[SerializeField] private GameObject characterPre;
-		[SerializeField] private Sever sever;
-		[SerializeField] private InputEventDetector inputEventDetector;
-
-
 		private void Start(){
+			EventBus.ExecutePostBuffer<CharacterChosen>(OnCharacterChosen);
+		}
+
+		private void OnCharacterChosen(CharacterChosen obj){
+			var characterPrefab = obj.CharacterPrefab;
 			var randomPosition = Random.insideUnitCircle * 3;
-			var id = gameObject.GetInstanceID().ToString();
-			if(sever){
-				var generateItem = sever.GenerateItem(characterPre.name, randomPosition, Quaternion.identity);
-				var character = generateItem.GetComponent<Character.Character>();
-				EventBus.Post(new CharacterCreated(id, character));
-				inputEventDetector.Init(id);
+			var isRunning = BoltNetwork.IsRunning;
+			var indexOfPlayer = obj.IndexOfPlayer;
+			if(isRunning){
+				CreateCharacterOnServer(characterPrefab, randomPosition);
 			}
 			else{
-				var generateItem = Instantiate(characterPre, randomPosition, Quaternion.identity);
-				var character = generateItem.GetComponent<Character.Character>();
-				EventBus.Post(new CharacterCreated(id, character));
-				inputEventDetector.Init(id);
+				CreateCharacterOnLocal(characterPrefab, indexOfPlayer, randomPosition);
 			}
+		}
+
+		public void CreateCharacterOnServer(GameObject characterPrefab, Vector3 spawnPosition){
+			var entity = BoltNetwork.Instantiate(characterPrefab, spawnPosition, Quaternion.identity);
+			var character = entity.GetComponent<Character.Character>();
+			var id = entity.NetworkId.ToString();
+			character.gameObject.AddComponent<InputEventDetector>().Init(id);
+			EventBus.Post(new CharacterCreated(id, character));
+		}
+
+		[Button]
+		public void CreateCharacterOnLocal(GameObject characterPrefab, int playerIndex, Vector3 spawnPosition){
+			var entity = Instantiate(characterPrefab, spawnPosition, Quaternion.identity);
+			var character = entity.GetComponent<Character.Character>();
+			var id = entity.GetInstanceID().ToString();
+			switch(playerIndex){
+				case 0:
+					character.gameObject.AddComponent<WasdInput>().Init(id);
+					break;
+				case 1:
+					character.gameObject.AddComponent<ArrowInput>().Init(id);
+					break;
+			}
+
+			EventBus.Post(new CharacterCreated(id, character));
 		}
 	}
 }

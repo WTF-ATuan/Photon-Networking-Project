@@ -15,35 +15,19 @@ namespace Script.Main.InputData{
 			}
 
 			DetectMoveInput();
-			DetectBaseSkillInput();
-			DetectStrongSkillInput();
+			DetectAttackInput();
 		}
 
 		private void DetectMoveInput(){
 			var horizontalValue = Input.GetAxisRaw($"Horizontal");
-			var verticalValue = Input.GetAxisRaw($"Vertical");
-			var isTumbleRoll = Input.GetKeyDown(KeyCode.LeftShift);
-			EventBus.Post(new MoveInputDetected(OwnerID, horizontalValue, verticalValue, isTumbleRoll));
+			var isJump = Input.GetKeyDown(KeyCode.Space);
+			EventBus.Post(new MoveInputDetected(OwnerID, horizontalValue, isJump));
 		}
 
-		private void DetectBaseSkillInput(){
-			if(Input.GetKeyDown(KeyCode.Q)){
-				EventBus.Post(new BaseSkillDetected(OwnerID, MouseWorldDirection()));
+		private void DetectAttackInput(){
+			if(Input.GetMouseButtonDown(0)){
+				EventBus.Post(new BaseSkillDetected(OwnerID));
 			}
-		}
-
-		private void DetectStrongSkillInput(){
-			if(Input.GetKeyDown(KeyCode.E)){
-				EventBus.Post(new StrongSkillDetected(OwnerID, MouseWorldDirection()));
-			}
-		}
-
-		private Vector3 MouseWorldDirection(){
-			if(Camera.main == null) return Vector3.zero;
-			var mousePos = Input.mousePosition;
-			mousePos.z = -Camera.main.transform.position.z;
-			var worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
-			return worldPosition;
 		}
 	}
 }
