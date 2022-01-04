@@ -10,12 +10,15 @@ public class AvatarsDisplay : MonoBehaviour{
 	//public Image AvatarIntroduce;
 	public Button RollSkill;
 	public Button BaseSkill;
-	//public Button StrongSkill;
+    //public Button StrongSkill;
+    public GameObject SkillIntroduce;
+    public GameObject Introduce;
+    public bool CheckSkill = false;
 
-        //Todo 換方式呈現
-	//public Image SkillIntroduce;
+    //Todo 換方式呈現
+    //public Image SkillIntroduce;
 
-	SpriteState Roll = new SpriteState();
+    SpriteState Roll = new SpriteState();
 	SpriteState Base = new SpriteState();
 	SpriteState Strong = new SpriteState();
 
@@ -52,19 +55,30 @@ public class AvatarsDisplay : MonoBehaviour{
 
 		RollSkill.spriteState = Roll;
 		BaseSkill.spriteState = Base;
-		//StrongSkill.spriteState = Strong;
+        //StrongSkill.spriteState = Strong;
+
 
         //Todo 要換方式呈現
-        // if (ChickWhichSkillntroduce == "RollSkill"){
-		//	SkillIntroduce.sprite = avatar.IntroductionOfRollSkill;
-		//}
-		//else if(ChickWhichSkillntroduce == "BaseSkill"){
-		//	SkillIntroduce.sprite = avatar.IntroductionOfBaseSkill;
-		//}
-		//else if(ChickWhichSkillntroduce == "StrongSkill"){
-		//	SkillIntroduce.sprite = avatar.IntroductionOfStrongSkill;
-		//}
-	}
+        SkillIntroduce.SetActive(CheckSkill);
+
+        if (CheckSkill == true)
+        {
+            if (ChickWhichSkillntroduce == "RollSkill")
+            {
+                SkillIntroduce.transform.position = new Vector2(Input.mousePosition.x, SkillIntroduce.transform.position.y) ;
+                Introduce.GetComponent<Text>().text = avatar.IntroductionOfRollSkill;
+            }
+            else if (ChickWhichSkillntroduce == "BaseSkill")
+            {
+                Introduce.GetComponent<Text>().text = avatar.IntroductionOfBaseSkill;
+            }
+        }
+
+        //else if (ChickWhichSkillntroduce == "StrongSkill")
+        //{
+        //    SkillIntroduce.sprite = avatar.IntroductionOfStrongSkill;
+        //}
+    }
 
 	public void ChooseCharacter(int indexOfPlayer){
 		var characterData = avatars[NumOfAvatarsArray];
