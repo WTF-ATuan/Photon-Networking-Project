@@ -14,11 +14,12 @@ namespace Script.Main{
 			var characterPrefab = obj.CharacterPrefab;
 			var randomPosition = Random.insideUnitCircle * 3;
 			var isRunning = BoltNetwork.IsRunning;
+			var indexOfPlayer = obj.IndexOfPlayer;
 			if(isRunning){
 				CreateCharacterOnServer(characterPrefab, randomPosition);
 			}
 			else{
-				CreateCharacterOnLocal(characterPrefab, 0, randomPosition);
+				CreateCharacterOnLocal(characterPrefab, indexOfPlayer, randomPosition);
 			}
 		}
 

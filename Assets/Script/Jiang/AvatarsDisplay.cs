@@ -7,12 +7,14 @@ using UnityEngine.UI;
 
 public class AvatarsDisplay : MonoBehaviour{
 	public Image AvatarImage;
+
 	//public Image AvatarIntroduce;
 	public Button RollSkill;
+
 	public Button BaseSkill;
 	//public Button StrongSkill;
 
-        //Todo 传よΑ瞷
+	//Todo 传よΑ瞷
 	//public Image SkillIntroduce;
 
 	SpriteState Roll = new SpriteState();
@@ -23,6 +25,7 @@ public class AvatarsDisplay : MonoBehaviour{
 	public static string ChickWhichSkillntroduce;
 
 	public Avatars[] avatars = new Avatars[4];
+
 	//public static int NumOfAvatarsArray;
 	public int NumOfAvatarsArray;
 	Avatars avatar;
@@ -41,8 +44,8 @@ public class AvatarsDisplay : MonoBehaviour{
 		BaseSkill.image.sprite = avatar.BaseSkill;
 		//StrongSkill.image.sprite = avatar.StrongSkill;
 
-        
- 		Roll.highlightedSprite = avatar.RollSkillDisabled;
+
+		Roll.highlightedSprite = avatar.RollSkillDisabled;
 		Base.highlightedSprite = avatar.BaseSkillDisabled;
 		//Strong.highlightedSprite = avatar.StrongSkillDisabled;
 
@@ -54,8 +57,8 @@ public class AvatarsDisplay : MonoBehaviour{
 		BaseSkill.spriteState = Base;
 		//StrongSkill.spriteState = Strong;
 
-        //Todo 璶传よΑ瞷
-        // if (ChickWhichSkillntroduce == "RollSkill"){
+		//Todo 璶传よΑ瞷
+		// if (ChickWhichSkillntroduce == "RollSkill"){
 		//	SkillIntroduce.sprite = avatar.IntroductionOfRollSkill;
 		//}
 		//else if(ChickWhichSkillntroduce == "BaseSkill"){
@@ -69,6 +72,7 @@ public class AvatarsDisplay : MonoBehaviour{
 	public void ChooseCharacter(int indexOfPlayer){
 		var characterData = avatars[NumOfAvatarsArray];
 		var characterPrefab = characterData.characterPrefab;
+		Debug.Log($"indexOfPlayer = {indexOfPlayer}");
 		EventBus.DynamicPost(new CharacterChosen(characterPrefab, indexOfPlayer));
 	}
 }
