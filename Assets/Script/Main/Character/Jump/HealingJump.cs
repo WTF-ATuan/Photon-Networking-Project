@@ -28,23 +28,23 @@ namespace Script.Main.Character.Jump{
 			_rigidbody2D = GetComponent<Rigidbody2D>();
 			_timer = new ColdDownTimer(coldDownTime);
 			_healObject = Instantiate(healObjectViewPrefab, transform.position, Quaternion.identity);
-			_healObject.OnCollisionEnter2DAsObservable()
+			_healObject.OnTriggerEnter2DAsObservable()
 					.Subscribe(OnHealAreaEnter)
 					.AddTo(_healObject);
-			_healObject.OnCollisionExit2DAsObservable()
+			_healObject.OnTriggerExit2DAsObservable()
 					.Subscribe(OnHealAreaExit)
 					.AddTo(_healObject);
 
 			DestroyHealArea();
 		}
 
-		private void OnHealAreaEnter(Collision2D other){
+		private void OnHealAreaEnter(Collider2D other){
 			var character = other.gameObject.GetComponent<Character>();
 			if(character)
 				_areaCharacters.Add(character);
 		}
 
-		private void OnHealAreaExit(Collision2D other){
+		private void OnHealAreaExit(Collider2D other){
 			var character = other.gameObject.GetComponent<Character>();
 			if(character)
 				_areaCharacters.Remove(character);

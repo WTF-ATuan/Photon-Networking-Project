@@ -44,7 +44,9 @@ namespace Script.Main.Character.Attack{
 
 		private void OnSkillTriggered(GameObject entity, Collider2D other){
 			var character = other.GetComponent<Character>();
+			var enemy = other.GetComponent<Enemy.Enemy>();
 			character?.ModifyHp(5);
+			enemy.ModifyHp(-10);
 			Destroy(entity);
 		}
 	}
