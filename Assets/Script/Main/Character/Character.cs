@@ -111,7 +111,7 @@ namespace Script.Main.Character{
 			EventBus.Post(new CharacterHealthModified(characterID, _currentHealth, amount));
 			var hpBarRect = _hpBar.GetComponent<RectTransform>();
 			var height = hpBarRect.sizeDelta.y;
-			hpBarRect.sizeDelta = new Vector2(_currentHealth - amount, height);
+			hpBarRect.sizeDelta = new Vector2(_currentHealth, height);
 			if(_currentHealth <= 0){
 				Die();
 			}
