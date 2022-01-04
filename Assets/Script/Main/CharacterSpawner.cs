@@ -36,7 +36,6 @@ namespace Script.Main{
 			var entity = Instantiate(characterPrefab, spawnPosition, Quaternion.identity);
 			var character = entity.GetComponent<Character.Character>();
 			var id = entity.GetInstanceID().ToString();
-			Debug.Log($"playerIndex = {playerIndex}");
 			switch(playerIndex){
 				case 0:
 					character.gameObject.AddComponent<WasdInput>().Init(id);

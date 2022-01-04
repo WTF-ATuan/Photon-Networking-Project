@@ -37,6 +37,8 @@ namespace Script.Jiang{
 		}
 
 		private void FixedUpdate(){
+			var targetsCount = _targets.Count;
+			if(targetsCount < 1) return;
 			var targetPosition = GetCenterPoint() + _offset + Vector3.up;
 			var targetPositionX = targetPosition.x;
 			if(targetPositionX > _rightLimitX || targetPositionX < _leftLimitX) return;
