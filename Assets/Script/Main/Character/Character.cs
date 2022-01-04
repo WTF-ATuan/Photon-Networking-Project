@@ -47,8 +47,6 @@ namespace Script.Main.Character{
 			else{
 				PlayAnimation("Run", 2);
 			}
-
-			EventBus.Post(new PositionUpdated(characterID, transform.position));
 		}
 
 		public void Jump(float horizontal){
@@ -66,7 +64,6 @@ namespace Script.Main.Character{
 			var leftRotation = new Vector3(0, 180, 0);
 			var characterTransform = transform;
 			characterTransform.eulerAngles = isLeft ? leftRotation : rightRotation;
-			EventBus.Post(new FaceDirectionFlipped(characterID, characterTransform.eulerAngles));
 		}
 
 		public void ModifyAbility(CharacterAbilityType ability, float amount){

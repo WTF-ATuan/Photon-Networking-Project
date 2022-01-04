@@ -35,11 +35,14 @@ namespace Script.Main{
 			var entity = Instantiate(characterPrefab, spawnPosition, Quaternion.identity);
 			var character = entity.GetComponent<Character.Character>();
 			var id = entity.GetInstanceID().ToString();
-			if(playerIndex == 0){
-				character.gameObject.AddComponent<WasdInput>().Init(id);
-			}
-			else{
-				character.gameObject.AddComponent<ArrowInput>().Init(id);
+			Debug.Log($"playerIndex = {playerIndex}");
+			switch(playerIndex){
+				case 0:
+					character.gameObject.AddComponent<WasdInput>().Init(id);
+					break;
+				case 1:
+					character.gameObject.AddComponent<ArrowInput>().Init(id);
+					break;
 			}
 
 			EventBus.Post(new CharacterCreated(id, character));
