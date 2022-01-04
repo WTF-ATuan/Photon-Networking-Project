@@ -11,10 +11,17 @@ public class AnimationEnds : MonoBehaviour
 
     void Start()
     {
-        Invoke("End",VideoDuration );
+        if (ButtonSetting.GameOverBackStart)
+        {
+            End();
+        }
+        else
+        {
+            Invoke("End", VideoDuration);
+        }
     }
     
-    void End()
+ public void End()
     {
         VideoPlayer.SetActive(false);
         BattleUI.SetActive(true);
@@ -24,8 +31,7 @@ public class AnimationEnds : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            VideoPlayer.SetActive(false);
-            BattleUI.SetActive(true);
+            End();
         }
     }
 }
