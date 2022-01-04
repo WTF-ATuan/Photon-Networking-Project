@@ -7,7 +7,7 @@ public class ButtonSetting : MonoBehaviour //以按鈕名稱判斷按了什麼�
     public GameObject MenuPrefab; //點開齒輪 出現的選單
     public GameObject VolumeControl; //調整音量的介面
     public static string GetButtonName; //點擊的按鈕名稱
-
+    public static bool GameOverBackStart = false;
 
     public void ButtonIsClick()
     {
@@ -19,8 +19,18 @@ public class ButtonSetting : MonoBehaviour //以按鈕名稱判斷按了什麼�
             Application.Quit();
         }
 
-        if (GetButtonName == "Button_BackToStart") {
+        if (GetButtonName == "Button_BackToStart" ) {
             SceneManager.LoadScene("StartScenes");
+        }
+
+        if (GetButtonName == "GameOver") {
+            SceneManager.LoadScene("StartScenes");
+
+            GameOverBackStart = true;
+            
+            //GameObject animation = GetComponent<AnimationEnds>().gameObject;
+            //animation.GetComponent<AnimationEnds>().VideoPlayer.SetActive(false);
+            //animation.GetComponent<AnimationEnds>().BattleUI.SetActive(true);
         }
 
         //if (GetButtonName == "Button_BackToCreateOrJoin") {
