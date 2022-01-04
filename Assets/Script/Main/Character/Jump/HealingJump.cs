@@ -2,14 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using Script.Main.Character.Interface;
+using Script.Main.Enemy.Extension;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Script.Main.Character.Jump{
 	[RequireComponent(typeof(Rigidbody2D))]
 	public class HealingJump : MonoBehaviour, IJump{
 		private Rigidbody2D _rigidbody2D;
+		[SerializeField] private float coldDownTime = 8f;
 
 		[Header("ViewObject")] [SerializeField]
 		private GameObject healObjectViewPrefab;
@@ -18,10 +21,12 @@ namespace Script.Main.Character.Jump{
 		private Character _character;
 
 		private readonly List<Character> _areaCharacters = new List<Character>();
+		private ColdDownTimer _timer;
 
 		private void Start(){
 			_character = GetComponent<Character>();
 			_rigidbody2D = GetComponent<Rigidbody2D>();
+			_timer = new ColdDownTimer(coldDownTime);
 			_healObject = Instantiate(healObjectViewPrefab, transform.position, Quaternion.identity);
 			_healObject.OnCollisionEnter2DAsObservable()
 					.Subscribe(OnHealAreaEnter)
@@ -54,7 +59,9 @@ namespace Script.Main.Character.Jump{
 			var jumpDirection = new Vector2(directionX, 1f) * jumpForce;
 			_rigidbody2D.AddForce(jumpDirection, ForceMode2D.Impulse);
 			_character.PlayAnimation("Jump", 1);
-			ActiveHealArea();
+			if(_timer.CanInvoke()){
+				ActiveHealArea();
+			}
 		}
 
 		private Coroutine _healingCoroutine;
@@ -67,6 +74,7 @@ namespace Script.Main.Character.Jump{
 			}
 
 			_healingCoroutine = StartCoroutine(Healing());
+			_timer.Reset();
 		}
 
 		private IEnumerator Healing(){
