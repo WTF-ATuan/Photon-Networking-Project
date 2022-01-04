@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Script.Main.Enemy{
 	public class EnemyRepository{
@@ -28,6 +29,10 @@ namespace Script.Main.Enemy{
 			}
 
 			_enemyList.Remove(enemyID);
+		}
+
+		public List<Enemy> QueryAll(){
+			return _enemyList.Values.ToList();
 		}
 
 		public int Count(){

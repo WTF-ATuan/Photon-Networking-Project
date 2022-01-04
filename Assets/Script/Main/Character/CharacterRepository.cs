@@ -31,5 +31,15 @@ namespace Script.Main.Character{
 			var characters = _characters.Values.ToList();
 			return characters;
 		}
+
+		public void Remove(string characterID){
+			var containsKey = _characters.ContainsKey(characterID);
+			if(!containsKey) return;
+			_characters.Remove(characterID);
+		}
+
+		public int Count(){
+			return _characters.Count;
+		}
 	}
 }

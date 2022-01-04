@@ -111,24 +111,15 @@ namespace Script.Main.Character{
 			EventBus.Post(new CharacterHealthModified(characterID, _currentHealth, amount));
 			var hpBarRect = _hpBar.GetComponent<RectTransform>();
 			var height = hpBarRect.sizeDelta.y;
-			hpBarRect.sizeDelta = new Vector2(_currentHealth - amount, height);
+			hpBarRect.sizeDelta = new Vector2(_currentHealth, height);
 			if(_currentHealth <= 0){
 				Die();
 			}
 		}
 
-		//TODO
 		public void Die(){
 			gameObject.SetActive(false);
 			EventBus.Post(new CharacterDead(characterID));
-		}
-	}
-
-	public class CharacterDead{
-		public string CharacterID{ get; }
-
-		public CharacterDead(string characterID){
-			CharacterID = characterID;
 		}
 	}
 }

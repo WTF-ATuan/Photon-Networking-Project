@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace Script.Main.Enemy{
 	public class Enemy : MonoBehaviour, IModifyHp{
 		public string EnemyID{ get; set; }
-		[SerializeField] private float hp = 100;
+		[SerializeField] private float defaultHp = 100;
 		[SerializeField] private Image hpBar;
 
 		private IDetector _detector;
@@ -17,7 +17,7 @@ namespace Script.Main.Enemy{
 		private IAttack _attack;
 
 		private SkeletonAnimation _animation;
-
+		private float _currentHp;
 
 		private void Start(){
 			_detector = GetComponent<IDetector>();
@@ -25,19 +25,25 @@ namespace Script.Main.Enemy{
 			_move = GetComponent<IMove>();
 			_attack = GetComponent<IAttack>();
 			_animation = GetComponent<SkeletonAnimation>();
+			_currentHp = defaultHp;
 		}
 
 
 		public void ModifyHp(float amount){
-			hp += amount;
+			_currentHp += amount;
 			var hpBarRect = hpBar.GetComponent<RectTransform>();
 			var height = hpBarRect.sizeDelta.y;
-			hpBarRect.sizeDelta = new Vector2(hp - amount, height);
-			if(hp <= 0){
-				gameObject.SetActive(false);
-				var enemyDead = new EnemyDead(EnemyID);
-				EventBus.Post(enemyDead);
+			var hpViewValue = _currentHp * 100 / defaultHp;
+			hpBarRect.sizeDelta = new Vector2(hpViewValue, height);
+			if(_currentHp <= 0){
+				Die();
 			}
+		}
+
+		public void Die(){
+			gameObject.SetActive(false);
+			var enemyDead = new EnemyDead(EnemyID);
+			EventBus.Post(enemyDead);
 		}
 
 		public Vector3 GetFacingDirection(){
