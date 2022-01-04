@@ -1,13 +1,11 @@
+using System.Collections.Generic;
 using Script.Main;
 using Script.Main.Character.Event;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Script.Jiang{
 	public class CameraFollow : MonoBehaviour{
-		public Transform player;
 		public float smoothing = 5f; //鏡頭平滑移動的速度
 		private Vector3 _offset; //相機和主角之間的固定距離
 
@@ -16,6 +14,8 @@ namespace Script.Jiang{
 
 		private float _leftLimitX;
 		private float _rightLimitX;
+
+		private readonly List<Transform> _targets = new List<Transform>();
 
 
 		private void Start(){
@@ -31,16 +31,31 @@ namespace Script.Jiang{
 
 		private void OnCharacterCreated(CharacterCreated obj){
 			var character = obj.Character;
-			player = character.transform;
-			_offset = transform.position - player.position;
+			var characterTransform = character.transform;
+			_targets.Add(characterTransform);
+			_offset = transform.position - GetCenterPoint();
 		}
 
 		private void FixedUpdate(){
-			var targetPosition = player.position + _offset + Vector3.up;
+			var targetPosition = GetCenterPoint() + _offset + Vector3.up;
 			var targetPositionX = targetPosition.x;
 			if(targetPositionX > _rightLimitX || targetPositionX < _leftLimitX) return;
 			transform.position =
 					Vector3.Lerp(transform.position, targetPosition, smoothing * Time.deltaTime); //以一定的速度，從A平滑移動到B
+		}
+
+		private Vector3 GetCenterPoint(){
+			var targetsCount = _targets.Count;
+			if(targetsCount == 1){
+				return _targets[0].position;
+			}
+
+			var bounds = new Bounds(_targets[0].position, Vector3.zero);
+			for(var i = 0; i < targetsCount; i++){
+				bounds.Encapsulate(_targets[i].position);
+			}
+
+			return bounds.center;
 		}
 
 		private void DrawLine(float patrolX, Vector3 spawnPosition){
