@@ -9,8 +9,10 @@ using Random = UnityEngine.Random;
 namespace Script.Main.Enemy{
 	public class EnemySpawner : MonoBehaviour{
 		[SerializeField] [BoxGroup("Basic")] private List<Enemy> randomEnemyType;
-		[SerializeField] [BoxGroup("Basic")] private List<int> waveEnemyCount = new List<int>();
+		[SerializeField] [BoxGroup("Basic")] private float maxEnemyCount;
 		[SerializeField] [BoxGroup("Basic")] private float spawnDuring;
+
+		[SerializeField] private Enemy boss;
 
 		[SerializeField] [LabelText("隨機生成範圍")] [PropertyOrder(0)]
 		private float spawnSize = 3f;
@@ -22,8 +24,7 @@ namespace Script.Main.Enemy{
 		private float rightLimitX;
 
 
-		private int _currentWave;
-		private int _currentWaveEnemyCount;
+		private int _currentEnemyCount;
 		private ColdDownTimer _timer;
 		private EnemyRepository _repository;
 
@@ -46,24 +47,17 @@ namespace Script.Main.Enemy{
 		}
 
 		public void Spawn(){
+			if(_currentEnemyCount > maxEnemyCount) return;
 			var enemyTypeCount = randomEnemyType.Count;
 			var range = Random.Range(0, enemyTypeCount);
-			var spawnEnemy = randomEnemyType[range];
-			if(_currentWave >= waveEnemyCount.Count) return;
-			var maxEnemyCount = waveEnemyCount[_currentWave];
+			var isFinalBoss = _currentEnemyCount == maxEnemyCount;
+			var spawnEnemy = isFinalBoss ? boss : randomEnemyType[range];
 			var randomPosition = RandomSpawnPosition();
 			var enemy = Instantiate(spawnEnemy, randomPosition, Quaternion.identity);
 			var enemyID = enemy.GetInstanceID().ToString();
 			enemy.EnemyID = enemyID;
 			_repository.Save(enemyID, enemy);
-			if(_currentWaveEnemyCount >= maxEnemyCount){
-				_currentWave++;
-				_currentWaveEnemyCount = 1;
-			}
-			else{
-				_currentWaveEnemyCount++;
-			}
-
+			_currentEnemyCount++;
 			_timer.Reset();
 		}
 

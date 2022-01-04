@@ -33,7 +33,6 @@ namespace Script.Main.Enemy.Attack{
 
 		public void Attack(){
 			onAttack?.Invoke();
-			_enemy.PlayAnimation("Attack1", 1);
 			if(_attackCoroutine != null){
 				StopCoroutine(_attackCoroutine);
 			}
@@ -49,8 +48,6 @@ namespace Script.Main.Enemy.Attack{
 			foreach(var character in allTarget){
 				character?.ModifyHp(-attackDamage);
 			}
-
-			_enemy.PlayAnimation("Attack2", 1);
 		}
 
 		private void DetectAttackDirection(Vector3 direction){
