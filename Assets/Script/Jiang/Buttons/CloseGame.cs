@@ -8,10 +8,12 @@ namespace Script.Jiang.Buttons{
         public Sprite fail;
 
 		public void Win(){
+            gameObject.SetActive(true);
             gameObject.GetComponent<Image>().sprite = win;
 		}
         public void Fail()
         {
+            gameObject.SetActive(true);
             gameObject.GetComponent<Image>().sprite = fail;
         }
     }
