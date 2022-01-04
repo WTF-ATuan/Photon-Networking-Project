@@ -14,11 +14,12 @@ namespace Script.Main{
 			var characterPrefab = obj.CharacterPrefab;
 			var randomPosition = Random.insideUnitCircle * 3;
 			var isRunning = BoltNetwork.IsRunning;
+			var indexOfPlayer = obj.IndexOfPlayer;
 			if(isRunning){
 				CreateCharacterOnServer(characterPrefab, randomPosition);
 			}
 			else{
-				CreateCharacterOnLocal(characterPrefab, 0, randomPosition);
+				CreateCharacterOnLocal(characterPrefab, indexOfPlayer, randomPosition);
 			}
 		}
 
@@ -35,11 +36,13 @@ namespace Script.Main{
 			var entity = Instantiate(characterPrefab, spawnPosition, Quaternion.identity);
 			var character = entity.GetComponent<Character.Character>();
 			var id = entity.GetInstanceID().ToString();
-			if(playerIndex == 0){
-				character.gameObject.AddComponent<WasdInput>().Init(id);
-			}
-			else{
-				character.gameObject.AddComponent<ArrowInput>().Init(id);
+			switch(playerIndex){
+				case 0:
+					character.gameObject.AddComponent<WasdInput>().Init(id);
+					break;
+				case 1:
+					character.gameObject.AddComponent<ArrowInput>().Init(id);
+					break;
 			}
 
 			EventBus.Post(new CharacterCreated(id, character));
